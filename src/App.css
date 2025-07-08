@@ -24,7 +24,7 @@ body {
   border-bottom: 1px solid var(--slate-800);
 }
 .btn-primary {
-  background-color: var(--teal-200);
+  background-color: var(--color-teal-600);
   color: var(--white);
   border-radius: 0.5rem;
   padding: 0.75rem 1.5rem;
@@ -34,7 +34,8 @@ body {
     0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 .btn-primary:hover {
-  background-color: var(--teal-100);
+  color: var(--color-slate-800);
+  background-color: var(--color-teal-700);
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(5, 104, 107, 0.3),
     0 4px 6px -4px rgba(4, 87, 90, 0.3);

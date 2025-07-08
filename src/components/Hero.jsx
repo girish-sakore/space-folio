@@ -1,9 +1,9 @@
 import React from 'react';
-import galaxy from '../assets/790f124fb9305381a0cefc7e7ff68f48.png'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 
 const Hero = () => {
   return (
-    <section className="mx-auto md:py-32 text-center relative" id="hero">
+    <section className="mx-auto my-auto md:py-32 text-center relative" id="hero">
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <img
           alt="Planet"
@@ -15,8 +15,6 @@ const Hero = () => {
           className="absolute bottom-0 w-1/5 opacity-75 hovering-spaceship"
           // src="https://static.vecteezy.com/system/resources/previews/045/800/108/non_2x/spaceship-isolated-on-transparent-background-free-png.png"
           src="https://static.vecteezy.com/system/resources/previews/045/800/111/non_2x/spaceship-isolated-on-transparent-background-free-png.png"
-          // src={galaxy}
-          
           
         />
         
@@ -31,7 +29,7 @@ const Hero = () => {
         </p>
         <a className="btn-primary inline-flex items-center space-x-2" href="#services">
           <span>Get Started</span>
-          <span className="text-xl"></span>
+          <RocketLaunchIcon />
         </a>
       </div>
     </section>

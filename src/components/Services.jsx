@@ -5,7 +5,7 @@ import StorageIcon from '@mui/icons-material/Storage';
 
 const Services = () => {
   return (
-    <section className="py-20 bg-slate-800 rounded-3xl mx-1 my-1 glass-effect relative" id="services">
+    <section className="py-20 bg-slate-800 rounded-3xl mx-5 my-5 glass-effect relative" id="services">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="section-title text-4xl font-bold">Our Core Services</h2>
