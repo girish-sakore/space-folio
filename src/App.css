@@ -99,7 +99,7 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-@keyframes rotate-slow {
+@keyframes spin-slow {
   from {
       transform: rotate(0deg);
   }
@@ -108,50 +108,82 @@ body {
   }
 }
 
+@keyframes rotate-slow {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
 .planet-slow {
-  animation: rotate-slow 400s linear infinite;
+  animation: spin-slow 400s linear infinite;
 }
 
 /* Large rotating container */
 .orbit-container {
-  /* border: 2px dashed rgba(255, 255, 255, 0.2); border for debugging */
+   /* border: 2px dashed rgba(255, 255, 255, 0.2);border for debugging */
   z-index: 10;
   position: absolute;
   /* Make it much larger than viewport */
   width: 120vw;
-  /* height: 10vh; */
-  /* Position so left half is outside viewport */
-  left: -50%;
+  /* height: 120vw; */
+  left: -60vw;
   top: 50%;
   transform: translateY(-50%);
-  /* Rotation point at the right edge (which is center of viewport) */
-  /* transform-origin: 100vw 100vh; */
+  transform-origin: 50% 50%;
   animation: rotate-slow 100s linear infinite;
   pointer-events: none;
+  z-index: 10;
 }
 
 /* Satellite positioning */
 .satellite {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  /* opacity: 0.7; */
+  width: clamp(40px, 8vw, 80px);
+  height: clamp(40px, 8vw, 80px);
   transition: opacity 0.5s ease;
-}
-
-.satellite:hover {
-  opacity: 1;
+  animation: spin-slow 120s linear infinite;
 }
 
 /* Position satellites at opposite corners of the large container */
 .satellite-1 {
   top: 0;
-  right: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
 }
 
 .satellite-2 {
   bottom: 0;
-  left: 0;
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .orbit-container {
+    width: 150vw;
+    /* height: 150vw; */
+    left: -75vw;
+    animation: rotate-slow 120s linear infinite;
+  }
+  
+  .satellite {
+    width: clamp(30px, 10vw, 60px);
+    height: clamp(30px, 10vw, 60px);
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .orbit-container {
+    width: 180vw;
+    /* height: 180vw; */
+    left: -90vw;
+    animation: rotate-slow 140s linear infinite;
+  }
+  
+  .satellite {
+    width: clamp(25px, 12vw, 50px);
+    height: clamp(25px, 12vw, 50px);
+  }
 }
 
 .glass-effect {
