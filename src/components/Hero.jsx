@@ -12,7 +12,7 @@ const Hero = () => {
         />
         <img
           alt="Spaceship"
-          className="absolute bottom-0 w-1/4 opacity-75 hovering-spaceship"
+          className="absolute bottom-0 w-1/5 opacity-75 hovering-spaceship"
           // src="https://static.vecteezy.com/system/resources/previews/045/800/108/non_2x/spaceship-isolated-on-transparent-background-free-png.png"
           src="https://static.vecteezy.com/system/resources/previews/045/800/111/non_2x/spaceship-isolated-on-transparent-background-free-png.png"
           // src={galaxy}

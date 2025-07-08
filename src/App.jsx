@@ -4,8 +4,8 @@ import Hero from './components/Hero'
 import Header from './components/Header'
 import OrbitingSatellites from './components/OrbitingSatellites'
 import Services from './components/Services'
-import FeaturedProjects from './components/FeaturedProjects'
-import AboutSection from './components/AboutSection'
+// import FeaturedProjects from './components/FeaturedProjects'
+// import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
       <Header />
       <Hero />
       <Services />
-      <FeaturedProjects />
-      <AboutSection />
+      {/* <FeaturedProjects />
+      <AboutSection /> */}
       <ContactSection />
     </>
   )

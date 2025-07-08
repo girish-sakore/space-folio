@@ -208,5 +208,5 @@ body {
 }
 
 .hovering-spaceship {
-  animation: hover-bob 8s ease-in-out infinite;
+  animation: hover-bob 32s ease-in-out infinite;
 }
