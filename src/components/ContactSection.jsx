@@ -163,7 +163,7 @@ export default function ContactSection() {
     try {
       // Your form submission logic here
       console.log("Form submitted:", formData);
-      const response = await fetch("https://proximacloud.ddns.net/submit-contact/", {
+      const response = await fetch("https://proximacloud.ddns.net/fast/api/submit-contact/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
