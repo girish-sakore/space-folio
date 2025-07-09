@@ -1,5 +1,6 @@
 import myne_logo from '../assets/234844.png';
 import hapchi_logo from '../assets/000032.png';
+import DoubleArrowSharpIcon from '@mui/icons-material/DoubleArrowSharp';
 
 export default function FeaturedProjects() {
   const projects = [
@@ -103,9 +104,9 @@ export default function FeaturedProjects() {
                 <h3 className="text-2xl font-bold text-white mb-2">
                   {project.title}
                 </h3>
-                <p className="text-slate-400 mb-4">{project.description}</p>
+                <p className="text-slate-400 mb-4 h-[50px] overflow-hidden">{project.description}</p>
                 <a
-                  className="text-teal-400 font-semibold hover:text-teal-300 transition-colors"
+                  className="text-teal-400 font-semibold hover:text-teal-300 transition-colors pt-3"
                   href={project.link}
                 >
                   View Case Study →
@@ -113,6 +114,12 @@ export default function FeaturedProjects() {
               </div>
             </div>
           ))}
+        </div>
+        <div className='mx-auto items-center flex justify-center'>
+          <a className="mt-8 btn-primary" href='#'>
+            <span>View All Projects</span>
+            <DoubleArrowSharpIcon />
+          </a>
         </div>
       </div>
     </section>
