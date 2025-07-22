@@ -1,6 +1,7 @@
 :root {
   --teal: #a7dbd9;
   --orange: #ecb595;
+  --orange-100: #f29c6a;
   --slate-900: #0f172a;
   --slate-800: #1e293b;
   --slate-700: #334155;
@@ -35,7 +36,7 @@ body {
 }
 .btn-primary:hover {
   color: var(--color-slate-800);
-  background-color: var(--color-teal-700);
+  background-color: white;
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(5, 104, 107, 0.3),
     0 4px 6px -4px rgba(4, 87, 90, 0.3);
@@ -95,7 +96,7 @@ body {
   /* letter-spacing: -0.025em; */
 }
 .gradient-text {
-  background: linear-gradient(to right, var(--teal-200), #f29c6a);
+  background: linear-gradient(to right, var(--teal-200), var(--orange-100));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

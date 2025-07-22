@@ -146,6 +146,8 @@ export default function ContactSection() {
   };
 
   const handleSubmit = async (e) => {
+    const api_base_url = process.env.REACT_APP_API_URL || "https://proximacloud.ddns.net";
+
     e.preventDefault();
     setIsSubmitting(true);
 
@@ -159,11 +161,8 @@ export default function ContactSection() {
 
     // Simulate API delay
     await new Promise((resolve) => setTimeout(resolve, 1000));
-
     try {
-      // Your form submission logic here
-      console.log("Form submitted:", formData);
-      const response = await fetch("https://proximacloud.ddns.net/fast/api/submit-contact/", {
+      const response = await fetch(`${api_base_url}/fast/api/submit-contact/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
