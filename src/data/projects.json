@@ -1,0 +1,321 @@
+{
+  "tagCategories": {
+    "technologies": [
+      "React",
+      "React Native",
+      "Ruby on Rails",
+      "Node.js",
+      "Express.js",
+      "PostgreSQL",
+      "MySQL",
+      "MongoDB",
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "Java",
+      "Swift",
+      "Kotlin",
+      "HTML5",
+      "CSS3",
+      "SASS",
+      "Tailwind CSS",
+      "Bootstrap",
+      "Vue.js",
+      "Angular",
+      "Next.js",
+      "Nuxt.js",
+      "GraphQL",
+      "REST API",
+      "Docker",
+      "Kubernetes",
+      "AWS",
+      "Azure",
+      "Google Cloud",
+      "Firebase",
+      "Stripe",
+      "PayPal",
+      "Redis",
+      "Elasticsearch",
+      "Socket.io",
+      "WebRTC",
+      "OAuth",
+      "JWT",
+      "Webpack",
+      "Vite",
+      "Jest",
+      "Cypress",
+      "Selenium"
+    ],
+    "industries": [
+      "Fintech",
+      "Healthcare",
+      "Education",
+      "E-commerce",
+      "Social Media",
+      "Entertainment",
+      "Real Estate",
+      "Travel",
+      "Food & Beverage",
+      "Automotive",
+      "Manufacturing",
+      "Logistics",
+      "Government",
+      "Non-profit",
+      "Gaming",
+      "Sports",
+      "Fashion",
+      "Agriculture",
+      "Energy",
+      "Insurance",
+      "Legal",
+      "Marketing",
+      "HR",
+      "Consulting",
+      "Child Safety",
+      "Portfolio Management"
+    ],
+    "projectTypes": [
+      "Web Application",
+      "Mobile App",
+      "Desktop Application",
+      "E-commerce Platform",
+      "Content Management System",
+      "API Development",
+      "Database Design",
+      "UI/UX Design",
+      "Landing Page",
+      "Portfolio Website",
+      "Blog Platform",
+      "Social Platform",
+      "Analytics Dashboard",
+      "Admin Panel",
+      "Payment Gateway",
+      "Booking System",
+      "Chat Application",
+      "Video Streaming",
+      "File Management",
+      "Project Management Tool",
+      "CRM System",
+      "ERP System",
+      "Learning Management System",
+      "Assessment Platform",
+      "Report Generator"
+    ],
+    "categories": [
+      "Frontend",
+      "Backend",
+      "Full Stack",
+      "Mobile Development",
+      "DevOps",
+      "Database",
+      "API Integration",
+      "UI/UX",
+      "Security",
+      "Performance Optimization",
+      "Testing",
+      "Deployment",
+      "Maintenance",
+      "Consulting",
+      "Architecture Design"
+    ],
+    "complexityLevels": [
+      "Simple",
+      "Medium",
+      "Complex"
+    ],
+    "statusOptions": [
+      "Completed",
+      "In Progress",
+      "On Hold",
+      "Cancelled",
+      "Maintenance"
+    ]
+  },
+  "projects": [
+    {
+      "id": 1,
+      "title": "MyneLeap2024",
+      "description": "A complete wealth solution built for your financial well-being.",
+      "image": "../assets/234844.png",
+      "link": "https://joinmyne.com/",
+      "client": "Myne",
+      "startDate": "2023-01-15",
+      "endDate": "2024-03-01",
+      "status": "Completed",
+      "features": [
+        "International payments",
+        "Global Timezone Appointment Booking",
+        "User Subscriptions",
+        "Financial Data Analytics",
+        "Multiple Currencies",
+        "Multirole Users",
+        "Admin Console"
+      ],
+      "challenges": "Integrating diverse financial services and ensuring secure transactions.",
+      "solutions": "Developed a robust API and implemented strong encryption and authentication protocols.",
+      "results": "Successful launch with positive user feedback and increased customer engagement.",
+      "technologies": [
+        "Ruby on Rails",
+        "React",
+        "React Native",
+        "PostgreSQL",
+        "REST API",
+        "OAuth",
+        "Stripe"
+      ],
+      "industries": [
+        "Fintech"
+      ],
+      "projectTypes": [
+        "Web Application",
+        "Mobile App",
+        "Payment Gateway"
+      ],
+      "categories": [
+        "Full Stack",
+        "Mobile Development",
+        "API Integration",
+        "Security"
+      ],
+      "complexity": "Complex",
+      "teamSize": 8,
+      "duration": "14 months"
+    },
+    {
+      "id": 2,
+      "title": "Hapchi",
+      "description": "India's first child safety digital platform focuses on every child safety concern that a child encounters during their journey from early childhood to adolescence.",
+      "image": "../assets/000032.png",
+      "link": "https://hapchi.in/",
+      "client": "Hapchi",
+      "startDate": "2022-05-01",
+      "endDate": "2023-08-15",
+      "status": "Completed",
+      "features": [
+        "Assesments and Questionaires",
+        "Test Evaluations",
+        "Reports Generators",
+        "Multirole Users",
+        "Admin Console"
+      ],
+      "challenges": "Creating a user-friendly interface for sensitive child safety data.",
+      "solutions": "Implemented intuitive UI/UX design and strict data privacy measures.",
+      "results": "Positive feedback from parents and educators, demonstrating the platform's effectiveness.",
+      "technologies": [
+        "Ruby on Rails",
+        "React",
+        "React Native",
+        "MySQL",
+        "REST API"
+      ],
+      "industries": [
+        "Child Safety",
+        "Education"
+      ],
+      "projectTypes": [
+        "Web Application",
+        "Mobile App",
+        "Assessment Platform",
+        "Report Generator"
+      ],
+      "categories": [
+        "Full Stack",
+        "Mobile Development",
+        "UI/UX",
+        "Security"
+      ],
+      "complexity": "Complex",
+      "teamSize": 6,
+      "duration": "15 months"
+    },
+    {
+      "id": 3,
+      "title": "Social Media App",
+      "description": "A social platform for connecting creative professionals",
+      "image": "https://images.unsplash.com/photo-1675703818188-cee153b831f3",
+      "link": "#",
+      "client": "Internal Project",
+      "startDate": "2024-01-01",
+      "endDate": "2024-06-30",
+      "status": "In Progress",
+      "features": [
+        "User Profiles",
+        "Content Sharing",
+        "Real-time Messaging",
+        "Professional Networking",
+        "Portfolio Showcase"
+      ],
+      "challenges": "Building scalable real-time features and ensuring user engagement.",
+      "solutions": "Implementing WebSocket connections and gamification elements.",
+      "results": "Currently in development with promising early user testing results.",
+      "technologies": [
+        "React Native",
+        "Node.js",
+        "MongoDB",
+        "Socket.io",
+        "Firebase"
+      ],
+      "industries": [
+        "Social Media",
+        "Entertainment"
+      ],
+      "projectTypes": [
+        "Mobile App",
+        "Social Platform"
+      ],
+      "categories": [
+        "Mobile Development",
+        "Backend",
+        "API Integration"
+      ],
+      "complexity": "Medium",
+      "teamSize": 4,
+      "duration": "6 months"
+    },
+    {
+      "id": 4,
+      "title": "Portfolio Generator",
+      "description": "Tool for creating beautiful portfolio websites",
+      "image": "https://images.unsplash.com/photo-1739514984003-330f7c1d2007",
+      "link": "#",
+      "client": "Open Source",
+      "startDate": "2024-02-01",
+      "endDate": "2024-04-30",
+      "status": "Completed",
+      "features": [
+        "Template Selection",
+        "Drag & Drop Builder",
+        "Custom Themes",
+        "Export Options",
+        "SEO Optimization"
+      ],
+      "challenges": "Creating an intuitive drag-and-drop interface with flexible customization options.",
+      "solutions": "Developed a component-based architecture with real-time preview functionality.",
+      "results": "Successfully launched with over 1000 users in the first month.",
+      "technologies": [
+        "React",
+        "Node.js",
+        "MongoDB",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS"
+      ],
+      "industries": [
+        "Portfolio Management",
+        "Marketing"
+      ],
+      "projectTypes": [
+        "Web Application",
+        "Portfolio Website"
+      ],
+      "categories": [
+        "Frontend",
+        "UI/UX",
+        "Full Stack"
+      ],
+      "complexity": "Medium",
+      "teamSize": 3,
+      "duration": "3 months"
+    }
+  ]
+}

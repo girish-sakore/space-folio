@@ -1,125 +1,57 @@
+// Migration to JSON-based project data structure
+// This file now imports project data from projects.json and uses utility functions
+// from projectUtils.js while maintaining backward compatibility with existing components
+
 import myne_logo from '../assets/234844.png';
 import hapchi_logo from '../assets/000032.png';
+import { loadProjects } from '../utils/projectUtils.js';
 
-const projects = [
-  {
-    title: "MyneLeap2024",
-    description:
-      "A complete wealth solution built for your financial well-being.",
-    image: myne_logo,
-    link: "https://joinmyne.com/",
-    features: [
-      "International payments",
-      "Global Timezone Appointment Booking",
-      "User Subscriptions",
-      "Financial Data Analytics",
-      "Multiple Currencies",
-      "Multirole Users",
-      "Admin Console",
-    ],
-    client: "Myne",
-    projectType: "Web Application",
-    startDate: "2023-01-15",
-    endDate: "2024-03-01",
-    technologiesUsed: [
-      "Ruby on Rails",
-      "React",
-      "React Native",
-      "PostgreSQL",
-    ],
-    challenges:
-      "Integrating diverse financial services and ensuring secure transactions.",
-    solutions:
-      "Developed a robust API and implemented strong encryption and authentication protocols.",
-    results:
-      "Successful launch with positive user feedback and increased customer engagement.",
-    id: 1,
-  },
-  {
-    title: "Hapchi",
-    description:
-      "India's first child safety digital platform focuses on every child safety concern that a child encounters during their journey from early childhood to adolescence.",
-    image: hapchi_logo,
-    link: "https://hapchi.in/",
-    features: [
-      "Assesments and Questionaires",
-      "Test Evaluations",
-      "Reports Generators",
-      "Multirole Users",
-      "Admin Console",
-    ],
-    client: "Hapchi",
-    projectType: "Web and IOS/Android Application",
-    startDate: "2022-05-01",
-    endDate: "2023-08-15",
-    technologiesUsed: ["Ruby on Rails", "React", "React Native", "MySQL"],
-    challenges:
-      "Creating a user-friendly interface for sensitive child safety data.",
-    solutions:
-      "Implemented intuitive UI/UX design and strict data privacy measures.",
-    results:
-      "Positive feedback from parents and educators, demonstrating the platform's effectiveness.",
-    id: 2,
-  },
-  {
-    title: "Social Media App",
-    description: "A social platform for connecting creative professionals",
-    image: "https://images.unsplash.com/photo-1675703818188-cee153b831f3",
-    link: "#",
-    features: [],
-    projectType: "Mobile Application",
-    id: 3,
-  },
-  {
-    title: "Portfolio Generator",
-    description: "Tool for creating beautiful portfolio websites",
-    image: "https://images.unsplash.com/photo-1739514984003-330f7c1d2007",
-    link: "#",
-    projectType: "Web Tool",
-    id: 4,
-    features: [],
-  },
-];
+// Load project data from JSON
+const { projects: jsonProjects } = loadProjects();
 
+// Map JSON data to maintain backward compatibility with existing component structure
+// This ensures FeaturedProjects.jsx, Portfolio.jsx, and ProjectDetail.jsx continue to work
+const projects = jsonProjects.map(project => {
+  // Handle image imports for local assets
+  let projectImage = project.image;
+  if (project.id === 1) {
+    projectImage = myne_logo;
+  } else if (project.id === 2) {
+    projectImage = hapchi_logo;
+  }
 
-// const projects = [
-//   {
-// 	id: 1,
-// 	title: "Project One",
-// 	description: "This is the first project description.",
-// 	image: "/images/project1.jpg",
-// 	link: "#",
-// 	projectType: "Web App",
-// 	features: [],
-//   },
-//   {
-// 	id: 2,
-// 	title: "Project Two",
-// 	description: "This is the second project description.",
-// 	image: "/images/project2.jpg",
-// 	link: "#",
-// 	projectType: "Mobile App",
-// 	features: [],
-//   },
-//   {
-// 	id: 3,
-// 	title: "Project Three",
-// 	description: "This is the third project description.",
-// 	image: "/images/project3.jpg",
-// 	link: "#",
-// 	projectType: "E-commerce",
-// 	features: [],
-//   },
-//   {
-// 	id: 4,
-// 	title: "Project Four",
-// 	description: "This is the fourth project description.",
-// 	image: "/images/project4.jpg",
-// 	link: "#",
-// 	projectType: "Web Tool",
-// 	features: [],
-//   },
-  
-// ];
-
+  return {
+    // Core fields that existing components expect
+    id: project.id,
+    title: project.title,
+    description: project.description,
+    image: projectImage,
+    link: project.link,
+    features: project.features || [],
+    
+    // Legacy fields for backward compatibility
+    projectType: project.projectTypes ? project.projectTypes[0] : 'Web Application',
+    technologiesUsed: project.technologies || [],
+    
+    // Additional fields from enhanced schema
+    client: project.client,
+    startDate: project.startDate,
+    endDate: project.endDate,
+    status: project.status,
+    challenges: project.challenges,
+    solutions: project.solutions,
+    results: project.results,
+    
+    // New enhanced fields (available for future use)
+    technologies: project.technologies,
+    industries: project.industries,
+    projectTypes: project.projectTypes,
+    categories: project.categories,
+    complexity: project.complexity,
+    teamSize: project.teamSize,
+    duration: project.duration
+  };
+});
+// Export projects array in the same format as before for backward compatibility
+// Existing components (FeaturedProjects.jsx, Portfolio.jsx, ProjectDetail.jsx) will continue to work
 export default projects;
