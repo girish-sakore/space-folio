@@ -1,1 +1,492 @@
 @import "tailwindcss";
+
+:root {
+  --teal: #a7dbd9;
+  --orange: #ecb595;
+  --orange-100: #f29c6a;
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --white: #ffffff;
+  --teal-300: #356c6a;
+  --teal-200: #64c5c2;
+  --teal-100: #a7dbd9;
+  --border-radius-base: 0.375rem;
+}
+body {
+  background-color: var(--slate-900);
+  color: var(--slate-300);
+  font-family: "Inter", sans-serif;
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+}
+.header {
+  background-color: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--slate-800);
+}
+.btn-primary {
+  background-color: var(--color-teal-600);
+  color: var(--white);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+    0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+.btn-primary:hover {
+  color: var(--color-slate-800);
+  background-color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(5, 104, 107, 0.3),
+    0 4px 6px -4px rgba(4, 87, 90, 0.3);
+}
+.nav-link {
+  transition: color 0.3s ease;
+  position: relative;
+  padding-bottom: 4px;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--teal-100);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--teal-100);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+.card {
+  background-color: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--slate-600);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+.form-input {
+  background-color: var(--slate-900);
+  border: 1px solid var(--slate-700);
+  border-radius: 0.5rem;
+  color: var(--slate-300);
+  padding: 0.75rem 1rem;
+}
+.form-input:focus {
+  outline: none;
+  border-color: var(--teal-200);
+  box-shadow: 0 0 0 2px rgb(14 165 233 / 0.2);
+}
+.section-title {
+  /* font-weight: 700; */
+  /* color: var(--white); */
+  /* letter-spacing: -0.025em; */
+}
+.gradient-text {
+  background: linear-gradient(to right, var(--teal-200), var(--orange-100));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes spin-slow {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate-slow {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.planet-slow {
+  animation: spin-slow 400s linear infinite;
+}
+
+/* Large rotating container */
+.orbit-container {
+   /* border: 2px dashed rgba(255, 255, 255, 0.2);border for debugging */
+  z-index: 10;
+  position: absolute;
+  /* Make it much larger than viewport */
+  width: 120vw;
+  /* height: 120vw; */
+  left: -60vw;
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: 50% 50%;
+  animation: rotate-slow 100s linear infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Satellite positioning */
+.satellite {
+  position: absolute;
+  width: clamp(40px, 8vw, 80px);
+  height: clamp(40px, 8vw, 80px);
+  transition: opacity 0.5s ease;
+  animation: spin-slow 120s linear infinite;
+}
+
+/* Position satellites at opposite corners of the large container */
+.satellite-1 {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.satellite-2 {
+  bottom: 0;
+  right: 0;
+  transform: translate(-50%, -50%);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .orbit-container {
+    width: 150vw;
+    /* height: 150vw; */
+    left: -75vw;
+    animation: rotate-slow 120s linear infinite;
+  }
+  
+  .satellite {
+    width: clamp(30px, 10vw, 60px);
+    height: clamp(30px, 10vw, 60px);
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+  .orbit-container {
+    width: 180vw;
+    /* height: 180vw; */
+    left: -90vw;
+    animation: rotate-slow 140s linear infinite;
+  }
+  
+  .satellite {
+    width: clamp(25px, 12vw, 50px);
+    height: clamp(25px, 12vw, 50px);
+  }
+}
+
+.glass-effect {
+  background-color: rgba(109, 109, 109, 0.055);
+  backdrop-filter: blur(2px);
+  border: 2px solid rgba(180, 178, 178, 0.048);
+  z-index: 20;
+  /* box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); */
+}
+
+/* Complex floating with 3D movement */
+@keyframes float-3d {
+  0%, 100% {
+      transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+      transform: translateY(-20px) translateX(10px) rotate(3deg);
+  }
+  50% {
+      transform: translateY(-15px) translateX(-5px) rotate(-1deg);
+  }
+  75% {
+      transform: translateY(-25px) translateX(-10px) rotate(-3deg);
+  }
+}
+
+/* Gentle floating with rotation */
+@keyframes float-gentle {
+  0%, 100% {
+      transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+      transform: translateY(-15px) rotate(2deg);
+  }
+  66% {
+      transform: translateY(-10px) rotate(-2deg);
+  }
+}
+
+/* Hovering with subtle bob */
+@keyframes hover-bob {
+  0%, 100% {
+      transform: translateY(0px) scale(1);
+  }
+  25% {
+      transform: translateY(-8px) scale(1.02);
+  }
+  50% {
+      transform: translateY(-12px) scale(1.01);
+  }
+  75% {
+      transform: translateY(-5px) scale(1.03);
+  }
+}
+
+.hovering-spaceship {
+  animation: hover-bob 10s ease-in-out infinite;
+}
+
+
+/* Filter Chip Styles */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: 9999px;
+  color: var(--slate-300);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-base);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--slate-600);
+  color: var(--slate-200);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.chip-selected {
+  background-color: var(--teal-200);
+  color: var(--slate-900);
+  border-color: var(--teal-100);
+  font-weight: 600;
+}
+
+.chip-selected:hover {
+  background-color: var(--teal-300);
+  border-color: var(--teal-200);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.2), 0 2px 4px -1px rgba(20, 184, 166, 0.1);
+}
+
+/* Filter Section Styles */
+.filter-content {
+  max-height: 0;
+  overflow: auto;
+  transition: max-height 0.5s ease-in-out; /* Adjust timing and easing as you like */
+}
+
+/* Style for the content wrapper when it's open */
+.filter-content.open {
+  max-height: 500px; /* A value larger than the content's expected height */
+}
+/* .filter-section {
+  background-color: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+} */
+
+.filter-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--slate-200);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Enhanced Card Styles */
+.project-tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--slate-700);
+  color: var(--teal-300);
+  border-radius: var(--border-radius-base);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--slate-600);
+  transition: var(--transition-base);
+}
+
+.project-tag:hover {
+  background-color: var(--slate-600);
+  border-color: var(--teal-400);
+  color: var(--teal-200);
+}
+
+.project-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Results and utility styles */
+.results-count {
+  color: var(--slate-400);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.secondary-btn {
+  background: none;
+  border: 1px solid var(--slate-600);
+  color: var(--slate-300);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-size: 0.875rem;
+}
+
+.secondary-btn:hover {
+  border-color: var(--teal-400);
+  color: var(--teal-300);
+  background-color: var(--slate-800);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--slate-400);
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  color: var(--slate-300);
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .filter-section {
+    padding: 1.5rem;
+  }
+  
+  .filter-group {
+    margin-bottom: 1rem;
+  }
+  
+  .filter-chips {
+    gap: 0.375rem;
+  }
+  
+  .chip {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+  
+  .project-tag {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.375rem;
+  }
+  
+  .project-tag-list {
+    gap: 0.375rem;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .filter-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .filter-group {
+    gap: 0.5rem;
+  }
+  
+  .filter-label {
+    font-size: 0.875rem;
+  }
+  
+  .chip {
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Focus states for accessibility */
+.chip:focus,
+.secondary-btn:focus {
+  outline: 2px solid var(--teal-400);
+  outline-offset: 2px;
+}
+
+.chip:focus-visible,
+.secondary-btn:focus-visible {
+  outline: 2px solid var(--teal-400);
+  outline-offset: 2px;
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Grid layout utilities */
+.portfolio-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

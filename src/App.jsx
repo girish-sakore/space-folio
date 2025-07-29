@@ -1,27 +1,33 @@
-import { useState } from 'react'
-import './App.css'
-import Hero from './components/Hero'
-import Header from './components/Header'
-import OrbitingSatellites from './components/OrbitingSatellites'
-import Services from './components/Services'
-import FeaturedProjects from './components/FeaturedProjects'
-import AboutSection from './components/AboutSection'
-import ContactSection from './components/ContactSection'
-import Footer from './components/Footer'
+import React from "react";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import OrbitingSatellites from "./components/OrbitingSatellites";
+import Home from "./pages/Home";
+import Portfolio from "./pages/Portfolio";
+import ProjectDetail from "./pages/ProjectDetail";
 
-function App() {
+const Layout = () => (
+  <>
+    <OrbitingSatellites />
+    <Header />
+    <Outlet />
+    <Footer />
+  </>
+);
+
+const App = () => {
   return (
-    <>
-      <OrbitingSatellites />
-      <Header />
-      <Hero />
-      <Services />
-      <FeaturedProjects />
-      <AboutSection />
-      <ContactSection />
-      <Footer />
-    </>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="portfolio" element={<Portfolio />} />
+          <Route path="portfolio/:id" element={<ProjectDetail />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
