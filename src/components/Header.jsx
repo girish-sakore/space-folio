@@ -1,8 +1,11 @@
 import React from "react";
 import proximaLogo from '../assets/Proxima_Cloud-removebg-preview.png';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
+  
+  const isActive = (path) => location.pathname === path;
   return (
     <header className="fixed w-full z-50 p-4 header">
       <div className="container mx-auto flex justify-between items-center">
@@ -21,19 +24,19 @@ const Header = () => {
 
         </Link>
         <nav className="hidden md:flex items-center space-x-8 text-slate-300 font-medium">
-          <Link to="/" className="nav-link active">
+          <Link to="/" className={`font-bold nav-link ${isActive('/') ? 'active' : ''}`}>
             Home
           </Link>
-          <Link to="/portfolio" className="nav-link">
+          <Link to="/portfolio" className={`font-bold nav-link ${isActive('/portfolio') ? 'active' : ''}`}>
             Projects
           </Link>
-          <a href="#services" className="nav-link">
+          <a href="#services" className={`font-bold nav-link ${isActive('/services') ? 'active' : ''}`}>
             Services
           </a>
-          <a href="#about" className="nav-link">
+          <a href="#about" className={`font-bold nav-link ${isActive('/about') ? 'active' : ''}`}>
             About
           </a>
-          <a href="#contact" className="nav-link">
+          <a href="#contact" className={`font-bold nav-link ${isActive('/contact') ? 'active' : ''}`}>
             Contact
           </a>
         </nav>

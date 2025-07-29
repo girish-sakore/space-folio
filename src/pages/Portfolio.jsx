@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import FilterAltSharpIcon from '@mui/icons-material/FilterAltSharp';
+import FilterAltOffSharpIcon from '@mui/icons-material/FilterAltOffSharp';
+
 import { 
   loadProjects, 
   filterProjects, 
@@ -11,6 +14,7 @@ import {
 import { Alert } from '@mui/material';
 
 export default function Portfolio() {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
   // State management for filters and projects
   const [allProjects, setAllProjects] = useState([]);
   const [filteredProjects, setFilteredProjects] = useState([]);
@@ -72,6 +76,10 @@ export default function Portfolio() {
       setFilteredProjects(result.success ? result.data : []);
     }
   }, [activeFilters, allProjects]);
+
+  const toggleAccordion = () => {
+    setIsFilterOpen(prevIsOpen => !prevIsOpen);
+  };
 
   // Toggle filter selection
   const toggleFilter = (category, value) => {
@@ -167,8 +175,8 @@ export default function Portfolio() {
       <div className="container mx-auto px-4">
         {/* Hero Section */}
         <div className="text-center mb-16">
-          <h1 className="gradient-text text-5xl font-bold mb-4">
-            Our Portfolio
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight tracking-tighter">
+            <span className="gradient-text">&nbsp;Our Portfolio&nbsp;</span>
           </h1>
           <p className="text-lg text-slate-400 max-w-3xl mx-auto">
             Explore our comprehensive collection of projects across various industries and technologies. 
@@ -177,29 +185,41 @@ export default function Portfolio() {
         </div>
 
         {/* Filter Section */}
-        <div className="filter-section">
-          <div className="flex justify-between items-center mb-6">
+        <div className="px-5 py-10 bg-slate-800 rounded-3xl mx-5 my-5 glass-effect relative">
+          <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-slate-200">Filter Projects</h2>
-            {hasActiveFilters && (
+            <div className="">
               <button
-                onClick={clearAllFilters}
-                className="clear-filters-btn"
+                className="secondary-btn mr-1"
+                onClick={toggleAccordion}
+                tooltip="Toggle Filters"
               >
-                Clear All Filters
+                <FilterAltSharpIcon />
               </button>
-            )}
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="secondary-btn"
+                >
+                  <FilterAltOffSharpIcon />
+                </button>
+              )}
+            </div>
           </div>
-
-          {/* Filter Groups */}
-          {renderFilterChips('technologies', filterOptions.technologies, 'Technologies')}
-          {renderFilterChips('industries', filterOptions.industries, 'Industries')}
-          {renderFilterChips('projectTypes', filterOptions.projectTypes, 'Project Types')}
-          {renderFilterChips('categories', filterOptions.categories, 'Categories')}
-          {renderFilterChips('complexity', filterOptions.complexity, 'Complexity')}
+          {isFilterOpen && (
+            <div className={`mt-6 filter-content ${isFilterOpen ? 'open' : ''}`}>
+              {/* Filter Groups */}
+              {renderFilterChips('technologies', filterOptions.technologies, 'Technologies')}
+              {renderFilterChips('industries', filterOptions.industries, 'Industries')}
+              {renderFilterChips('projectTypes', filterOptions.projectTypes, 'Project Types')}
+              {renderFilterChips('categories', filterOptions.categories, 'Categories')}
+              {renderFilterChips('complexity', filterOptions.complexity, 'Complexity')}
+            </div>
+          )}
         </div>
 
         {/* Results Count */}
-        <div className="results-count">
+        <div className="results-count px-5">
           Showing {filteredProjects.length} of {allProjects.length} projects
           {hasActiveFilters && (
             <span className="text-teal-400 ml-2">
@@ -210,11 +230,11 @@ export default function Portfolio() {
 
         {/* Projects Grid */}
         {filteredProjects.length > 0 ? (
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-6">
+          <div className="px-5 grid lg:grid-cols-3 md:grid-cols-2 gap-6">
             {filteredProjects.map(renderProjectCard)}
           </div>
         ) : (
-          <div className="empty-state">
+          <div className="px-5 empty-state">
             <h3>No projects found</h3>
             <p>Try adjusting your filters to see more results.</p>
             {hasActiveFilters && (
