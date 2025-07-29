@@ -1,488 +1,277 @@
 import projectsData from '../data/projects.json';
 
-// Data Loading Functions
+// --- Data Loading Functions ---
 
 /**
  * Load and return project data from JSON
- * @returns {Object} Object containing projects array and tag categories
+ * @returns {{success: boolean, data: {projects: Array, tagCategories: Object}, error: string|null}}
  */
 export const loadProjects = () => {
   try {
-    return {
+    const data = {
       projects: projectsData.projects || [],
       tagCategories: projectsData.tagCategories || {}
     };
+    return { success: true, data, error: null };
   } catch (error) {
     console.error('Error loading projects:', error);
-    return {
-      projects: [],
-      tagCategories: {}
-    };
+    return { success: false, data: { projects: [], tagCategories: {} }, error: error.message };
   }
 };
 
 /**
  * Find a specific project by ID
  * @param {number|string} id - The project ID to search for
- * @returns {Object|null} The project object or null if not found
+ * @returns {{success: boolean, data: Object|null, error: string|null}} The project object or null if not found
  */
 export const getProjectById = (id) => {
   try {
-    const { projects } = loadProjects();
-    const project = projects.find(project => project.id === parseInt(id));
-    return {
-      success: true,
-      data: project,
-      error: null,
-    };
+    const { data } = loadProjects();
+    const project = data.projects.find(p => p.id === parseInt(id, 10)) || null;
+    return { success: true, data: project, error: null };
   } catch (error) {
     console.error('Error getting project by ID:', error);
-    return {
-      success: false,
-      data: null,
-      error: error.message,
-    };
+    return { success: false, data: null, error: error.message };
   }
 };
 
 /**
  * Get a limited number of featured projects
  * @param {number} count - Number of projects to return (default: 3)
- * @returns {Array} Array of featured projects
+ * @returns {{success: boolean, data: Array, error: string|null}} Array of featured projects
  */
 export const getFeaturedProjects = (count = 3) => {
   try {
-    const { projects } = loadProjects();
-    // Prioritize completed projects, then sort by end date (most recent first)
-    const sortedProjects = projects
+    const { data } = loadProjects();
+    const sortedProjects = data.projects
       .filter(project => project.status === 'Completed')
       .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
     
-      return {
-        success: true,
-        data: sortedProjects.slice(0, count),
-        error: null,
-      };
+    return { success: true, data: sortedProjects.slice(0, count), error: null };
   } catch (error) {
     console.error('Error getting featured projects:', error);
-    return {
-      success: false,
-      data: null,
-      error: error.message,
-    };
+    return { success: false, data: [], error: error.message };
   }
 };
 
-// Filtering Functions
+
+// --- Filtering Functions ---
 
 /**
  * Filter projects by technology tags
  * @param {Array} projects - Array of project objects
  * @param {Array} technologies - Array of technology tags to filter by
- * @returns {Array} Filtered array of projects
+ * @returns {{success: boolean, data: Array, error: string|null}} Filtered array of projects
  */
-export const filterProjectsByTechnology = (projects, technologies) => {
-  let filteredProjects;
-  if (!Array.isArray(projects) || !Array.isArray(technologies) || technologies.length === 0) {
-    filteredProjects = projects;
-  } else {
-    filteredProjects = projects.filter(project => 
-      project.technologies && 
-      technologies.some(tech => project.technologies.includes(tech))
+const filterByTag = (projects, tags, tagKey) => {
+  try {
+    if (!Array.isArray(projects)) throw new Error('Invalid projects array.');
+    if (!Array.isArray(tags) || tags.length === 0) {
+      return { success: true, data: projects, error: null };
+    }
+    
+    const filtered = projects.filter(project => 
+      project[tagKey] && tags.some(tag => project[tagKey].includes(tag))
     );
+    return { success: true, data: filtered, error: null };
+  } catch (error) {
+     console.error(`Error filtering by ${tagKey}:`, error);
+     return { success: false, data: projects, error: error.message };
   }
-
-  return {
-    success: true,
-    data: filteredProjects,
-    error: null,
-  };
-};
-
-/**
- * Filter projects by industry tags
- * @param {Array} projects - Array of project objects
- * @param {Array} industries - Array of industry tags to filter by
- * @returns {Array} Filtered array of projects
- */
-export const filterProjectsByIndustry = (projects, industries) => {
-  let filteredProjects;
-  if (!Array.isArray(projects) || !Array.isArray(industries) || industries.length === 0) {
-    filteredProjects =  projects;
-  }
-  
-  filteredProjects = projects.filter(project => 
-    project.industries && 
-    industries.some(industry => project.industries.includes(industry))
-  );
-
-  return {
-    success: true,
-    data: filteredProjects,
-    error: null,
-  };
-};
-
-/**
- * Filter projects by project type tags
- * @param {Array} projects - Array of project objects
- * @param {Array} types - Array of project type tags to filter by
- * @returns {Array} Filtered array of projects
- */
-export const filterProjectsByProjectType = (projects, types) => {
-  let filteredProjects;
-  if (!Array.isArray(projects) || !Array.isArray(types) || types.length === 0) {
-    filteredProjects = projects;
-  }
-  
-  filteredProjects = projects.filter(project => 
-    project.projectTypes && 
-    types.some(type => project.projectTypes.includes(type))
-  );
-  return {
-    success: true,
-    data: filteredProjects,
-    error: null,
-  };
-};
-
-/**
- * Filter projects by category tags
- * @param {Array} projects - Array of project objects
- * @param {Array} categories - Array of category tags to filter by
- * @returns {Array} Filtered array of projects
- */
-export const filterProjectsByCategory = (projects, categories) => {
-  let filteredProjects;
-  if (!Array.isArray(projects) || !Array.isArray(categories) || categories.length === 0) {
-    filteredProjects = projects;
-  }
-  
-  filteredProjects = projects.filter(project => 
-    project.categories && 
-    categories.some(category => project.categories.includes(category))
-  );
-  return {
-    success: true,
-    data: filteredProjects,
-    error: null,
-  };
-};
-
-/**
- * Filter projects by complexity level
- * @param {Array} projects - Array of project objects
- * @param {string} complexity - Complexity level to filter by
- * @returns {Array} Filtered array of projects
- */
-export const filterProjectsByComplexity = (projects, complexity) => {
-  let filteredProjects;
-  if (!Array.isArray(projects) || !complexity) {
-    filteredProjects = projects;
-  }
-  
-  filteredProjects = projects.filter(project => project.complexity === complexity);
-  return {
-    success: true,
-    data: filteredProjects,
-    error: null,
-  };
 };
 
 /**
  * Master filter function that applies multiple filter criteria
  * @param {Array} projects - Array of project objects
  * @param {Object} filters - Object containing filter criteria
- * @param {Array} filters.technologies - Technology tags to filter by
- * @param {Array} filters.industries - Industry tags to filter by
- * @param {Array} filters.projectTypes - Project type tags to filter by
- * @param {Array} filters.categories - Category tags to filter by
- * @param {string} filters.complexity - Complexity level to filter by
- * @param {string} filters.status - Status to filter by
- * @returns {Array} Filtered array of projects
+ * @returns {{success: boolean, data: Array, error: string|null}} Filtered array of projects
  */
 export const filterProjects = (projects, filters = {}) => {
-  if (!Array.isArray(projects)) {
-    return [];
-  }
-  
-  let filteredProjects = [...projects];
-  
   try {
+    if (!Array.isArray(projects)) throw new Error("Initial projects data must be an array.");
+
+    let currentProjects = [...projects];
+    let result;
+
     if (filters.technologies && filters.technologies.length > 0) {
-      filteredProjects = filterProjectsByTechnology(filteredProjects, filters.technologies);
+      result = filterByTag(currentProjects, filters.technologies, 'technologies');
+      if (!result.success) return result;
+      currentProjects = result.data;
     }
     
     if (filters.industries && filters.industries.length > 0) {
-      filteredProjects = filterProjectsByIndustry(filteredProjects, filters.industries);
+      result = filterByTag(currentProjects, filters.industries, 'industries');
+      if (!result.success) return result;
+      currentProjects = result.data;
     }
     
     if (filters.projectTypes && filters.projectTypes.length > 0) {
-      filteredProjects = filterProjectsByProjectType(filteredProjects, filters.projectTypes);
+      result = filterByTag(currentProjects, filters.projectTypes, 'projectTypes');
+      if (!result.success) return result;
+      currentProjects = result.data;
     }
-    
+
     if (filters.categories && filters.categories.length > 0) {
-      filteredProjects = filterProjectsByCategory(filteredProjects, filters.categories);
+      result = filterByTag(currentProjects, filters.categories, 'categories');
+      if (!result.success) return result;
+      currentProjects = result.data;
     }
     
-    if (filters.complexity) {
-      filteredProjects = filterProjectsByComplexity(filteredProjects, filters.complexity);
+    if (filters.complexity && filters.complexity.length > 0) {
+      currentProjects = currentProjects.filter(p => p.complexity === filters.complexity);
     }
     
     if (filters.status) {
-      filteredProjects = filteredProjects.filter(project => project.status === filters.status);
+      currentProjects = currentProjects.filter(p => p.status === filters.status);
     }
-    
-    return {
-      success: true,
-      data: filteredProjects,
-      error: null,
-    };
+    return { success: true, data: currentProjects, error: null };
   } catch (error) {
-    console.error('Error filtering projects:', error);
-    return {
-      success: false,
-      data: null,
-      error: error.message,
-    };
+    return { success: false, data: [], error: error.message };
   }
 };
 
-// Tag Management Functions
+// --- Tag Management Functions ---
 
 /**
- * Extract all unique technology tags from projects
+ * Extract all unique tags from projects for a given key
  * @param {Array} projects - Array of project objects
- * @returns {Array} Array of unique technology tags
+ * @param {string} tagKey - The key for the tags (e.g., 'technologies')
+ * @returns {{success: boolean, data: Array, error: string|null}}
  */
-export const getAllTechnologies = (projects) => {
-  if (!Array.isArray(projects)) {
-    return [];
-  }
-  
-  const technologies = new Set();
-  projects.forEach(project => {
-    if (project.technologies && Array.isArray(project.technologies)) {
-      project.technologies.forEach(tech => technologies.add(tech));
+const getAllUniqueTags = (projects, tagKey) => {
+    try {
+        if (!Array.isArray(projects)) return { success: true, data: [], error: null };
+        const tags = new Set();
+        projects.forEach(project => {
+            if (Array.isArray(project[tagKey])) {
+                project[tagKey].forEach(tag => tags.add(tag));
+            }
+        });
+        return { success: true, data: Array.from(tags).sort(), error: null };
+    } catch(error) {
+        console.error(`Error getting unique tags for ${tagKey}:`, error);
+        return { success: false, data: [], error: error.message };
     }
-  });
-  
-  return Array.from(technologies).sort();
-};
+}
 
-/**
- * Extract all unique industry tags from projects
- * @param {Array} projects - Array of project objects
- * @returns {Array} Array of unique industry tags
- */
-export const getAllIndustries = (projects) => {
-  if (!Array.isArray(projects)) {
-    return [];
-  }
-  
-  const industries = new Set();
-  projects.forEach(project => {
-    if (project.industries && Array.isArray(project.industries)) {
-      project.industries.forEach(industry => industries.add(industry));
-    }
-  });
-  
-  return Array.from(industries).sort();
-};
-
-/**
- * Extract all unique project type tags from projects
- * @param {Array} projects - Array of project objects
- * @returns {Array} Array of unique project type tags
- */
-export const getAllProjectTypes = (projects) => {
-  if (!Array.isArray(projects)) {
-    return [];
-  }
-  
-  const projectTypes = new Set();
-  projects.forEach(project => {
-    if (project.projectTypes && Array.isArray(project.projectTypes)) {
-      project.projectTypes.forEach(type => projectTypes.add(type));
-    }
-  });
-  
-  return Array.from(projectTypes).sort();
-};
-
-/**
- * Extract all unique category tags from projects
- * @param {Array} projects - Array of project objects
- * @returns {Array} Array of unique category tags
- */
-export const getAllCategories = (projects) => {
-  if (!Array.isArray(projects)) {
-    return [];
-  }
-  
-  const categories = new Set();
-  projects.forEach(project => {
-    if (project.categories && Array.isArray(project.categories)) {
-      project.categories.forEach(category => categories.add(category));
-    }
-  });
-  
-  return Array.from(categories).sort();
-};
+export const getAllTechnologies = (projects) => getAllUniqueTags(projects, 'technologies');
+export const getAllIndustries = (projects) => getAllUniqueTags(projects, 'industries');
+export const getAllProjectTypes = (projects) => getAllUniqueTags(projects, 'projectTypes');
+export const getAllCategories = (projects) => getAllUniqueTags(projects, 'categories');
 
 /**
  * Get count of projects for each tag in a category
  * @param {Array} projects - Array of project objects
- * @param {string} tagType - Type of tag ('technologies', 'industries', 'projectTypes', 'categories')
- * @returns {Object} Object with tag names as keys and counts as values
+ * @param {string} tagType - Type of tag ('technologies', 'industries', etc.)
+ * @returns {{success: boolean, data: Object, error: string|null}}
  */
 export const getTagCounts = (projects, tagType) => {
-  if (!Array.isArray(projects) || !tagType) {
-    return {};
-  }
-  
-  const tagCounts = {};
-  
-  projects.forEach(project => {
-    const tags = project[tagType];
-    if (tags && Array.isArray(tags)) {
-      tags.forEach(tag => {
-        tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-      });
+  try {
+    if (!Array.isArray(projects) || !tagType) {
+      return { success: true, data: {}, error: null };
     }
-  });
-  
-  return tagCounts;
+    const tagCounts = {};
+    projects.forEach(project => {
+      const tags = project[tagType];
+      if (Array.isArray(tags)) {
+        tags.forEach(tag => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        });
+      }
+    });
+    return { success: true, data: tagCounts, error: null };
+  } catch (error) {
+    console.error('Error getting tag counts:', error);
+    return { success: false, data: {}, error: error.message };
+  }
 };
 
-// Search and Sort Functions
+// --- Search and Sort Functions ---
 
 /**
  * Search projects by title, description, or tags
  * @param {Array} projects - Array of project objects
  * @param {string} searchTerm - Term to search for
- * @returns {Array} Array of projects matching the search term
+ * @returns {{success: boolean, data: Array, error: string|null}}
  */
 export const searchProjects = (projects, searchTerm) => {
-  if (!Array.isArray(projects) || !searchTerm || typeof searchTerm !== 'string') {
-    return projects;
+  try {
+    if (!Array.isArray(projects)) throw new Error("Projects must be an array.");
+    const term = (searchTerm || '').toLowerCase().trim();
+    if (!term) return { success: true, data: projects, error: null };
+
+    const searchFields = ['title', 'description', 'client'];
+    const tagFields = ['technologies', 'industries', 'projectTypes', 'categories'];
+
+    const filtered = projects.filter(project => {
+      if (searchFields.some(field => project[field]?.toLowerCase().includes(term))) {
+        return true;
+      }
+      if (tagFields.some(field => Array.isArray(project[field]) && project[field].some(tag => tag.toLowerCase().includes(term)))) {
+          return true;
+      }
+      return false;
+    });
+
+    return { success: true, data: filtered, error: null };
+  } catch (error) {
+    console.error('Error searching projects:', error);
+    return { success: false, data: [], error: error.message };
   }
-  
-  const term = searchTerm.toLowerCase().trim();
-  if (!term) {
-    return projects;
-  }
-  
-  return projects.filter(project => {
-    // Search in title
-    if (project.title && project.title.toLowerCase().includes(term)) {
-      return true;
-    }
-    
-    // Search in description
-    if (project.description && project.description.toLowerCase().includes(term)) {
-      return true;
-    }
-    
-    // Search in client
-    if (project.client && project.client.toLowerCase().includes(term)) {
-      return true;
-    }
-    
-    // Search in technologies
-    if (project.technologies && Array.isArray(project.technologies)) {
-      if (project.technologies.some(tech => tech.toLowerCase().includes(term))) {
-        return true;
-      }
-    }
-    
-    // Search in industries
-    if (project.industries && Array.isArray(project.industries)) {
-      if (project.industries.some(industry => industry.toLowerCase().includes(term))) {
-        return true;
-      }
-    }
-    
-    // Search in project types
-    if (project.projectTypes && Array.isArray(project.projectTypes)) {
-      if (project.projectTypes.some(type => type.toLowerCase().includes(term))) {
-        return true;
-      }
-    }
-    
-    // Search in categories
-    if (project.categories && Array.isArray(project.categories)) {
-      if (project.categories.some(category => category.toLowerCase().includes(term))) {
-        return true;
-      }
-    }
-    
-    return false;
-  });
 };
+
 
 /**
  * Sort projects by various criteria
  * @param {Array} projects - Array of project objects
  * @param {string} sortBy - Criteria to sort by ('date', 'title', 'complexity', 'client')
  * @param {string} order - Sort order ('asc' or 'desc')
- * @returns {Array} Sorted array of projects
+ * @returns {{success: boolean, data: Array, error: string|null}}
  */
 export const sortProjects = (projects, sortBy = 'date', order = 'desc') => {
-  if (!Array.isArray(projects)) {
-    return [];
-  }
-  
-  const sortedProjects = [...projects];
-  
   try {
-    sortedProjects.sort((a, b) => {
+    if (!Array.isArray(projects)) throw new Error("Projects must be an array.");
+
+    const sorted = [...projects].sort((a, b) => {
       let comparison = 0;
-      
       switch (sortBy) {
         case 'date':
           const dateA = new Date(a.endDate || a.startDate);
           const dateB = new Date(b.endDate || b.startDate);
           comparison = dateA - dateB;
           break;
-          
         case 'title':
           comparison = (a.title || '').localeCompare(b.title || '');
           break;
-          
         case 'complexity':
           const complexityOrder = { 'Simple': 1, 'Medium': 2, 'Complex': 3 };
           comparison = (complexityOrder[a.complexity] || 0) - (complexityOrder[b.complexity] || 0);
           break;
-          
         case 'client':
           comparison = (a.client || '').localeCompare(b.client || '');
           break;
-          
         default:
-          comparison = 0;
+          break;
       }
-      
       return order === 'desc' ? -comparison : comparison;
     });
-    
-    return sortedProjects;
+    return { success: true, data: sorted, error: null };
   } catch (error) {
     console.error('Error sorting projects:', error);
-    return projects;
+    return { success: false, data: projects, error: error.message };
   }
 };
 
-// Validation Functions
+
+// --- Validation Functions ---
 
 /**
  * Validate project data structure
  * @param {Object} project - Project object to validate
- * @returns {Object} Validation result with isValid boolean and errors array
+ * @returns {{isValid: boolean, errors: Array<string>}}
  */
 export const validateProject = (project) => {
   const errors = [];
-  
   if (!project || typeof project !== 'object') {
     return { isValid: false, errors: ['Project must be an object'] };
   }
@@ -539,54 +328,29 @@ export const validateProject = (project) => {
   };
 };
 
+// ... (validateTags and getTagCategories are also fine, but getTagCategories can be improved for consistency)
 /**
- * Validate tags against predefined categories
- * @param {Array} tags - Array of tags to validate
- * @param {Array} allowedTags - Array of allowed tags
- * @returns {Object} Validation result with isValid boolean and invalidTags array
+ * Helper function to get tag categories from loaded data
+ * @returns {{success: boolean, data: Object, error: string|null}}
  */
-export const validateTags = (tags, allowedTags) => {
-  if (!Array.isArray(tags)) {
-    return { isValid: false, invalidTags: [], errors: ['Tags must be an array'] };
-  }
-  
-  if (!Array.isArray(allowedTags)) {
-    return { isValid: false, invalidTags: [], errors: ['Allowed tags must be an array'] };
-  }
-  
-  const invalidTags = tags.filter(tag => !allowedTags.includes(tag));
-  
-  return {
-    isValid: invalidTags.length === 0,
-    invalidTags,
-    errors: invalidTags.length > 0 ? [`Invalid tags: ${invalidTags.join(', ')}`] : []
-  };
-};
-
-// Helper function to get tag categories from loaded data
 export const getTagCategories = () => {
   try {
-    const { tagCategories } = loadProjects();
-    return tagCategories;
+    const { data } = loadProjects();
+    return { success: true, data: data.tagCategories || {}, error: null };
   } catch (error) {
     console.error('Error getting tag categories:', error);
-    return {};
+    return { success: false, data: {}, error: error.message };
   }
 };
 
-// Export default object with all functions for convenience
+
+// --- Default Export ---
+
 export default {
   // Data Loading
   loadProjects,
   getProjectById,
   getFeaturedProjects,
-  
-  // Filtering
-  filterProjectsByTechnology,
-  filterProjectsByIndustry,
-  filterProjectsByProjectType,
-  filterProjectsByCategory,
-  filterProjectsByComplexity,
   filterProjects,
   
   // Tag Management
@@ -602,7 +366,7 @@ export default {
   
   // Validation
   validateProject,
-  validateTags,
+  // validateTags,
   
   // Helper
   getTagCategories

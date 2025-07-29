@@ -8,6 +8,7 @@ import {
   getAllProjectTypes, 
   getAllCategories 
 } from '../utils/projectUtils';
+import { Alert } from '@mui/material';
 
 export default function Portfolio() {
   // State management for filters and projects
@@ -32,24 +33,38 @@ export default function Portfolio() {
 
   // Load projects and initialize filter options on component mount
   useEffect(() => {
-    const { projects } = loadProjects();
-    setAllProjects(projects);
-    setFilteredProjects(projects);
+    const loadResult = loadProjects();
 
-    // Extract all available filter options from projects
-    setFilterOptions(prev => ({
-      ...prev,
-      technologies: getAllTechnologies(projects),
-      industries: getAllIndustries(projects),
-      projectTypes: getAllProjectTypes(projects),
-      categories: getAllCategories(projects)
-    }));
+    if (loadResult.success) {
+      const projects = loadResult.data.projects;
+      setAllProjects(projects);
+      setFilteredProjects(projects);
+  
+      // --- Extract all available filter options ---
+      const techResult = getAllTechnologies(projects);
+      const industryResult = getAllIndustries(projects);
+      const typeResult = getAllProjectTypes(projects);
+      const categoryResult = getAllCategories(projects);
+  
+      setFilterOptions(prev => ({
+        ...prev,
+        technologies: techResult.success ? techResult.data : [],
+        industries: industryResult.success ? industryResult.data : [],
+        projectTypes: typeResult.success ? typeResult.data : [],
+        categories: categoryResult.success ? categoryResult.data : []
+      }));
+    } else {
+      console.error("Failed to load project data:", loadResult.error);
+      Alert.error("Failed to load project data. Please try again later.");
+    }
   }, []);
 
   // Apply filters whenever activeFilters change
   useEffect(() => {
-    const hasActiveFilters = Object.values(activeFilters).some(filterArray => filterArray.length > 0);
-    
+    const hasActiveFilters = Object.values(activeFilters).some(
+      (filter) => Array.isArray(filter) && filter.length > 0
+    );
+
     if (!hasActiveFilters) {
       setFilteredProjects(allProjects);
     } else {

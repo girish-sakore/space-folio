@@ -7,11 +7,20 @@ import hapchi_logo from '../assets/000032.png';
 import { loadProjects } from '../utils/projectUtils.js';
 
 // Load project data from JSON
-const { projects: jsonProjects } = loadProjects();
-
+const { success, data: jsonProjects, error } = loadProjects();
+let allProjects = [];
+if (success) {
+  console.log(jsonProjects);
+  allProjects = jsonProjects.projects;
+  console.log(`Successfully loaded ${allProjects.length} projects.`);
+  // You can now use the allProjects array
+} else {
+  // Handle the error if the loading failed
+  console.error('Failed to load projects:', error);
+}
 // Map JSON data to maintain backward compatibility with existing component structure
 // This ensures FeaturedProjects.jsx, Portfolio.jsx, and ProjectDetail.jsx continue to work
-const projects = jsonProjects.map(project => {
+const projects = allProjects.map(project => {
   // Handle image imports for local assets
   let projectImage = project.image;
   if (project.id === 1) {
