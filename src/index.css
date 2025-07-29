@@ -246,3 +246,236 @@ body {
 .hovering-spaceship {
   animation: hover-bob 10s ease-in-out infinite;
 }
+
+
+/* Filter Chip Styles */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: 9999px;
+  color: var(--slate-300);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-base);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--slate-600);
+  color: var(--slate-200);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.chip-selected {
+  background-color: var(--teal-200);
+  color: var(--slate-900);
+  border-color: var(--teal-100);
+  font-weight: 600;
+}
+
+.chip-selected:hover {
+  background-color: var(--teal-300);
+  border-color: var(--teal-200);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.2), 0 2px 4px -1px rgba(20, 184, 166, 0.1);
+}
+
+/* Filter Section Styles */
+.filter-section {
+  background-color: var(--slate-800);
+  border: 1px solid var(--slate-700);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.filter-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-group:last-child {
+  margin-bottom: 0;
+}
+
+.filter-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--slate-200);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Enhanced Card Styles */
+.project-tag {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--slate-700);
+  color: var(--teal-300);
+  border-radius: var(--border-radius-base);
+  font-size: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--slate-600);
+  transition: var(--transition-base);
+}
+
+.project-tag:hover {
+  background-color: var(--slate-600);
+  border-color: var(--teal-400);
+  color: var(--teal-200);
+}
+
+.project-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Results and utility styles */
+.results-count {
+  color: var(--slate-400);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.clear-filters-btn {
+  background: none;
+  border: 1px solid var(--slate-600);
+  color: var(--slate-300);
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius-base);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-size: 0.875rem;
+}
+
+.clear-filters-btn:hover {
+  border-color: var(--teal-400);
+  color: var(--teal-300);
+  background-color: var(--slate-800);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--slate-400);
+}
+
+.empty-state h3 {
+  font-size: 1.25rem;
+  color: var(--slate-300);
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .filter-section {
+    padding: 1.5rem;
+  }
+  
+  .filter-group {
+    margin-bottom: 1rem;
+  }
+  
+  .filter-chips {
+    gap: 0.375rem;
+  }
+  
+  .chip {
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+  
+  .project-tag {
+    font-size: 0.6875rem;
+    padding: 0.1875rem 0.375rem;
+  }
+  
+  .project-tag-list {
+    gap: 0.375rem;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .filter-section {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .filter-group {
+    gap: 0.5rem;
+  }
+  
+  .filter-label {
+    font-size: 0.875rem;
+  }
+  
+  .chip {
+    padding: 0.3125rem 0.625rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Focus states for accessibility */
+.chip:focus,
+.clear-filters-btn:focus {
+  outline: 2px solid var(--teal-400);
+  outline-offset: 2px;
+}
+
+.chip:focus-visible,
+.clear-filters-btn:focus-visible {
+  outline: 2px solid var(--teal-400);
+  outline-offset: 2px;
+}
+
+/* Animation for smooth transitions */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Grid layout utilities */
+.portfolio-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
