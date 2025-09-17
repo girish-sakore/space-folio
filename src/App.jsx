@@ -1,37 +1,54 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import OrbitingSatellites from "./components/OrbitingSatellites";
-import InteractiveBackground, { FloatingShapes, AnimatedGrid } from "./components/InteractiveBackground";
-import Home from "./pages/Home";
-import Portfolio from "./pages/Portfolio";
-import ProjectDetail from "./pages/ProjectDetail";
-import Services from "./pages/Services";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import Privacy from "./pages/Privacy";
-import Terms from "./pages/Terms";
-import CaseStudies from "./pages/CaseStudies";
-import PricingCalculator from "./pages/PricingCalculator";
-import FAQ from './pages/FAQ';
-import Process from './pages/Process';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import ProximaShare from './pages/ProximaShare';
-import Tools from './pages/Tools';
 import ScrollToTop from './components/ScrollToTop';
+
+// Lazy load heavy components
+const OrbitingSatellites = lazy(() => import("./components/OrbitingSatellites"));
+const InteractiveBackground = lazy(() => import("./components/InteractiveBackground").then(module => ({ default: module.default })));
+const FloatingShapes = lazy(() => import("./components/InteractiveBackground").then(module => ({ default: module.FloatingShapes })));
+const AnimatedGrid = lazy(() => import("./components/InteractiveBackground").then(module => ({ default: module.AnimatedGrid })));
+
+// Lazy load pages
+const Home = lazy(() => import("./pages/Home"));
+const Portfolio = lazy(() => import("./pages/Portfolio"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail"));
+const Services = lazy(() => import("./pages/Services"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const Terms = lazy(() => import("./pages/Terms"));
+const CaseStudies = lazy(() => import("./pages/CaseStudies"));
+const PricingCalculator = lazy(() => import("./pages/PricingCalculator"));
+const FAQ = lazy(() => import('./pages/FAQ'));
+const Process = lazy(() => import('./pages/Process'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const ProximaShare = lazy(() => import('./pages/ProximaShare'));
+const Tools = lazy(() => import('./pages/Tools'));
+
+// Loading component
+const PageLoader = () => (
+  <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
+  </div>
+);
 
 const Layout = () => (
   <>
     <ScrollToTop />
-    <InteractiveBackground particleCount={40} opacity={0.08} speed={0.8} />
-    <FloatingShapes />
-    <AnimatedGrid />
-    <OrbitingSatellites />
+    <Suspense fallback={null}>
+      <InteractiveBackground particleCount={40} opacity={0.08} speed={0.8} />
+      <FloatingShapes />
+      <AnimatedGrid />
+      <OrbitingSatellites />
+    </Suspense>
     <Header />
-    <Outlet />
+    <Suspense fallback={<PageLoader />}>
+      <Outlet />
+    </Suspense>
     <Footer />
   </>
 );
