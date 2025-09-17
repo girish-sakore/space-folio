@@ -44,7 +44,12 @@
       "Vite",
       "Jest",
       "Cypress",
-      "Selenium"
+      "Selenium",
+      "Material-UI (MUI)",
+      "Redux Toolkit",
+      "Redux Persist",
+      "React Hook Form",
+      "SWC"
     ],
     "industries": [
       "Fintech",
@@ -72,7 +77,8 @@
       "HR",
       "Consulting",
       "Child Safety",
-      "Portfolio Management"
+      "Portfolio Management",
+      "Debt Recovery"
     ],
     "projectTypes": [
       "Web Application",
@@ -99,7 +105,8 @@
       "ERP System",
       "Learning Management System",
       "Assessment Platform",
-      "Report Generator"
+      "Report Generator",
+      "Management System"
     ],
     "categories": [
       "Frontend",
@@ -135,8 +142,9 @@
     {
       "id": 1,
       "title": "MyneLeap2024",
+      "slug": "myneleap2024",
       "description": "A complete wealth solution built for your financial well-being.",
-      "image": "../assets/234844.png",
+      "image": "/images/234844.png",
       "link": "https://joinmyne.com/",
       "client": "Myne",
       "startDate": "2023-01-15",
@@ -184,8 +192,9 @@
     {
       "id": 2,
       "title": "Hapchi",
+      "slug": "hapchi",
       "description": "India's first child safety digital platform focuses on every child safety concern that a child encounters during their journey from early childhood to adolescence.",
-      "image": "../assets/000032.png",
+      "image": "/images/000032.png",
       "link": "https://hapchi.in/",
       "client": "Hapchi",
       "startDate": "2022-05-01",
@@ -231,6 +240,7 @@
     {
       "id": 3,
       "title": "Social Media App",
+      "slug": "social-media-app",
       "description": "A social platform for connecting creative professionals",
       "image": "https://images.unsplash.com/photo-1675703818188-cee153b831f3",
       "link": "#",
@@ -275,6 +285,7 @@
     {
       "id": 4,
       "title": "Portfolio Generator",
+      "slug": "portfolio-generator",
       "description": "Tool for creating beautiful portfolio websites",
       "image": "https://images.unsplash.com/photo-1739514984003-330f7c1d2007",
       "link": "#",
@@ -316,6 +327,326 @@
       "complexity": "Medium",
       "teamSize": 3,
       "duration": "3 months"
+    },
+    {
+      "id": 5,
+      "title": "Cyberi3Secure",
+      "slug": "cyberi3secure",
+      "description": "A cybersecurity website specializing in Privileged Access Management and identity security solutions.",
+      "image": "/images/000033.png",
+      "link": "https://cyberi3secure.com/",
+      "client": "Cyberi3Secure Consultants LLP",
+      "startDate": "2025-01-10",
+      "endDate": "2025-03-25",
+      "status": "Completed",
+      "features": [
+        "Privileged Access Management overview",
+        "Identity and Access Security solutions",
+        "Compliance and data protection guidelines",
+        "Responsive design",
+        "Contact and inquiry forms",
+        "Informational content sections",
+        "Blog/Resources section"
+      ],
+      "challenges": "Presenting complex cybersecurity solutions in a user-friendly format while ensuring a secure and fast website.",
+      "solutions": "Developed a custom WordPress theme with clear navigation, interactive elements, optimized performance, and responsive design for all devices.",
+      "results": "Successfully launched a professional, secure, and SEO-friendly website that effectively communicates the company's services and expertise.",
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "MySQL",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "jQuery",
+        "Elementor (Page Builder)"
+      ],
+      "industries": [
+        "Cybersecurity",
+        "IT Services"
+      ],
+      "projectTypes": [
+        "Website Development",
+        "Corporate Website"
+      ],
+      "categories": [
+        "Web Development",
+        "Security",
+        "UI/UX Design",
+        "WordPress"
+      ],
+      "complexity": "Medium",
+      "teamSize": 3,
+      "duration": "2.5 months"
+    },
+    {
+  "id": 6,
+  "title": "St. Vincent Pallotti College Website",
+  "slug": "st-vincent-college-website",
+  "description": "Official website of St. Vincent Pallotti College of Engineering & Technology, Nagpur, showcasing courses, admissions, events, and campus facilities.",
+  "image": "/images/Palloti.png",
+  "link": "https://dev.stvincentngp.edu.in/",
+  "client": "St. Vincent Pallotti College of Engineering & Technology",
+  "startDate": "2025-03-18",
+  "endDate": "",
+  "status": "In Progress",
+  "features": [
+    "Course Information",
+    "Admission Details",
+    "Event Updates",
+    "Contact Forms",
+    "Responsive Design",
+    "Informational Pages",
+    "Blog/News Section"
+  ],
+  "challenges": "Presenting detailed academic information in a user-friendly layout while ensuring performance and responsive design.",
+  "solutions": "Developed a PHP-based custom website with a clean structure, interactive navigation, optimized performance, and mobile responsiveness.",
+  "results": "Currently under development, aiming for a professional, informative, and responsive website.",
+  "technologies": [
+    "PHP",
+    "MySQL",
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "jQuery",
+    "Bootstrap"
+  ],
+  "industries": [
+    "Education",
+    "Institution"
+  ],
+  "projectTypes": [
+    "Website Development",
+    "Institutional Website"
+  ],
+  "categories": [
+    "Web Development",
+    "UI/UX Design",
+    "Security",
+    "PHP"
+  ],
+  "complexity": "Medium",
+  "teamSize": 2,
+  "duration": "Ongoing"
+    },
+    {
+  "id": 7,
+  "title": "Inheritance Infra Website",
+  "slug": "inheritance-infra-website",
+  "description": "Official website of Inheritance Infrastructure Pvt. Ltd., showcasing their projects, services, and commitment to innovative and sustainable construction solutions.",
+  "image": "/images/Inheritance_Infra.png",
+  "link": "https://inheritance-infrastructure.vercel.app/",
+  "client": "Inheritance Infrastructure Pvt. Ltd.",
+  "startDate": "2025-05-01",
+  "endDate": "",
+  "status": "In Progress",
+  "features": [
+    "Project Portfolio",
+    "Service Offerings",
+    "Contact Forms",
+    "Responsive Design",
+    "Interactive Sections",
+    "Blog/News Section"
+  ],
+  "challenges": "Presenting detailed infrastructure services and projects in an interactive, user-friendly, and responsive manner while maintaining performance.",
+  "solutions": "Developed a React-based website with a component-driven architecture, optimized performance, responsive design, and easy content management for future scalability.",
+  "results": "Currently under development, aiming for a professional, responsive, and informative website that highlights the company's expertise and projects.",
+  "technologies": [
+    "React.js",
+    "JavaScript",
+    "HTML5",
+    "CSS3",
+    "Bootstrap",
+    "Vercel (Deployment)"
+  ],
+  "industries": [
+    "Construction",
+    "Infrastructure"
+  ],
+  "projectTypes": [
+    "Website Development",
+    "Corporate Website"
+  ],
+  "categories": [
+    "Web Development",
+    "UI/UX Design",
+    "Performance Optimization",
+    "React"
+  ],
+  "complexity": "Medium",
+  "teamSize": 2,
+  "duration": "Ongoing"
+    },
+    {
+  "id": 8,
+  "title": "CRN Portfolio Website",
+  "slug": "crn-portfolio-website",
+  "description": "Personal portfolio website of CRN, showcasing projects, skills, and professional achievements, built using Next.js for fast performance and SEO optimization.",
+  "image": "/images/crn-portfolio.png",
+  "link": "https://crn-portfolio.vercel.app/",
+  "client": "CRN",
+  "startDate": "2025-04-01",
+  "endDate": "",
+  "status": "In Progress",
+  "features": [
+    "Project Showcase",
+    "Skills Section",
+    "About Me Section",
+    "Contact Form",
+    "Responsive Design",
+    "Interactive UI",
+    "SEO Optimized Pages"
+  ],
+  "challenges": "Presenting a professional portfolio in a visually appealing and interactive way while ensuring fast load times and SEO optimization.",
+  "solutions": "Developed a Next.js-based website using component-driven architecture, optimized images, server-side rendering, and responsive design for all devices.",
+  "results": "Currently under development, aiming for a visually engaging and SEO-friendly portfolio website that highlights skills and projects effectively.",
+  "technologies": [
+    "Next.js",
+    "React.js",
+    "JavaScript",
+    "HTML5",
+    "CSS3",
+    "Tailwind CSS",
+    "Vercel (Deployment)"
+  ],
+  "industries": [
+    "Portfolio",
+    "Personal Branding"
+  ],
+  "projectTypes": [
+    "Portfolio Website",
+    "Web Application"
+  ],
+  "categories": [
+    "Web Development",
+    "UI/UX Design",
+    "Performance Optimization",
+    "React"
+  ],
+  "complexity": "Medium",
+  "teamSize": 1,
+  "duration": "Ongoing"
+    },
+    {
+      "id": 9,
+      "title": "ProximaShare",
+      "slug": "proximashare",
+      "description": "Simple & secure file sharing tool. Upload files and get shareable links in seconds with automatic expiry for enhanced security.",
+      "image": "/images/proxima-share.png",
+      "link": "https://share.proximacloud.in/",
+      "client": "ProximaCloud (Internal Product)",
+      "startDate": "2024-10-01",
+      "endDate": "2024-12-15",
+      "status": "Completed",
+      "features": [
+        "Drag & Drop File Upload",
+        "Secure Link Generation",
+        "Auto-Expiring Links (3 days)",
+        "Download Limit Control (3 downloads)",
+        "Multiple File Support",
+        "2MB File Size Limit",
+        "No Registration Required",
+        "Mobile Responsive Design",
+        "Real-time Upload Progress",
+        "Dark/Light Theme Support"
+      ],
+      "challenges": "Creating a user-friendly file sharing solution that balances security with simplicity, ensuring files are accessible while maintaining privacy through automatic expiration.",
+      "solutions": "Implemented a clean drag-and-drop interface with automatic link generation, built-in security features like auto-expiry, and optimized the system for both speed and user experience.",
+      "results": "Successfully launched a production-ready file sharing tool that provides instant, secure file sharing capabilities with zero friction for users.",
+      "technologies": [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "Cloudflare",
+        "File API",
+        "Progressive Web App"
+      ],
+      "industries": [
+        "File Sharing",
+        "Productivity Tools",
+        "Cloud Services"
+      ],
+      "projectTypes": [
+        "Web Application",
+        "File Management",
+        "Cloud Platform",
+        "Productivity Tool"
+      ],
+      "categories": [
+        "Full Stack",
+        "UI/UX",
+        "Security",
+        "Performance Optimization"
+      ],
+      "complexity": "Medium",
+      "teamSize": 3,
+      "duration": "2.5 months"
+    },
+    {
+      "id": 10,
+      "title": "Recovery Agency Management System",
+      "slug": "recovery-agency-management-system",
+      "description": "Comprehensive debt recovery management system built with React, TypeScript, and Material-UI. Features advanced data grids, real-time analytics, and role-based authentication for financial institutions.",
+      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80",
+      "link": "#",
+      "client": "Financial Services Institution",
+      "startDate": "2024-08-01",
+      "endDate": "",
+      "status": "In Progress",
+      "features": [
+        "Advanced Data Grid with 40+ columns",
+        "Real-time allocation management",
+        "Role-based authentication system",
+        "Dynamic column visibility",
+        "Bulk import/export functionality",
+        "Advanced filtering and search",
+        "Performance-optimized rendering",
+        "Responsive design for mobile devices",
+        "JWT-based security",
+        "Redux state management",
+        "TypeScript implementation",
+        "Material-UI component library"
+      ],
+      "challenges": "Managing complex state for 40+ data columns while maintaining high performance with large datasets. Implementing secure authentication and real-time data synchronization for debt recovery operations.",
+      "solutions": "Developed a scalable React + TypeScript architecture with Redux Toolkit for state management, implemented server-side pagination for performance, and created a comprehensive security layer with JWT authentication and automatic token refresh.",
+      "results": "Successfully built a robust management system that handles 50,000+ daily allocations with 90% improved load times, 60% reduction in manual data entry, and 100% user adoption within deployment.",
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Material-UI (MUI)",
+        "Redux Toolkit",
+        "Redux Persist",
+        "Axios",
+        "React Hook Form",
+        "Vite",
+        "ESLint",
+        "Prettier",
+        "JWT Authentication",
+        "React Router"
+      ],
+      "industries": [
+        "Fintech",
+        "Financial Services",
+        "Debt Recovery"
+      ],
+      "projectTypes": [
+        "Web Application",
+        "Management System",
+        "Analytics Dashboard",
+        "Admin Panel"
+      ],
+      "categories": [
+        "Full Stack",
+        "Frontend",
+        "UI/UX",
+        "Security",
+        "Performance Optimization"
+      ],
+      "complexity": "Complex",
+      "teamSize": 1,
+      "duration": "Ongoing"
     }
   ]
 }

@@ -1,18 +1,34 @@
 import projectsData from '../data/projects.json';
 
+// --- Utility Functions ---
+
+// Slugify a string (convert title into URL-safe slug)
+export const generateSlug = (title) => {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-') // replace spaces/special chars with -
+    .replace(/(^-|-$)+/g, '');   // trim hyphens
+};
+
 // --- Data Loading Functions ---
 
 /**
- * Load and return project data from JSON
- * @returns {{success: boolean, data: {projects: Array, tagCategories: Object}, error: string|null}}
+ * Load and return project data from JSON (auto-generate slug if missing)
  */
 export const loadProjects = () => {
   try {
-    const data = {
-      projects: projectsData.projects || [],
-      tagCategories: projectsData.tagCategories || {}
+    const projects = (projectsData.projects || []).map(p => ({
+      ...p,
+      slug: p.slug || generateSlug(p.title)
+    }));
+    return {
+      success: true,
+      data: {
+        projects,
+        tagCategories: projectsData.tagCategories || {}
+      },
+      error: null
     };
-    return { success: true, data, error: null };
   } catch (error) {
     console.error('Error loading projects:', error);
     return { success: false, data: { projects: [], tagCategories: {} }, error: error.message };
@@ -20,32 +36,22 @@ export const loadProjects = () => {
 };
 
 /**
- * Find a specific project by ID
- * @param {number|string} id - The project ID to search for
- * @returns {{success: boolean, data: Object|null, error: string|null}} The project object or null if not found
+ * Get project by slug
  */
-export const getProjectById = (id) => {
-  try {
-    const { data } = loadProjects();
-    const project = data.projects.find(p => p.id === parseInt(id, 10)) || null;
-    return { success: true, data: project, error: null };
-  } catch (error) {
-    console.error('Error getting project by ID:', error);
-    return { success: false, data: null, error: error.message };
-  }
+export const getProjectBySlug = (slug) => {
+  const { data } = loadProjects();
+  return data.projects.find(project => project.slug === slug) || null;
 };
 
 /**
  * Get a limited number of featured projects
- * @param {number} count - Number of projects to return (default: 3)
- * @returns {{success: boolean, data: Array, error: string|null}} Array of featured projects
  */
 export const getFeaturedProjects = (count = 3) => {
   try {
     const { data } = loadProjects();
     const sortedProjects = data.projects
       .filter(project => project.status === 'Completed')
-      .sort((a, b) => new Date(b.endDate) - new Date(a.endDate));
+      .sort((a, b) => new Date(b.endDate || b.startDate || 0) - new Date(a.endDate || a.startDate || 0));
     
     return { success: true, data: sortedProjects.slice(0, count), error: null };
   } catch (error) {
@@ -54,15 +60,8 @@ export const getFeaturedProjects = (count = 3) => {
   }
 };
 
-
 // --- Filtering Functions ---
 
-/**
- * Filter projects by technology tags
- * @param {Array} projects - Array of project objects
- * @param {Array} technologies - Array of technology tags to filter by
- * @returns {{success: boolean, data: Array, error: string|null}} Filtered array of projects
- */
 const filterByTag = (projects, tags, tagKey) => {
   try {
     if (!Array.isArray(projects)) throw new Error('Invalid projects array.');
@@ -80,12 +79,6 @@ const filterByTag = (projects, tags, tagKey) => {
   }
 };
 
-/**
- * Master filter function that applies multiple filter criteria
- * @param {Array} projects - Array of project objects
- * @param {Object} filters - Object containing filter criteria
- * @returns {{success: boolean, data: Array, error: string|null}} Filtered array of projects
- */
 export const filterProjects = (projects, filters = {}) => {
   try {
     if (!Array.isArray(projects)) throw new Error("Initial projects data must be an array.");
@@ -93,32 +86,32 @@ export const filterProjects = (projects, filters = {}) => {
     let currentProjects = [...projects];
     let result;
 
-    if (filters.technologies && filters.technologies.length > 0) {
+    if (filters.technologies?.length) {
       result = filterByTag(currentProjects, filters.technologies, 'technologies');
       if (!result.success) return result;
       currentProjects = result.data;
     }
     
-    if (filters.industries && filters.industries.length > 0) {
+    if (filters.industries?.length) {
       result = filterByTag(currentProjects, filters.industries, 'industries');
       if (!result.success) return result;
       currentProjects = result.data;
     }
     
-    if (filters.projectTypes && filters.projectTypes.length > 0) {
+    if (filters.projectTypes?.length) {
       result = filterByTag(currentProjects, filters.projectTypes, 'projectTypes');
       if (!result.success) return result;
       currentProjects = result.data;
     }
 
-    if (filters.categories && filters.categories.length > 0) {
+    if (filters.categories?.length) {
       result = filterByTag(currentProjects, filters.categories, 'categories');
       if (!result.success) return result;
       currentProjects = result.data;
     }
     
-    if (filters.complexity && filters.complexity.length > 0) {
-      currentProjects = currentProjects.filter(p => p.complexity === filters.complexity);
+    if (filters.complexity?.length) {
+      currentProjects = currentProjects.filter(p => filters.complexity.includes(p.complexity));
     }
     
     if (filters.status) {
@@ -132,39 +125,27 @@ export const filterProjects = (projects, filters = {}) => {
 
 // --- Tag Management Functions ---
 
-/**
- * Extract all unique tags from projects for a given key
- * @param {Array} projects - Array of project objects
- * @param {string} tagKey - The key for the tags (e.g., 'technologies')
- * @returns {{success: boolean, data: Array, error: string|null}}
- */
 const getAllUniqueTags = (projects, tagKey) => {
-    try {
-        if (!Array.isArray(projects)) return { success: true, data: [], error: null };
-        const tags = new Set();
-        projects.forEach(project => {
-            if (Array.isArray(project[tagKey])) {
-                project[tagKey].forEach(tag => tags.add(tag));
-            }
-        });
-        return { success: true, data: Array.from(tags).sort(), error: null };
-    } catch(error) {
-        console.error(`Error getting unique tags for ${tagKey}:`, error);
-        return { success: false, data: [], error: error.message };
-    }
-}
+  try {
+    if (!Array.isArray(projects)) return { success: true, data: [], error: null };
+    const tags = new Set();
+    projects.forEach(project => {
+      if (Array.isArray(project[tagKey])) {
+        project[tagKey].forEach(tag => tags.add(tag));
+      }
+    });
+    return { success: true, data: Array.from(tags).sort(), error: null };
+  } catch(error) {
+    console.error(`Error getting unique tags for ${tagKey}:`, error);
+    return { success: false, data: [], error: error.message };
+  }
+};
 
 export const getAllTechnologies = (projects) => getAllUniqueTags(projects, 'technologies');
 export const getAllIndustries = (projects) => getAllUniqueTags(projects, 'industries');
 export const getAllProjectTypes = (projects) => getAllUniqueTags(projects, 'projectTypes');
 export const getAllCategories = (projects) => getAllUniqueTags(projects, 'categories');
 
-/**
- * Get count of projects for each tag in a category
- * @param {Array} projects - Array of project objects
- * @param {string} tagType - Type of tag ('technologies', 'industries', etc.)
- * @returns {{success: boolean, data: Object, error: string|null}}
- */
 export const getTagCounts = (projects, tagType) => {
   try {
     if (!Array.isArray(projects) || !tagType) {
@@ -188,27 +169,29 @@ export const getTagCounts = (projects, tagType) => {
 
 // --- Search and Sort Functions ---
 
-/**
- * Search projects by title, description, or tags
- * @param {Array} projects - Array of project objects
- * @param {string} searchTerm - Term to search for
- * @returns {{success: boolean, data: Array, error: string|null}}
- */
 export const searchProjects = (projects, searchTerm) => {
   try {
     if (!Array.isArray(projects)) throw new Error("Projects must be an array.");
     const term = (searchTerm || '').toLowerCase().trim();
     if (!term) return { success: true, data: projects, error: null };
 
-    const searchFields = ['title', 'description', 'client'];
+    const searchFields = ['title', 'client'];
     const tagFields = ['technologies', 'industries', 'projectTypes', 'categories'];
 
     const filtered = projects.filter(project => {
+      // check title & client
       if (searchFields.some(field => project[field]?.toLowerCase().includes(term))) {
         return true;
       }
+      // check description (string or array)
+      if (Array.isArray(project.description)) {
+        if (project.description.some(d => d.toLowerCase().includes(term))) return true;
+      } else if (project.description?.toLowerCase().includes(term)) {
+        return true;
+      }
+      // check tags
       if (tagFields.some(field => Array.isArray(project[field]) && project[field].some(tag => tag.toLowerCase().includes(term)))) {
-          return true;
+        return true;
       }
       return false;
     });
@@ -220,14 +203,6 @@ export const searchProjects = (projects, searchTerm) => {
   }
 };
 
-
-/**
- * Sort projects by various criteria
- * @param {Array} projects - Array of project objects
- * @param {string} sortBy - Criteria to sort by ('date', 'title', 'complexity', 'client')
- * @param {string} order - Sort order ('asc' or 'desc')
- * @returns {{success: boolean, data: Array, error: string|null}}
- */
 export const sortProjects = (projects, sortBy = 'date', order = 'desc') => {
   try {
     if (!Array.isArray(projects)) throw new Error("Projects must be an array.");
@@ -236,8 +211,8 @@ export const sortProjects = (projects, sortBy = 'date', order = 'desc') => {
       let comparison = 0;
       switch (sortBy) {
         case 'date':
-          const dateA = new Date(a.endDate || a.startDate);
-          const dateB = new Date(b.endDate || b.startDate);
+          const dateA = new Date(a.endDate || a.startDate || 0);
+          const dateB = new Date(b.endDate || b.startDate || 0);
           comparison = dateA - dateB;
           break;
         case 'title':
@@ -262,28 +237,27 @@ export const sortProjects = (projects, sortBy = 'date', order = 'desc') => {
   }
 };
 
-
 // --- Validation Functions ---
 
-/**
- * Validate project data structure
- * @param {Object} project - Project object to validate
- * @returns {{isValid: boolean, errors: Array<string>}}
- */
 export const validateProject = (project) => {
   const errors = [];
   if (!project || typeof project !== 'object') {
-    return { isValid: false, errors: ['Project must be an object'] };
+    return { success: false, data: null, error: 'Project must be an object' };
   }
   
   // Required fields
-  const requiredFields = ['id', 'title', 'description'];
+  const requiredFields = ['id', 'title', 'description', 'status'];
   requiredFields.forEach(field => {
     if (!project[field]) {
       errors.push(`Missing required field: ${field}`);
     }
   });
-  
+
+  // Validate slug
+  if (project.slug && typeof project.slug !== 'string') {
+    errors.push('Slug must be a string');
+  }
+
   // Validate ID
   if (project.id && (typeof project.id !== 'number' || project.id <= 0)) {
     errors.push('ID must be a positive number');
@@ -312,7 +286,6 @@ export const validateProject = (project) => {
   if (project.startDate && isNaN(Date.parse(project.startDate))) {
     errors.push('Start date must be a valid date');
   }
-  
   if (project.endDate && isNaN(Date.parse(project.endDate))) {
     errors.push('End date must be a valid date');
   }
@@ -321,18 +294,24 @@ export const validateProject = (project) => {
   if (project.teamSize && (typeof project.teamSize !== 'number' || project.teamSize <= 0)) {
     errors.push('Team size must be a positive number');
   }
+
+  // Validate image (if provided)
+  if (project.image && typeof project.image === 'string') {
+    const urlPattern = /^(http|https):\/\/[^ "]+$/;
+    if (!urlPattern.test(project.image)) {
+      errors.push('Image must be a valid URL');
+    }
+  }
   
   return {
-    isValid: errors.length === 0,
-    errors
+    success: errors.length === 0,
+    data: project,
+    error: errors.length > 0 ? errors : null
   };
 };
 
-// ... (validateTags and getTagCategories are also fine, but getTagCategories can be improved for consistency)
-/**
- * Helper function to get tag categories from loaded data
- * @returns {{success: boolean, data: Object, error: string|null}}
- */
+// --- Helper ---
+
 export const getTagCategories = () => {
   try {
     const { data } = loadProjects();
@@ -343,13 +322,12 @@ export const getTagCategories = () => {
   }
 };
 
-
 // --- Default Export ---
 
 export default {
   // Data Loading
   loadProjects,
-  getProjectById,
+  getProjectBySlug,
   getFeaturedProjects,
   filterProjects,
   
@@ -366,7 +344,6 @@ export default {
   
   // Validation
   validateProject,
-  // validateTags,
   
   // Helper
   getTagCategories
