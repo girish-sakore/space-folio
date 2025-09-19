@@ -6,7 +6,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import BuildIcon from '@mui/icons-material/Build';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import LaunchIcon from '@mui/icons-material/Launch';
-import proximaLogo from '../assets/Proxima_Cloud-removebg-preview.png';
+import proximaLogo from '../assets/Proxima_Cloud-preview.png';
 import { Link, useLocation } from "react-router-dom";
 import { useMagneticHover } from '../hooks/useScrollAnimation';
 import { buttonHoverVariants, mobileMenuVariants } from '../utils/animationVariants';
