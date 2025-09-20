@@ -593,9 +593,6 @@ I'm ready to move forward with this project. Looking forward to hearing from you
         
         if (emailResult.success) {
           console.log(`✓ Email sent successfully via ${emailResult.method}`);
-          if (emailResult.method === 'mailto') {
-            alert('Your email client has been opened. Please send the email to complete your submission.');
-          }
           setShowSuccess(true);
         } else {
           throw new Error('All email methods failed');
@@ -707,9 +704,6 @@ I'm ready to move forward with this project. Looking forward to hearing from you
         
         if (emailResult.success) {
           console.log(`✓ Email sent successfully via ${emailResult.method}`);
-          if (emailResult.method === 'mailto') {
-            alert('Your email client has been opened. Please send the email to complete your submission.');
-          }
           setShowSuccess(true);
         } else {
           throw new Error('All email methods failed');
