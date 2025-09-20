@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 import SEO from '../components/SEO';
+import SimplePDFEstimate from '../components/SimplePDFEstimate';
+import PDFDownloadModal from '../components/PDFDownloadModal';
 import { getWebPageSchema } from '../utils/structuredData';
-import CalculateIcon from '@mui/icons-material/Calculate';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import StarIcon from '@mui/icons-material/Star';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import SpeedIcon from '@mui/icons-material/Speed';
-import SecurityIcon from '@mui/icons-material/Security';
-import SupportIcon from '@mui/icons-material/Support';
-import CountUp from 'react-countup';
+
+// Define simple icons as text to avoid Material UI issues
+const CalculateIcon = () => <span style={{ fontSize: '2rem' }}>🧮</span>;
+const CheckCircleIcon = () => <span style={{ fontSize: '1rem' }}>✓</span>;
+const StarIcon = () => <span style={{ fontSize: '1rem' }}>⭐</span>;
+const TrendingUpIcon = () => <span style={{ fontSize: '1rem' }}>📈</span>;
+const SpeedIcon = () => <span style={{ fontSize: '1rem' }}>⚡</span>;
+const SecurityIcon = () => <span style={{ fontSize: '1rem' }}>🔒</span>;
+const SupportIcon = () => <span style={{ fontSize: '1rem' }}>🛠️</span>;
+
+// Simple CountUp replacement
+const CountUp = ({ end }) => <span>{end.toLocaleString()}</span>;
 
 const PricingCalculator = () => {
   const [selectedServices, setSelectedServices] = useState([]);
@@ -19,6 +27,11 @@ const PricingCalculator = () => {
   const [supportLevel, setSupportLevel] = useState('standard');
   const [totalPrice, setTotalPrice] = useState(0);
   const [showEstimate, setShowEstimate] = useState(false);
+  const [showPDFPreview, setShowPDFPreview] = useState(false);
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+  const [downloadProgress, setDownloadProgress] = useState(0);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const printRef = useRef();
 
   const services = [
     {
@@ -130,6 +143,125 @@ const PricingCalculator = () => {
     });
   };
 
+  // Generate estimate ID once when estimate is created
+  const [estimateId, setEstimateId] = useState('');
+  
+  useEffect(() => {
+    if (showEstimate && estimateId === '') {
+      setEstimateId(`EST-${Math.floor(Math.random() * 900000) + 100000}`);
+    }
+  }, [showEstimate, estimateId]);
+
+  const handleDownloadPDF = async () => {
+    if (!showEstimate) {
+      alert('Please select services first!');
+      return;
+    }
+
+    if (!printRef.current) {
+      alert('PDF component not ready. Please try again.');
+      return;
+    }
+
+    // Reset states and show modal
+    setDownloadProgress(0);
+    setShowDownloadModal(true);
+    setIsGeneratingPDF(true);
+    
+    try {
+      const element = printRef.current;
+      const filename = `Project_Estimate_${estimateId}.pdf`;
+      
+      // Stage 1: Preparing (0-20%)
+      setDownloadProgress(10);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setDownloadProgress(20);
+      
+      // Stage 2: Rendering Content (20-40%)
+      const canvas = await html2canvas(element, {
+        scale: 1.5,
+        useCORS: true,
+        allowTaint: false,
+        backgroundColor: '#ffffff',
+        scrollX: 0,
+        scrollY: 0,
+        width: 800,
+        height: element.scrollHeight,
+        onclone: (clonedDoc) => {
+          const clonedElement = clonedDoc.getElementById('pdf-estimate');
+          if (clonedElement) {
+            clonedElement.style.fontFamily = 'Arial, sans-serif';
+          }
+        },
+        onrendered: () => {
+          setDownloadProgress(35);
+        }
+      });
+      
+      setDownloadProgress(40);
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      // Stage 3: Optimizing Quality (40-60%)
+      setDownloadProgress(50);
+      await new Promise(resolve => setTimeout(resolve, 300));
+      setDownloadProgress(60);
+      
+      // Stage 4: Generating PDF (60-90%)
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+        unit: 'mm',
+        format: 'a4'
+      });
+      
+      setDownloadProgress(70);
+      
+      // Calculate dimensions to fit A4 (210 x 297 mm)
+      const pdfWidth = 210;
+      const pdfHeight = 297;
+      const margin = 10;
+      const availableWidth = pdfWidth - (margin * 2);
+      const availableHeight = pdfHeight - (margin * 2);
+      
+      const canvasAspectRatio = canvas.height / canvas.width;
+      let finalWidth = availableWidth;
+      let finalHeight = availableWidth * canvasAspectRatio;
+      
+      if (finalHeight > availableHeight) {
+        finalHeight = availableHeight;
+        finalWidth = finalHeight / canvasAspectRatio;
+      }
+      
+      const xOffset = (pdfWidth - finalWidth) / 2;
+      const yOffset = margin;
+      
+      setDownloadProgress(80);
+      
+      const imgData = canvas.toDataURL('image/png', 0.95);
+      pdf.addImage(imgData, 'PNG', xOffset, yOffset, finalWidth, finalHeight);
+      
+      setDownloadProgress(90);
+      await new Promise(resolve => setTimeout(resolve, 200));
+      
+      // Stage 5: Complete (90-100%)
+      pdf.save(filename);
+      setDownloadProgress(100);
+      
+      console.log(`PDF downloaded successfully: ${filename}`);
+      
+    } catch (err) {
+      console.error('PDF generation failed:', err);
+      setShowDownloadModal(false);
+      alert(`PDF generation failed: ${err.message}. Please try again.`);
+    } finally {
+      setIsGeneratingPDF(false);
+    }
+  };
+
+  const handleDownloadComplete = () => {
+    setShowDownloadModal(false);
+    setDownloadProgress(0);
+  };
+
   const pageSchema = getWebPageSchema(
     "Pricing Calculator - Get Instant Project Estimates",
     "Calculate the cost of your technology project with our interactive pricing tool. Get instant estimates for cloud migration, web development, and more.",
@@ -168,7 +300,7 @@ const PricingCalculator = () => {
             variants={containerVariants}
           >
             <motion.div variants={itemVariants} className="inline-flex items-center gap-2 mb-6">
-              <CalculateIcon className="text-4xl text-teal-400" />
+              <div className="text-4xl text-teal-400"><CalculateIcon /></div>
               <h1 className="text-4xl md:text-5xl font-bold text-white">
                 Pricing <span className="gradient-text">Calculator</span>
               </h1>
@@ -215,7 +347,7 @@ const PricingCalculator = () => {
                           </div>
                         </div>
                         {selectedServices.includes(service.id) && (
-                          <CheckCircleIcon className="text-teal-500" />
+                          <CheckCircleIcon />
                         )}
                       </div>
                     </motion.div>
@@ -313,7 +445,7 @@ const PricingCalculator = () => {
                   <div className="bg-teal-500/10 border border-teal-500/30 rounded-xl p-6 mb-6">
                     <div className="text-center">
                       <div className="text-3xl md:text-4xl font-bold text-teal-400 mb-2">
-                        $<CountUp end={totalPrice} duration={1} separator="," />
+                        $<CountUp end={totalPrice} />
                       </div>
                       <div className="text-slate-400">Total Project Cost</div>
                     </div>
@@ -343,7 +475,7 @@ const PricingCalculator = () => {
                     <div className="space-y-2">
                       {getSelectedServicesFeatures().slice(0, 6).map((feature, index) => (
                         <div key={index} className="flex items-center gap-2">
-                          <CheckCircleIcon className="text-teal-400" fontSize="small" />
+                          <CheckCircleIcon />
                           <span className="text-slate-300 text-sm">{feature}</span>
                         </div>
                       ))}
@@ -353,15 +485,15 @@ const PricingCalculator = () => {
                   {/* Project Stats */}
                   <div className="grid grid-cols-3 gap-4 mb-6">
                     <div className="text-center">
-                      <SpeedIcon className="text-teal-400 mb-1" />
+                      <SpeedIcon />
                       <div className="text-white font-semibold text-sm">{timelineMultipliers[timeline].label}</div>
                     </div>
                     <div className="text-center">
-                      <SecurityIcon className="text-teal-400 mb-1" />
+                      <SecurityIcon />
                       <div className="text-white font-semibold text-sm">Secure</div>
                     </div>
                     <div className="text-center">
-                      <SupportIcon className="text-teal-400 mb-1" />
+                      <SupportIcon />
                       <div className="text-white font-semibold text-sm">{supportLevels[supportLevel].label}</div>
                     </div>
                   </div>
@@ -375,12 +507,22 @@ const PricingCalculator = () => {
                     >
                       Get Detailed Quote
                     </Link>
-                    <button 
-                      className="secondary-btn w-full"
-                      onClick={() => window.print()}
-                    >
-                      Download Estimate
-                    </button>
+                    <div className="flex gap-2">
+                      <button 
+                        className="secondary-btn flex-1"
+                        onClick={() => setShowPDFPreview(!showPDFPreview)}
+                        disabled={!showEstimate}
+                      >
+                        {showPDFPreview ? '✖ Hide' : '👁️ Preview'} PDF
+                      </button>
+                      <button 
+                        className="secondary-btn flex-1"
+                        onClick={handleDownloadPDF}
+                        disabled={!showEstimate || isGeneratingPDF}
+                      >
+                        {isGeneratingPDF ? '⏳ Generating...' : '📄 Download PDF'}
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ) : (
@@ -390,7 +532,7 @@ const PricingCalculator = () => {
                   animate={{ opacity: 1 }}
                 >
                   <div className="text-center text-slate-400">
-                    <CalculateIcon className="text-6xl mb-4 text-slate-600" />
+                    <div className="text-6xl mb-4 text-slate-600"><CalculateIcon /></div>
                     <h3 className="text-lg font-semibold mb-2">Select Services</h3>
                     <p>Choose the services you need to see your project estimate.</p>
                   </div>
@@ -407,15 +549,15 @@ const PricingCalculator = () => {
                 <h4 className="text-lg font-semibold text-white mb-4">Why Choose Us?</h4>
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <StarIcon className="text-yellow-500" fontSize="small" />
+                    <StarIcon />
                     <span className="text-slate-300 text-sm">4.9/5 Client Rating</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <TrendingUpIcon className="text-teal-400" fontSize="small" />
+                    <TrendingUpIcon />
                     <span className="text-slate-300 text-sm">50+ Successful Projects</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircleIcon className="text-green-500" fontSize="small" />
+                    <CheckCircleIcon />
                     <span className="text-slate-300 text-sm">100% On-Time Delivery</span>
                   </div>
                 </div>
@@ -451,6 +593,93 @@ const PricingCalculator = () => {
             </div>
           </motion.div>
         </div>
+        
+        {/* PDF Preview Modal */}
+        {showPDFPreview && showEstimate && (
+          <motion.div 
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowPDFPreview(false)}
+          >
+            <motion.div 
+              className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center">
+                <h3 className="text-lg font-semibold text-gray-900">PDF Estimate Preview</h3>
+                <div className="flex gap-2">
+                  <button 
+                    className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+                    onClick={handleDownloadPDF}
+                    disabled={isGeneratingPDF}
+                  >
+                    {isGeneratingPDF ? '⏳ Generating...' : '📄 Download PDF'}
+                  </button>
+                  <button 
+                    className="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors"
+                    onClick={() => setShowPDFPreview(false)}
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+              <div className="p-6">
+                <SimplePDFEstimate
+                  selectedServices={selectedServices}
+                  services={services}
+                  projectComplexity={projectComplexity}
+                  timeline={timeline}
+                  supportLevel={supportLevel}
+                  totalPrice={totalPrice}
+                  complexityMultipliers={complexityMultipliers}
+                  timelineMultipliers={timelineMultipliers}
+                  supportLevels={supportLevels}
+                  getSelectedServicesFeatures={getSelectedServicesFeatures}
+                  estimateId={estimateId}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+        
+        {/* Hidden PDF component for generation - positioned off-screen */}
+        <div style={{ 
+          position: 'absolute', 
+          left: '-9999px', 
+          top: 0,
+          width: '800px',
+          backgroundColor: 'white',
+          zIndex: -1
+        }}>
+          <SimplePDFEstimate
+            ref={printRef}
+            id="pdf-estimate"
+            selectedServices={selectedServices}
+            services={services}
+            projectComplexity={projectComplexity}
+            timeline={timeline}
+            supportLevel={supportLevel}
+            totalPrice={totalPrice}
+            complexityMultipliers={complexityMultipliers}
+            timelineMultipliers={timelineMultipliers}
+            supportLevels={supportLevels}
+            getSelectedServicesFeatures={getSelectedServicesFeatures}
+            estimateId={estimateId}
+          />
+        </div>
+        
+        {/* PDF Download Progress Modal */}
+        <PDFDownloadModal
+          isVisible={showDownloadModal}
+          progress={downloadProgress}
+          onComplete={handleDownloadComplete}
+          filename={`Project_Estimate_${estimateId}.pdf`}
+        />
       </div>
     </>
   );

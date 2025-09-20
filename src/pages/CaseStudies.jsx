@@ -10,6 +10,8 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StarIcon from '@mui/icons-material/Star';
 import LaunchIcon from '@mui/icons-material/Launch';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const CaseStudies = () => {
   const [activeStudy, setActiveStudy] = useState(0);
@@ -145,9 +147,9 @@ const CaseStudies = () => {
           {/* Case Studies Content */}
           {!loading && caseStudies.length > 0 && (
             <>
-              {/* Interactive Timeline */}
+              {/* Desktop Timeline */}
               <motion.div 
-                className="relative mb-16"
+                className="hidden lg:block relative mb-16"
                 initial="hidden"
                 animate="visible"
                 variants={containerVariants}
@@ -155,42 +157,193 @@ const CaseStudies = () => {
                 <div className="flex justify-center mb-8">
                   <div className="relative">
                     <div className="absolute left-1/2 transform -translate-x-1/2 h-full"></div>
-                    <div className="flex flex-col md:flex-row gap-8 relative">
+                    <div className="flex flex-row gap-8 relative">
                       {caseStudies.map((study, index) => (
                         <motion.button
-                      key={study.id}
-                      className={`relative p-6 rounded-xl border-2 transition-all duration-300 ${
-                        activeStudy === index 
-                          ? 'border-teal-500 bg-teal-500/10' 
-                          : 'border-slate-600 hover:border-slate-500'
+                          key={study.id}
+                          className={`relative p-6 rounded-xl border-2 transition-all duration-300 ${
+                            activeStudy === index 
+                              ? 'border-teal-500 bg-teal-500/10' 
+                              : 'border-slate-600 hover:border-slate-500'
+                          }`}
+                          onClick={() => setActiveStudy(index)}
+                          variants={itemVariants}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <div className="text-center">
+                            <div className={`w-4 h-4 rounded-full mx-auto mb-2 ${
+                              activeStudy === index ? 'bg-teal-500' : 'bg-slate-600'
+                            }`}></div>
+                            <div className="text-white font-semibold">{study.year}</div>
+                            <div className="text-slate-400 text-sm">{study.client}</div>
+                          </div>
+                        </motion.button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Mobile Timeline Progress Indicator */}
+              <div className="lg:hidden mb-8">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-lg font-semibold text-white">
+                    Case Study {activeStudy + 1} of {caseStudies.length}
+                  </h3>
+                  <div className="text-sm text-slate-400">
+                    {caseStudies[activeStudy].year}
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-slate-700 rounded-full h-2 mb-4">
+                  <motion.div
+                    className="h-full rounded-full bg-gradient-to-r from-blue-500 via-teal-500 to-green-500"
+                    initial={{ width: "0%" }}
+                    animate={{ 
+                      width: `${((activeStudy + 1) / caseStudies.length) * 100}%`
+                    }}
+                    transition={{ duration: 0.5 }}
+                  />
+                </div>
+                
+                {/* Case Study Dots Navigation */}
+                <div className="flex justify-center space-x-2">
+                  {caseStudies.map((_, index) => (
+                    <motion.button
+                      key={index}
+                      className={`w-3 h-3 rounded-full transition-all ${
+                        index === activeStudy 
+                          ? 'bg-teal-400 scale-125' 
+                          : 'bg-slate-600'
                       }`}
                       onClick={() => setActiveStudy(index)}
-                      variants={itemVariants}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <div className="text-center">
-                        <div className={`w-4 h-4 rounded-full mx-auto mb-2 ${
-                          activeStudy === index ? 'bg-teal-500' : 'bg-slate-600'
-                        }`}></div>
-                        <div className="text-white font-semibold">{study.year}</div>
-                        <div className="text-slate-400 text-sm">{study.client}</div>
-                      </div>
-                    </motion.button>
+                      whileTap={{ scale: 0.9 }}
+                    />
                   ))}
                 </div>
               </div>
-            </div>
-          </motion.div>
 
-          {/* Active Case Study */}
+          {/* Mobile Carousel */}
+          <div className="lg:hidden mb-12">
+            <div className="relative overflow-hidden">
+              <motion.div
+                className="flex"
+                animate={{ x: `-${activeStudy * 100}%` }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
+                {caseStudies.map((study) => (
+                  <div key={study.id} className="w-full flex-shrink-0">
+                    <div className="card p-6 mx-1">
+                      <div className="flex items-center justify-between mb-4">
+                        <div>
+                          <h2 className="text-2xl font-bold text-white">{study.title}</h2>
+                          <div className="text-slate-400 text-sm">{study.client} • {study.year}</div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          {[...Array(study.rating)].map((_, i) => (
+                            <StarIcon key={i} className="text-yellow-500" fontSize="small" />
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4 mb-6">
+                        <div className="text-center">
+                          <GroupIcon className="text-teal-400 text-2xl mb-1" />
+                          <div className="text-white font-semibold text-sm">{study.teamSize || 'N/A'}</div>
+                          <div className="text-slate-400 text-xs">Team</div>
+                        </div>
+                        <div className="text-center">
+                          <AccessTimeIcon className="text-teal-400 text-2xl mb-1" />
+                          <div className="text-white font-semibold text-sm">{study.duration || 'N/A'}</div>
+                          <div className="text-slate-400 text-xs">Duration</div>
+                        </div>
+                        <div className="text-center">
+                          <TrendingUpIcon className="text-teal-400 text-2xl mb-1" />
+                          <div className="text-white font-semibold text-sm">High</div>
+                          <div className="text-slate-400 text-xs">ROI</div>
+                        </div>
+                      </div>
+
+                      <div className="mb-4">
+                        <h3 className="text-lg font-bold text-white mb-2">Challenge</h3>
+                        <p className="text-slate-400 text-sm">{study.challenge}</p>
+                      </div>
+
+                      <div className="mb-4">
+                        <h3 className="text-lg font-bold text-white mb-2">Solution</h3>
+                        <p className="text-slate-400 text-sm">{study.solution}</p>
+                      </div>
+
+                      <div className="mb-4">
+                        <h3 className="text-lg font-bold text-white mb-2">Technologies</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {study.technologies.slice(0, 6).map((tech, i) => (
+                            <span key={i} className="project-tag text-xs">{tech}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="text-center">
+                        <Link 
+                          to={`/portfolio/${study.slug}`}
+                          className="btn-primary inline-flex items-center gap-2 w-full justify-center"
+                        >
+                          <span>View Case Study</span>
+                          <LaunchIcon />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between items-center mt-4">
+              <motion.button
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
+                  activeStudy === 0
+                    ? 'border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white'
+                }`}
+                onClick={() => activeStudy > 0 && setActiveStudy(activeStudy - 1)}
+                disabled={activeStudy === 0}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ArrowBackIcon className="text-sm" />
+                <span className="text-sm font-medium">Previous</span>
+              </motion.button>
+
+              <div className="text-sm text-slate-400">
+                {activeStudy + 1} / {caseStudies.length}
+              </div>
+
+              <motion.button
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg border transition-all ${
+                  activeStudy === caseStudies.length - 1
+                    ? 'border-slate-700 text-slate-500 cursor-not-allowed'
+                    : 'border-teal-500 text-teal-400 hover:bg-teal-500 hover:text-white'
+                }`}
+                onClick={() => activeStudy < caseStudies.length - 1 && setActiveStudy(activeStudy + 1)}
+                disabled={activeStudy === caseStudies.length - 1}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-sm font-medium">Next</span>
+                <ArrowForwardIcon className="text-sm" />
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Desktop Active Case Study */}
           <motion.div
             key={activeStudy}
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.5 }}
-            className="grid lg:grid-cols-2 gap-12 mb-16"
+            className="hidden lg:grid lg:grid-cols-2 gap-12 mb-16"
           >
             {/* Study Details */}
             <div className="space-y-8">
