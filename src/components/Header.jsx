@@ -33,12 +33,12 @@ const Header = () => {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/services', label: 'Services' },
+    { path: '/portfolio', label: 'Portfolio' },
     { path: '/case-studies', label: 'Case Studies' },
     { path: '/pricing-calculator', label: 'Pricing' },
     { path: '/process', label: 'Process' },
-    { path: '/blog', label: 'Blog' },
     { path: '/about', label: 'About' },
-    { path: '/portfolio', label: 'Portfolio' },
+    { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' }
   ];
 

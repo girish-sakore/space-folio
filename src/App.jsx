@@ -4,10 +4,11 @@ import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from './components/ScrollToTop';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 // Lazy load heavy components
 const OrbitingSatellites = lazy(() => import("./components/OrbitingSatellites"));
-const InteractiveBackground = lazy(() => import("./components/InteractiveBackground").then(module => ({ default: module.default })));
+const InteractiveBackground = lazy(() => import("./components/InteractiveBackground"));
 const FloatingShapes = lazy(() => import("./components/InteractiveBackground").then(module => ({ default: module.FloatingShapes })));
 const AnimatedGrid = lazy(() => import("./components/InteractiveBackground").then(module => ({ default: module.AnimatedGrid })));
 
@@ -28,13 +29,13 @@ const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
 const ProximaShare = lazy(() => import('./pages/ProximaShare'));
 const Tools = lazy(() => import('./pages/Tools'));
+const LoaderDemo = lazy(() => import('./components/LoaderDemo'));
 
-// Loading component
-const PageLoader = () => (
-  <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-400"></div>
-  </div>
-);
+// Enhanced Loading component
+import EnhancedPageLoader from './components/EnhancedPageLoader';
+import Chatbot from './components/Chatbot';
+
+const PageLoader = () => <EnhancedPageLoader />;
 
 const Layout = () => (
   <>
@@ -50,6 +51,7 @@ const Layout = () => (
       <Outlet />
     </Suspense>
     <Footer />
+    <Chatbot />
   </>
 );
 
@@ -57,6 +59,7 @@ const App = () => {
   return (
     <HelmetProvider>
       <BrowserRouter>
+        <GoogleAnalytics />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
@@ -75,6 +78,7 @@ const App = () => {
           <Route path="/process" element={<Process />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/loader-demo" element={<LoaderDemo />} />
           </Route>
         </Routes>
       </BrowserRouter>

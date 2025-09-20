@@ -4,6 +4,7 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
+import { trackBusinessEvent } from '../components/GoogleAnalytics';
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -215,6 +216,7 @@ const Hero = () => {
           <motion.a 
             className="btn-primary inline-flex items-center space-x-2"
             href="#services"
+            onClick={() => trackBusinessEvent.serviceInterest('get_started', 'hero_cta')}
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -223,7 +225,10 @@ const Hero = () => {
           </motion.a>
           
           <button
-            onClick={() => window.open('https://share.proximacloud.in/', '_blank', 'noopener,noreferrer')}
+            onClick={() => {
+              trackBusinessEvent.toolUsed('ProximaShare', 'hero_cta_click');
+              window.open('https://share.proximacloud.in/', '_blank', 'noopener,noreferrer');
+            }}
             className="bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white px-6 py-3 rounded-lg font-semibold inline-flex items-center space-x-2 transition-all duration-300 hover:transform hover:scale-105"
           >
             <LaunchIcon />

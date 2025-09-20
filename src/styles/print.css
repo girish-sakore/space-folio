@@ -1,0 +1,329 @@
+/* Print-specific styles for PDF estimates */
+
+@media print {
+  /* Reset print margins and setup */
+  @page {
+    margin: 0.5in;
+    size: A4;
+  }
+
+  /* Hide all other content when printing */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Show only the PDF estimate */
+  #pdf-estimate,
+  #pdf-estimate * {
+    visibility: visible;
+  }
+
+  /* Position the estimate properly */
+  #pdf-estimate {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    height: auto !important;
+    background: white !important;
+    color: #1f2937 !important;
+    font-size: 12px !important;
+    line-height: 1.4 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Ensure proper spacing */
+  #pdf-estimate * {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* Header styling for print */
+  #pdf-estimate h1 {
+    font-size: 24px !important;
+    margin-bottom: 8px !important;
+    color: #1f2937 !important;
+  }
+
+  #pdf-estimate h2 {
+    font-size: 18px !important;
+    margin-bottom: 12px !important;
+    margin-top: 20px !important;
+    color: #1f2937 !important;
+  }
+
+  #pdf-estimate h3,
+  #pdf-estimate h4 {
+    font-size: 14px !important;
+    margin-bottom: 8px !important;
+    color: #1f2937 !important;
+  }
+
+  /* Text colors for print */
+  #pdf-estimate .text-gray-900 {
+    color: #1f2937 !important;
+  }
+
+  #pdf-estimate .text-gray-700 {
+    color: #374151 !important;
+  }
+
+  #pdf-estimate .text-gray-600 {
+    color: #4b5563 !important;
+  }
+
+  #pdf-estimate .text-teal-600 {
+    color: #0d9488 !important;
+  }
+
+  /* Border colors for print */
+  #pdf-estimate .border-teal-500 {
+    border-color: #14b8a6 !important;
+  }
+
+  #pdf-estimate .border-gray-200 {
+    border-color: #e5e7eb !important;
+  }
+
+  #pdf-estimate .border-gray-300 {
+    border-color: #d1d5db !important;
+  }
+
+  /* Background colors for print (use light grays instead) */
+  #pdf-estimate .bg-teal-50 {
+    background-color: #f0fdfa !important;
+  }
+
+  #pdf-estimate .bg-teal-100 {
+    background-color: #ccfbf1 !important;
+  }
+
+  #pdf-estimate .bg-gray-50 {
+    background-color: #f9fafb !important;
+  }
+
+  /* Grid layouts for print */
+  #pdf-estimate .grid {
+    display: grid !important;
+  }
+
+  #pdf-estimate .grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  #pdf-estimate .grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  #pdf-estimate .grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  /* Flexbox for print */
+  #pdf-estimate .flex {
+    display: flex !important;
+  }
+
+  #pdf-estimate .items-center {
+    align-items: center !important;
+  }
+
+  #pdf-estimate .justify-between {
+    justify-content: space-between !important;
+  }
+
+  /* Spacing for print */
+  #pdf-estimate .gap-4 {
+    gap: 16px !important;
+  }
+
+  #pdf-estimate .gap-6 {
+    gap: 24px !important;
+  }
+
+  #pdf-estimate .gap-8 {
+    gap: 32px !important;
+  }
+
+  #pdf-estimate .mb-2 {
+    margin-bottom: 8px !important;
+  }
+
+  #pdf-estimate .mb-3 {
+    margin-bottom: 12px !important;
+  }
+
+  #pdf-estimate .mb-4 {
+    margin-bottom: 16px !important;
+  }
+
+  #pdf-estimate .mb-6 {
+    margin-bottom: 24px !important;
+  }
+
+  #pdf-estimate .mb-8 {
+    margin-bottom: 32px !important;
+  }
+
+  #pdf-estimate .mt-1 {
+    margin-top: 4px !important;
+  }
+
+  #pdf-estimate .mt-2 {
+    margin-top: 8px !important;
+  }
+
+  /* Padding for print */
+  #pdf-estimate .p-4 {
+    padding: 16px !important;
+  }
+
+  #pdf-estimate .p-6 {
+    padding: 24px !important;
+  }
+
+  #pdf-estimate .px-6 {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  #pdf-estimate .py-3 {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  #pdf-estimate .py-4 {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+  #pdf-estimate .pb-8 {
+    padding-bottom: 32px !important;
+  }
+
+  #pdf-estimate .pt-8 {
+    padding-top: 32px !important;
+  }
+
+  /* Typography for print */
+  #pdf-estimate .font-bold {
+    font-weight: bold !important;
+  }
+
+  #pdf-estimate .font-semibold {
+    font-weight: 600 !important;
+  }
+
+  #pdf-estimate .text-sm {
+    font-size: 11px !important;
+  }
+
+  #pdf-estimate .text-xs {
+    font-size: 10px !important;
+  }
+
+  #pdf-estimate .text-lg {
+    font-size: 14px !important;
+  }
+
+  #pdf-estimate .text-xl {
+    font-size: 16px !important;
+  }
+
+  /* Border radius for print */
+  #pdf-estimate .rounded-lg {
+    border-radius: 8px !important;
+  }
+
+  #pdf-estimate .rounded-full {
+    border-radius: 50% !important;
+  }
+
+  /* Width and height for print */
+  #pdf-estimate .w-5 {
+    width: 20px !important;
+  }
+
+  #pdf-estimate .h-5 {
+    height: 20px !important;
+  }
+
+  #pdf-estimate .w-8 {
+    width: 32px !important;
+  }
+
+  #pdf-estimate .h-8 {
+    height: 32px !important;
+  }
+
+  /* Text alignment for print */
+  #pdf-estimate .text-center {
+    text-align: center !important;
+  }
+
+  #pdf-estimate .text-right {
+    text-align: right !important;
+  }
+
+  /* Lists for print */
+  #pdf-estimate ul {
+    list-style: none !important;
+    padding-left: 0 !important;
+  }
+
+  #pdf-estimate li {
+    margin-bottom: 4px !important;
+  }
+
+  /* Table-like elements for print */
+  #pdf-estimate .overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* Ensure proper page breaks */
+  #pdf-estimate .mb-8:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  /* Hide any buttons or interactive elements */
+  #pdf-estimate button,
+  #pdf-estimate a {
+    display: none !important;
+  }
+
+  /* Special handling for numbered circles */
+  #pdf-estimate .rounded-full span {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background-color: #ccfbf1 !important;
+    color: #0d9488 !important;
+    font-weight: bold !important;
+    font-size: 11px !important;
+  }
+
+  /* Ensure proper spacing for check marks */
+  #pdf-estimate .mr-3 {
+    margin-right: 12px !important;
+  }
+
+  #pdf-estimate .mr-2 {
+    margin-right: 8px !important;
+  }
+}
+
+/* Prevent page breaks inside important sections */
+@media print {
+  #pdf-estimate .mb-8 {
+    page-break-inside: avoid;
+  }
+  
+  #pdf-estimate table,
+  #pdf-estimate .grid {
+    page-break-inside: avoid;
+  }
+}

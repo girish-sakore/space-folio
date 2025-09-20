@@ -2,7 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import longLogo from '../assets/Proxima_Cloud_6-CSK-uDlf.png';
 import SEO from '../components/SEO';
-import { getAboutPageSchema, getLocalBusinessSchema } from '../utils/structuredData';
+import { getAboutPageSchema } from '../utils/structuredData';
+import { getLocalBusinessSchema, getProfessionalServiceSchema } from '../utils/localBusinessSchema';
+import teamMembers from '../data/teamMembers';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import GroupIcon from '@mui/icons-material/Group';
 import PublicIcon from '@mui/icons-material/Public';
@@ -11,6 +13,11 @@ import SecurityIcon from '@mui/icons-material/Security';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import VerifiedIcon from '@mui/icons-material/Verified';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+import StarIcon from '@mui/icons-material/Star';
 
 const About = () => {
   const values = [
@@ -36,37 +43,12 @@ const About = () => {
     }
   ];
 
-  const team = [
-    {
-      name: "Alex Chen",
-      role: "Chief Technology Officer",
-      bio: "15+ years in cloud architecture and enterprise solutions. Former lead architect at major tech companies.",
-      specialties: ["Cloud Architecture", "DevOps", "System Design"]
-    },
-    {
-      name: "Sarah Johnson",
-      role: "Head of Development",
-      bio: "Full-stack developer with expertise in modern web technologies and mobile app development.",
-      specialties: ["React/Node.js", "Mobile Development", "UI/UX"]
-    },
-    {
-      name: "Michael Rodriguez",
-      role: "Security & Compliance Lead",
-      bio: "Cybersecurity expert with certifications in multiple security frameworks and compliance standards.",
-      specialties: ["Security Audits", "Compliance", "Risk Assessment"]
-    },
-    {
-      name: "Emily Davis",
-      role: "Project Manager",
-      bio: "Agile project management specialist ensuring smooth delivery and client satisfaction.",
-      specialties: ["Project Management", "Client Relations", "Process Optimization"]
-    }
-  ];
+  // Using real team data from teamMembers.js
 
   const stats = [
     { number: "50+", label: "Projects Delivered" },
     { number: "25+", label: "Happy Clients" },
-    { number: "5+", label: "Years Experience" },
+    { number: "4+", label: "Years Experience" },
     { number: "99.9%", label: "Uptime Guarantee" }
   ];
 
@@ -74,7 +56,8 @@ const About = () => {
     "@context": "https://schema.org",
     "@graph": [
       getAboutPageSchema(),
-      getLocalBusinessSchema()
+      getLocalBusinessSchema(),
+      getProfessionalServiceSchema()
     ]
   };
 
@@ -200,27 +183,102 @@ const About = () => {
               Meet Our Team
             </h2>
             <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-              Our diverse team of experts brings together decades of combined experience in 
-              technology, business, and innovation.
+              Meet our co-founders who bring together expertise in engineering and design to deliver 
+              innovative cloud solutions and exceptional user experiences.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div key={index} className="card p-6 text-center">
-                <div className="w-24 h-24 bg-gradient-to-br from-teal-400 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">
-                    {member.name.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                <p className="text-teal-400 mb-3">{member.role}</p>
-                <p className="text-slate-400 text-sm mb-4">{member.bio}</p>
-                <div className="flex flex-wrap gap-1 justify-center">
-                  {member.specialties.map((specialty, idx) => (
-                    <span key={idx} className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">
-                      {specialty}
-                    </span>
-                  ))}
+          <div className="grid lg:grid-cols-2 gap-8">
+            {teamMembers.map((member) => (
+              <div key={member.id} className="card p-8 relative overflow-hidden">
+                <div className="relative z-10">
+                  {/* Avatar */}
+                  <div className="relative mb-6 flex justify-center">
+                    <img
+                      src={member.avatar}
+                      alt={member.name}
+                      className="w-24 h-24 rounded-full object-cover border-2 border-teal-400"
+                    />
+                  </div>
+
+                  {/* Rating Stars */}
+                  <div className="flex justify-center gap-1 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <StarIcon
+                        key={i}
+                        className={`text-yellow-500 ${i < Math.floor(member.rating) ? '' : 'opacity-30'}`}
+                        fontSize="small"
+                      />
+                    ))}
+                    <span className="text-slate-400 text-sm ml-1">{member.rating}</span>
+                  </div>
+
+                  {/* Basic Info */}
+                  <div className="text-center mb-6">
+                    <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                    <p className="text-teal-400 mb-3">{member.role}</p>
+                    <p className="text-slate-400 text-sm">{member.bio}</p>
+                  </div>
+
+                  {/* Quick Stats */}
+                  <div className="grid grid-cols-2 gap-4 mb-6 text-center">
+                    <div>
+                      <div className="text-white font-bold text-lg">{member.experience}</div>
+                      <div className="text-slate-400 text-xs">Experience</div>
+                    </div>
+                    <div>
+                      <div className="text-white font-bold text-lg">{member.projects}+</div>
+                      <div className="text-slate-400 text-xs">Projects</div>
+                    </div>
+                  </div>
+
+                  {/* Specialties */}
+                  <div className="mb-6 flex flex-wrap gap-1 justify-center">
+                    {member.specialties.map((specialty, idx) => (
+                      <span key={idx} className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">
+                        {specialty}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Social Links */}
+                  <div className="flex justify-center gap-3">
+                    {member.social.linkedin && (
+                      <a
+                        href={member.social.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-400 hover:text-blue-400 transition-colors"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </a>
+                    )}
+                    {member.social.twitter && (
+                      <a
+                        href={member.social.twitter}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-400 hover:text-blue-300 transition-colors"
+                      >
+                        <TwitterIcon fontSize="small" />
+                      </a>
+                    )}
+                    {member.social.github && (
+                      <a
+                        href={member.social.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-slate-400 hover:text-white transition-colors"
+                      >
+                        <GitHubIcon fontSize="small" />
+                      </a>
+                    )}
+                    <a
+                      href={`mailto:${member.social.email}`}
+                      className="text-slate-400 hover:text-teal-400 transition-colors"
+                    >
+                      <EmailIcon fontSize="small" />
+                    </a>
+                  </div>
                 </div>
               </div>
             ))}
