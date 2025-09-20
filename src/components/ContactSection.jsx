@@ -146,7 +146,7 @@ export default function ContactSection() {
   };
 
   const handleSubmit = async (e) => {
-    const api_base_url = process.env.REACT_APP_API_URL || "https://proximacloud.ddns.net";
+    const api_base_url = process.env.REACT_APP_API_URL || "https://proximacloud.in";
 
     e.preventDefault();
     setIsSubmitting(true);

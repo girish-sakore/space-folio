@@ -21,7 +21,7 @@ export default function AboutSection() {
           <div className="relative">
             <img
               alt="The Proxima Cloud team working"
-              className="rounded-lg shadow-2xl w-full"
+              className="rounded-lg w-full"
               src={longLogo}
             />
             <div className="absolute -top-4 -left-4 w-24 h-24 bg-teal-500/20 rounded-full -z-10"></div>

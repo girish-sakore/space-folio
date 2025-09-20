@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import OptimizedImage from './OptimizedImage';
 
 export default function ProjectCard({ 
   project, 
   showTags = true, 
-  linkTo = `/portfolio/${project.id}` 
+  linkTo = `/portfolio/${project.slug}` 
 }) {
   // Limit the number of visible tags to prevent overflow
   const maxVisibleTags = 3;
@@ -14,10 +15,13 @@ export default function ProjectCard({
 
   return (
     <div className="card">
-      <img
-        alt={project.title}
-        className="w-full h-64 object-cover"
+      <OptimizedImage
         src={project.image}
+        alt={`${project.title} - ${project.description}`}
+        className="w-full h-64 object-cover"
+        width={400}
+        height={256}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
       <div className="p-6">
         <h3 className="text-2xl font-bold text-white mb-2">

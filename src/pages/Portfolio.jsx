@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
+import { getPortfolioSchema, getWebPageSchema } from '../utils/structuredData';
 import FilterAltSharpIcon from '@mui/icons-material/FilterAltSharp';
 import FilterAltOffSharpIcon from '@mui/icons-material/FilterAltOffSharp';
 
@@ -36,6 +38,8 @@ export default function Portfolio() {
   });
 
   // Load projects and initialize filter options on component mount
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const loadResult = loadProjects();
 
@@ -59,7 +63,7 @@ export default function Portfolio() {
       }));
     } else {
       console.error("Failed to load project data:", loadResult.error);
-      Alert.error("Failed to load project data. Please try again later.");
+      setError("Failed to load project data. Please try again later.");
     }
   }, []);
 
@@ -161,7 +165,7 @@ export default function Portfolio() {
         )}
         
         <Link
-          to={`/portfolio/${project.id}`}
+          to={`/portfolio/${project.slug}`}
           className="text-teal-400 font-semibold hover:text-teal-300 transition-colors pt-3 inline-block mt-4"
         >
           View Case Study →
@@ -170,9 +174,42 @@ export default function Portfolio() {
     </div>
   );
 
+  // Create structured data for portfolio
+  const portfolioProjects = filteredProjects.map(project => ({
+    title: project.title,
+    description: project.description,
+    image: project.image,
+    url: `https://proximacloud.com/portfolio/${project.slug}`
+  }));
+
+  const pageSchema = getWebPageSchema(
+    "Our Portfolio - Showcase of Projects",
+    "Explore our comprehensive collection of projects across various industries and technologies including cloud solutions and web development.",
+    "https://proximacloud.com/portfolio"
+  );
+
+  const portfolioStructuredData = getPortfolioSchema(portfolioProjects);
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [pageSchema, portfolioStructuredData]
+  };
+
   return (
+    <>
+      <SEO 
+        title="Our Portfolio - Showcase of Projects"
+        description="Explore our comprehensive collection of projects across various industries and technologies including cloud solutions and web development."
+        keywords="portfolio, case studies, web development projects, cloud migration projects, mobile apps, technology solutions"
+        structuredData={combinedSchema}
+      />
     <section className="py-20">
       <div className="container mx-auto px-4">
+        {error && (
+          <div className="px-5 mb-6">
+            <Alert severity="error">{error}</Alert>
+          </div>
+        )}
         {/* Hero Section */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight tracking-tighter">
@@ -249,5 +286,6 @@ export default function Portfolio() {
         )}
       </div>
     </section>
+    </>
   );
 }
