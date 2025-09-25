@@ -4,7 +4,27 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import LaunchIcon from '@mui/icons-material/Launch';
 import { Link } from 'react-router-dom';
 import CountUp from 'react-countup';
-import { trackBusinessEvent } from '../components/GoogleAnalytics';
+// Simple Google Analytics tracking functions
+const trackBusinessEvent = {
+  serviceInterest: (service, source) => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'service_interest', {
+        event_category: 'Services',
+        event_label: service,
+        interest_source: source
+      });
+    }
+  },
+  toolUsed: (toolName, action) => {
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'tool_usage', {
+        event_category: 'Tools',
+        event_label: toolName,
+        tool_action: action
+      });
+    }
+  }
+};
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
