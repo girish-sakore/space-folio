@@ -4,7 +4,6 @@ import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from './components/ScrollToTop';
-import GoogleAnalytics from './components/GoogleAnalytics';
 
 // Lazy load heavy components
 const OrbitingSatellites = lazy(() => import("./components/OrbitingSatellites"));
@@ -59,7 +58,6 @@ const App = () => {
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <GoogleAnalytics />
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />

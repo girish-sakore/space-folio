@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <!-- Homepage -->
   <url>
-    <loc>https://proximacloud.com/</loc>
+    <loc>https://proximacloud.in/</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -10,28 +10,28 @@
   
   <!-- Core Business Pages -->
   <url>
-    <loc>https://proximacloud.com/services</loc>
+    <loc>https://proximacloud.in/services</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/portfolio</loc>
+    <loc>https://proximacloud.in/portfolio</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/about</loc>
+    <loc>https://proximacloud.in/about</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/contact</loc>
+    <loc>https://proximacloud.in/contact</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -39,28 +39,28 @@
   
   <!-- High-Value Business Pages -->
   <url>
-    <loc>https://proximacloud.com/pricing-calculator</loc>
+    <loc>https://proximacloud.in/pricing-calculator</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/case-studies</loc>
+    <loc>https://proximacloud.in/case-studies</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/tools</loc>
+    <loc>https://proximacloud.in/tools</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/proximashare</loc>
+    <loc>https://proximacloud.in/proximashare</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -68,21 +68,21 @@
   
   <!-- Content Pages -->
   <url>
-    <loc>https://proximacloud.com/blog</loc>
+    <loc>https://proximacloud.in/blog</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/process</loc>
+    <loc>https://proximacloud.in/process</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/faq</loc>
+    <loc>https://proximacloud.in/faq</loc>
     <lastmod>2025-09-20T01:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -90,28 +90,28 @@
   
   <!-- Individual Project Pages -->
   <url>
-    <loc>https://proximacloud.com/portfolio/1</loc>
+    <loc>https://proximacloud.in/portfolio/1</loc>
     <lastmod>2024-03-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/portfolio/2</loc>
+    <loc>https://proximacloud.in/portfolio/2</loc>
     <lastmod>2023-08-15T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/portfolio/3</loc>
+    <loc>https://proximacloud.in/portfolio/3</loc>
     <lastmod>2024-06-30T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/portfolio/4</loc>
+    <loc>https://proximacloud.in/portfolio/4</loc>
     <lastmod>2024-04-30T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
@@ -119,14 +119,14 @@
   
   <!-- Legal Pages -->
   <url>
-    <loc>https://proximacloud.com/privacy</loc>
+    <loc>https://proximacloud.in/privacy</loc>
     <lastmod>2025-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <url>
-    <loc>https://proximacloud.com/terms</loc>
+    <loc>https://proximacloud.in/terms</loc>
     <lastmod>2025-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

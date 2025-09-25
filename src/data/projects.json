@@ -589,7 +589,7 @@
       "title": "Recovery Agency Management System",
       "slug": "recovery-agency-management-system",
       "description": "Comprehensive debt recovery management system built with React, TypeScript, and Material-UI. Features advanced data grids, real-time analytics, and role-based authentication for financial institutions.",
-      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&q=80",
+      "image": "/images/ez-allocation.png",
       "link": "#",
       "client": "Financial Services Institution",
       "startDate": "2024-08-01",
