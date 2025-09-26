@@ -6,12 +6,12 @@ export const getOrganizationSchema = () => ({
     "@type": "Organization",
     "name": "Proxima Centauri Cloud Solutions (OPC) Pvt. Ltd.",
     "alternateName": "Proxima Cloud",
-    "url": "https://proximacloud.com",
-    "logo": "https://proximacloud.com/images/logo.png",
-    "image": "https://proximacloud.com/images/og-image.png",
+    "url": "https://proximacloud.in",
+    "logo": "https://proximacloud.in/images/logo.png",
+    "image": "https://proximacloud.in/images/og-image.png",
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91-98765-43210",
+      "telephone": "+91-77987-29845",
       "contactType": "customer service",
       "areaServed": "IN",
       "availableLanguage": "en"
@@ -61,16 +61,16 @@ export const getOrganizationSchema = () => ({
     "@type": "WebSite",
     "name": "Proxima Cloud",
     "alternateName": "Proxima Centauri Cloud Solutions",
-    "url": "https://proximacloud.com",
+    "url": "https://proximacloud.in",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://proximacloud.com/search?q={search_term_string}",
+      "target": "https://proximacloud.in/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     },
     "publisher": {
       "@type": "Organization",
       "name": "Proxima Cloud",
-      "logo": "https://proximacloud.com/images/logo.png"
+      "logo": "https://proximacloud.in/images/logo.png"
     }
   });
   
@@ -83,7 +83,7 @@ export const getOrganizationSchema = () => ({
     "provider": {
       "@type": "Organization",
       "name": "Proxima Cloud",
-      "url": "https://proximacloud.com"
+      "url": "https://proximacloud.in"
     },
     "serviceType": serviceName,
     "areaServed": "IN",
@@ -116,7 +116,7 @@ export const getOrganizationSchema = () => ({
     "publisher": {
       "@type": "Organization",
       "name": "Proxima Cloud",
-      "logo": "https://proximacloud.com/images/logo.png"
+      "logo": "https://proximacloud.in/images/logo.png"
     },
     "dateModified": new Date().toISOString(),
     "inLanguage": "en-US"
@@ -149,7 +149,7 @@ export const getOrganizationSchema = () => ({
     "publisher": {
       "@type": "Organization",
       "name": "Proxima Cloud",
-      "logo": "https://proximacloud.com/images/logo.png"
+      "logo": "https://proximacloud.in/images/logo.png"
     },
     "datePublished": datePublished,
     "dateModified": dateModified,
@@ -166,9 +166,9 @@ export const getOrganizationSchema = () => ({
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     "name": "Proxima Centauri Cloud Solutions (OPC) Pvt. Ltd.",
-    "image": "https://proximacloud.com/images/logo.png",
-    "telephone": "+91-98765-43210",
-    "email": "info@proximacloud.com",
+    "image": "https://proximacloud.in/images/logo.png",
+    "telephone": "+91-77987-29845",
+    "email": "info@proximacloud.in",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Tech Park, Whitefield",
@@ -182,7 +182,7 @@ export const getOrganizationSchema = () => ({
       "latitude": 12.9716,
       "longitude": 77.5946
     },
-    "url": "https://proximacloud.com",
+    "url": "https://proximacloud.in",
     "sameAs": [
       "https://linkedin.com/company/proxima-cloud",
       "https://twitter.com/proximacloud"
@@ -232,15 +232,15 @@ export const getOrganizationSchema = () => ({
     "@type": "ContactPage",
     "name": "Contact Proxima Cloud",
     "description": "Get in touch with Proxima Cloud for your technology needs",
-    "url": "https://proximacloud.com/contact",
+    "url": "https://proximacloud.in/contact",
     "mainEntity": {
       "@type": "Organization",
       "name": "Proxima Cloud",
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+91-98765-43210",
+        "telephone": "+91-77987-29845",
         "contactType": "customer service",
-        "email": "info@proximacloud.com"
+        "email": "info@proximacloud.in"
       }
     }
   });
@@ -251,7 +251,7 @@ export const getOrganizationSchema = () => ({
     "@type": "AboutPage",
     "name": "About Proxima Cloud",
     "description": "Learn about Proxima Cloud's mission, vision, and expertise in cloud solutions",
-    "url": "https://proximacloud.com/about",
+    "url": "https://proximacloud.in/about",
     "mainEntity": getOrganizationSchema()
   });
   

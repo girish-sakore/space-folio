@@ -265,7 +265,7 @@ const PricingCalculator = () => {
   const pageSchema = getWebPageSchema(
     "Pricing Calculator - Get Instant Project Estimates",
     "Calculate the cost of your technology project with our interactive pricing tool. Get instant estimates for cloud migration, web development, and more.",
-    "https://proximacloud.com/pricing-calculator"
+    "https://proximacloud.in/pricing-calculator"
   );
 
   const containerVariants = {

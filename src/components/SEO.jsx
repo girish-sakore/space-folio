@@ -12,11 +12,11 @@ const SEO = ({
   noindex = false 
 }) => {
   const location = useLocation();
-  const currentUrl = `https://proximacloud.com${location.pathname}`;
+  const currentUrl = `https://proximacloud.in${location.pathname}`;
   
   const defaultTitle = 'Proxima Cloud - Cloud Solutions & Web Development Services';
   const defaultDescription = 'Professional cloud migration, web development, mobile apps, and digital transformation services. Expert technology solutions for modern businesses.';
-  const defaultImage = 'https://proximacloud.com/images/og-image.png';
+  const defaultImage = 'https://proximacloud.in/images/og-image.png';
   const defaultKeywords = 'cloud migration, web development, mobile apps, cloud solutions, digital transformation, AWS, Azure, React, Node.js, technology consulting';
   
   const pageTitle = title ? `${title} | Proxima Cloud` : defaultTitle;

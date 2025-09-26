@@ -19,7 +19,7 @@ const ProximaShare = () => {
   const pageSchema = getWebPageSchema(
     "ProximaShare - Simple & Secure File Sharing Tool",
     "Upload and share files easily with ProximaShare. Get a secure, shareable link in seconds. Fast, simple, and free file sharing with 2MB limit per file.",
-    "https://proximacloud.com/proximashare"
+    "https://proximacloud.in/proximashare"
   );
 
   const features = [

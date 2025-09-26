@@ -303,7 +303,7 @@ const PrintableEstimate = React.forwardRef(({
               <div>📧 info@proximacloud.in</div>
               <div>📞 +91-77987-29845</div>
               <div>🏢 Ramtek, Nagpur, India</div>
-              <div>🌐 proximacloud.com</div>
+              <div>🌐 proximacloud.in</div>
             </div>
           </div>
 

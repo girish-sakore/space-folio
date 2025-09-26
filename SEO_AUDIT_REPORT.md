@@ -171,7 +171,7 @@ npm run build:analyze
 ### **For Marketing Team**
 
 #### **1. Google Search Console**
-- Submit sitemap: https://proximacloud.com/sitemap.xml
+- Submit sitemap: https://proximacloud.in/sitemap.xml
 - Monitor Core Web Vitals reports
 - Track keyword rankings and click-through rates
 

@@ -7,18 +7,18 @@ export const getLocalBusinessSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://proximacloud.com/#localbusiness",
+    "@id": "https://proximacloud.in/#localbusiness",
     "name": "Proxima Centauri Cloud Solutions (OPC) Pvt. Ltd.",
     "alternateName": "Proxima Cloud",
     "description": "Professional cloud migration, web development, mobile apps, and digital transformation services. Expert technology solutions for modern businesses.",
-    "url": "https://proximacloud.com",
-    "logo": "https://proximacloud.com/images/logo.png",
+    "url": "https://proximacloud.in",
+    "logo": "https://proximacloud.in/images/logo.png",
     "image": [
-      "https://proximacloud.com/images/og-image.png",
-      "https://proximacloud.com/images/screenshot-wide.png"
+      "https://proximacloud.in/images/og-image.png",
+      "https://proximacloud.in/images/screenshot-wide.png"
     ],
-    "telephone": "+91-98765-43210",
-    "email": "info@proximacloud.com",
+    "telephone": "+91-77987-29845",
+    "email": "info@proximacloud.in",
     "priceRange": "₹₹₹",
     "currenciesAccepted": "INR, USD, EUR",
     "paymentAccepted": "Cash, Credit Card, Bank Transfer, Online Payment",
@@ -171,14 +171,14 @@ export const getLocalBusinessSchema = () => {
     ],
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https://proximacloud.com/"
+      "@id": "https://proximacloud.in/"
     },
     "potentialAction": [
       {
         "@type": "ReserveAction",
         "target": {
           "@type": "EntryPoint",
-          "urlTemplate": "https://proximacloud.com/contact",
+          "urlTemplate": "https://proximacloud.in/contact",
           "actionPlatform": [
             "http://schema.org/DesktopWebPlatform",
             "http://schema.org/MobileWebPlatform"
@@ -201,7 +201,7 @@ export const getProfessionalServiceSchema = () => {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "@id": "https://proximacloud.com/#professionalservice",
+    "@id": "https://proximacloud.in/#professionalservice",
     "name": "Proxima Cloud - Cloud Solutions & Web Development",
     "description": "Professional cloud computing and web development services for businesses",
     "provider": {
@@ -211,9 +211,9 @@ export const getProfessionalServiceSchema = () => {
     "areaServed": "IN",
     "availableChannel": {
       "@type": "ServiceChannel",
-      "serviceUrl": "https://proximacloud.com",
-      "serviceSmsNumber": "+91-98765-43210",
-      "servicePhone": "+91-98765-43210"
+      "serviceUrl": "https://proximacloud.in",
+      "serviceSmsNumber": "+91-77987-29845",
+      "servicePhone": "+91-77987-29845"
     },
     "category": [
       "Cloud Computing",
@@ -221,7 +221,7 @@ export const getProfessionalServiceSchema = () => {
       "Software Development",
       "IT Consulting"
     ],
-    "termsOfService": "https://proximacloud.com/terms",
+    "termsOfService": "https://proximacloud.in/terms",
     "hasCertification": [
       {
         "@type": "Certification",
@@ -269,6 +269,6 @@ export const getProximaShareSchema = () => {
       "Privacy focused",
       "No registration required"
     ],
-    "screenshot": "https://proximacloud.com/images/proximashare-screenshot.png"
+    "screenshot": "https://proximacloud.in/images/proximashare-screenshot.png"
   };
 };

@@ -14,7 +14,7 @@ const teamMembers = [
       linkedin: "https://linkedin.com/in/girish-sakore",
       twitter: "https://twitter.com/girish_sakore",
       github: "https://github.com/girishsakore",
-      email: "girish@proximacloud.com"
+      email: "girish@proximacloud.in"
     }
   },
   {
@@ -31,7 +31,7 @@ const teamMembers = [
       linkedin: "https://linkedin.com/in/chandrakant-nagpure",
       twitter: "https://twitter.com/chandrakant_nagpure",
       github: "https://github.com/chandrakantnagpure",
-      email: "chandrakant@proximacloud.com"
+      email: "chandrakant@proximacloud.in"
     }
   }
 ];

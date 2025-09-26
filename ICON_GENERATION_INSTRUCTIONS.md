@@ -52,8 +52,8 @@ Using the existing logo `public/Proxima_Cloud-removebg-preview.png` as the base,
 
 ### File Placement:
 All icon files should be placed in the `public/` directory root so they're accessible at:
-- `https://proximacloud.com/favicon.ico`
-- `https://proximacloud.com/android-chrome-192x192.png`
+- `https://proximacloud.in/favicon.ico`
+- `https://proximacloud.in/android-chrome-192x192.png`
 - etc.
 
 The manifest.json and browserconfig.xml are already configured to reference these paths.

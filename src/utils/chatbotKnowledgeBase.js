@@ -88,7 +88,7 @@ export const knowledgeBase = {
   contact: {
     email: 'info@proximacloud.in',
     phone: '+91-77987-29845',
-    website: 'proximacloud.com',
+    website: 'proximacloud.in',
     business_hours: 'Monday-Friday, 9:00 AM - 6:00 PM IST',
     timezone: 'India Standard Time (IST)',
     response_time: 'Within 2-4 hours during business days'

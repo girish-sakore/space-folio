@@ -284,7 +284,7 @@ const SimplePDFEstimate = React.forwardRef(({
               <div style={{ marginBottom: '5px' }}>📧 info@proximacloud.in</div>
               <div style={{ marginBottom: '5px' }}>📞 +91-77987-29845</div>
               <div style={{ marginBottom: '5px' }}>🏢 Ramtek, Nagpur, India</div>
-              <div>🌐 proximacloud.com</div>
+              <div>🌐 proximacloud.in</div>
             </div>
           </div>
           <div style={{ textAlign: 'right' }}>

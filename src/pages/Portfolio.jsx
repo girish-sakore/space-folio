@@ -179,13 +179,13 @@ export default function Portfolio() {
     title: project.title,
     description: project.description,
     image: project.image,
-    url: `https://proximacloud.com/portfolio/${project.slug}`
+    url: `https://proximacloud.in/portfolio/${project.slug}`
   }));
 
   const pageSchema = getWebPageSchema(
     "Our Portfolio - Showcase of Projects",
     "Explore our comprehensive collection of projects across various industries and technologies including cloud solutions and web development.",
-    "https://proximacloud.com/portfolio"
+    "https://proximacloud.in/portfolio"
   );
 
   const portfolioStructuredData = getPortfolioSchema(portfolioProjects);

@@ -157,7 +157,7 @@ const FAQ = () => {
   const pageSchema = getWebPageSchema(
     "FAQ - Frequently Asked Questions",
     "Find answers to common questions about our cloud services, pricing, development process, and support options.",
-    "https://proximacloud.com/faq"
+    "https://proximacloud.in/faq"
   );
 
   return (

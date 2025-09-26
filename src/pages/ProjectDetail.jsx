@@ -65,7 +65,7 @@ const ProjectDetail = () => {
     project.startDate || new Date().toISOString(),
     new Date().toISOString(),
     project.image,
-    `https://proximacloud.com/portfolio/${project.slug}`
+    `https://proximacloud.in/portfolio/${project.slug}`
   );
 
   return (

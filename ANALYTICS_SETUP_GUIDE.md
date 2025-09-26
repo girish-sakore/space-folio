@@ -43,7 +43,7 @@ This guide walks you through setting up Google Analytics 4 (GA4) for the Space-F
 
 3. **Set up Web Data Stream**:
    - Choose "Web" platform
-   - Website URL: https://proximacloud.com
+   - Website URL: https://proximacloud.in
    - Stream name: "Proxima Cloud Website"
    - Enhanced measurement: **Enable all options**
 

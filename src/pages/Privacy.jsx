@@ -8,7 +8,7 @@ const Privacy = () => {
   const privacySchema = getWebPageSchema(
     "Privacy Policy",
     "Your privacy is important to us. This policy explains how we collect, use, and protect your information.",
-    "https://proximacloud.com/privacy"
+    "https://proximacloud.in/privacy"
   );
 
   return (
@@ -114,8 +114,8 @@ const Privacy = () => {
               </p>
               <div className="mt-4 p-4 bg-slate-700 rounded-lg">
                 <p className="text-white font-semibold">Proxima Centauri Cloud Solutions (OPC) Pvt. Ltd.</p>
-                <p className="text-slate-300">Email: privacy@proximacloud.com</p>
-                <p className="text-slate-300">Phone: +91-98765-43210</p>
+                <p className="text-slate-300">Email: privacy@proximacloud.in</p>
+                <p className="text-slate-300">Phone: +91-77987-29845</p>
               </div>
             </section>
           </div>

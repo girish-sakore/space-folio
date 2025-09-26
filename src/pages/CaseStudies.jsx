@@ -91,7 +91,7 @@ const CaseStudies = () => {
   const pageSchema = getWebPageSchema(
     "Case Studies - Success Stories",
     "Explore detailed case studies showcasing our successful cloud migrations, web development projects, and digital transformations.",
-    "https://proximacloud.com/case-studies"
+    "https://proximacloud.in/case-studies"
   );
 
   return (

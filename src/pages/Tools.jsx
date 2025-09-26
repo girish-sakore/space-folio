@@ -12,7 +12,7 @@ const Tools = () => {
   const pageSchema = getWebPageSchema(
     "ProximaCloud Tools - Free Productivity Tools & Utilities",
     "Discover our collection of free, powerful tools designed to boost your productivity. From file sharing to development utilities, all tools are free to use.",
-    "https://proximacloud.com/tools"
+    "https://proximacloud.in/tools"
   );
 
   const tools = [

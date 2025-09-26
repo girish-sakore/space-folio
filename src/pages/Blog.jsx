@@ -57,7 +57,7 @@ const Blog = () => {
   const pageSchema = getWebPageSchema(
     "Blog & Insights - ProximaCloud",
     "Stay updated with the latest insights on cloud computing, software development, security, and technology trends from our expert team.",
-    "https://proximacloud.com/blog"
+    "https://proximacloud.in/blog"
   );
 
   // Load more posts handler

@@ -8,7 +8,7 @@ const Terms = () => {
   const termsSchema = getWebPageSchema(
     "Terms of Service",
     "Please read these terms and conditions carefully before using our services.",
-    "https://proximacloud.com/terms"
+    "https://proximacloud.in/terms"
   );
 
   return (
@@ -160,8 +160,8 @@ const Terms = () => {
               </p>
               <div className="mt-4 p-4 bg-slate-700 rounded-lg">
                 <p className="text-white font-semibold">Proxima Centauri Cloud Solutions (OPC) Pvt. Ltd.</p>
-                <p className="text-slate-300">Email: legal@proximacloud.com</p>
-                <p className="text-slate-300">Phone: +91-98765-43210</p>
+                <p className="text-slate-300">Email: legal@proximacloud.in</p>
+                <p className="text-slate-300">Phone: +91-77987-29845</p>
               </div>
             </section>
           </div>

@@ -34,7 +34,7 @@ const Services = () => {
   const pageSchema = getWebPageSchema(
     "Our Services - Cloud & Web Development Solutions",
     "Comprehensive cloud and development solutions including migration, web apps, mobile development, security, and DevOps automation.",
-    "https://proximacloud.com/services"
+    "https://proximacloud.in/services"
   );
 
   const combinedSchema = {

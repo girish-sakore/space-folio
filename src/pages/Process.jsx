@@ -176,7 +176,7 @@ const Process = () => {
   const pageSchema = getWebPageSchema(
     "Our Development Process - How We Work",
     "Discover our proven 5-phase development methodology from discovery to ongoing support. Transparent, agile, and results-focused approach.",
-    "https://proximacloud.com/process"
+    "https://proximacloud.in/process"
   );
 
   return (
