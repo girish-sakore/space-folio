@@ -1,14 +1,14 @@
 import React from 'react';
 
-const SimplePDFEstimate = React.forwardRef(({ 
-  selectedServices, 
-  services, 
-  projectComplexity, 
-  timeline, 
-  supportLevel, 
-  totalPrice, 
-  complexityMultipliers, 
-  timelineMultipliers, 
+const SimplePDFEstimate = React.forwardRef(({
+  selectedServices,
+  services,
+  projectComplexity,
+  timeline,
+  supportLevel,
+  totalPrice,
+  complexityMultipliers,
+  timelineMultipliers,
   supportLevels,
   getSelectedServicesFeatures,
   estimateId,
@@ -168,7 +168,7 @@ const SimplePDFEstimate = React.forwardRef(({
             {selectedServices.map((serviceId, index) => {
               const service = services.find(s => s.id === serviceId);
               const adjustedPrice = service.basePrice * service.complexity[projectComplexity];
-              
+
               return (
                 <tr key={serviceId} style={{ backgroundColor: index % 2 === 0 ? 'white' : '#f9fafb' }}>
                   <td style={styles.tableCell}>
@@ -222,10 +222,10 @@ const SimplePDFEstimate = React.forwardRef(({
             <span>Support Level ({supportLevels[supportLevel]?.label}):</span>
             <span style={{ fontWeight: 'bold' }}>+${supportLevels[supportLevel]?.price}/month</span>
           </div>
-          <div style={{ 
-            borderTop: '2px solid #e5e7eb', 
-            paddingTop: '15px', 
-            display: 'flex', 
+          <div style={{
+            borderTop: '2px solid #e5e7eb',
+            paddingTop: '15px',
+            display: 'flex',
             justifyContent: 'space-between',
             fontSize: '18px',
             fontWeight: 'bold'
@@ -281,7 +281,7 @@ const SimplePDFEstimate = React.forwardRef(({
           <div>
             <h4 style={{ fontWeight: 'bold', marginBottom: '10px', fontSize: '14px' }}>Contact Information</h4>
             <div style={{ fontSize: '12px', color: '#6b7280' }}>
-              <div style={{ marginBottom: '5px' }}>📧 connect.proximacloud@gmail.com</div>
+              <div style={{ marginBottom: '5px' }}>📧 info@proximacloud.in</div>
               <div style={{ marginBottom: '5px' }}>📞 +91-77987-29845</div>
               <div style={{ marginBottom: '5px' }}>🏢 Ramtek, Nagpur, India</div>
               <div>🌐 proximacloud.com</div>

@@ -1,17 +1,17 @@
 import React from 'react';
 
-const PrintableEstimate = React.forwardRef(({ 
-  selectedServices, 
-  services, 
-  projectComplexity, 
-  timeline, 
-  supportLevel, 
-  totalPrice, 
-  complexityMultipliers, 
-  timelineMultipliers, 
+const PrintableEstimate = React.forwardRef(({
+  selectedServices,
+  services,
+  projectComplexity,
+  timeline,
+  supportLevel,
+  totalPrice,
+  complexityMultipliers,
+  timelineMultipliers,
   supportLevels,
   getSelectedServicesFeatures,
-  estimateId 
+  estimateId
 }, ref) => {
   const currentDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -20,7 +20,7 @@ const PrintableEstimate = React.forwardRef(({
   });
 
   return (
-    <div 
+    <div
       ref={ref}
       style={{
         backgroundColor: 'white',
@@ -88,7 +88,7 @@ const PrintableEstimate = React.forwardRef(({
           </span>
           Project Overview
         </h2>
-        
+
         <div className="grid grid-cols-3 gap-4 mb-4">
           <div className="bg-gray-50 rounded-lg p-3">
             <div className="text-xs text-gray-600 mb-1">Complexity Level</div>
@@ -99,7 +99,7 @@ const PrintableEstimate = React.forwardRef(({
               {complexityMultipliers[projectComplexity]?.description}
             </div>
           </div>
-          
+
           <div className="bg-gray-50 rounded-lg p-3">
             <div className="text-xs text-gray-600 mb-1">Timeline</div>
             <div className="font-semibold text-gray-900 text-sm">
@@ -109,7 +109,7 @@ const PrintableEstimate = React.forwardRef(({
               {timelineMultipliers[timeline]?.description}
             </div>
           </div>
-          
+
           <div className="bg-gray-50 rounded-lg p-3">
             <div className="text-xs text-gray-600 mb-1">Support Level</div>
             <div className="font-semibold text-gray-900 text-sm">
@@ -130,7 +130,7 @@ const PrintableEstimate = React.forwardRef(({
           </span>
           Services Breakdown
         </h2>
-        
+
         <div className="border border-gray-200 rounded-lg overflow-hidden">
           <div className="bg-gray-50 px-4 py-2 border-b border-gray-200">
             <div className="grid grid-cols-4 gap-4 font-semibold text-gray-900 text-sm">
@@ -140,11 +140,11 @@ const PrintableEstimate = React.forwardRef(({
               <div className="text-right">Total</div>
             </div>
           </div>
-          
+
           {selectedServices.map((serviceId, index) => {
             const service = services.find(s => s.id === serviceId);
             const adjustedPrice = service.basePrice * service.complexity[projectComplexity];
-            
+
             return (
               <div key={serviceId} className={`px-4 py-3 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                 <div className="grid grid-cols-4 gap-4 items-center text-sm">
@@ -178,7 +178,7 @@ const PrintableEstimate = React.forwardRef(({
           </span>
           Features Included
         </h2>
-        
+
         <div className="grid grid-cols-2 gap-3">
           {getSelectedServicesFeatures().map((feature, index) => (
             <div key={index} className="flex items-center">
@@ -199,7 +199,7 @@ const PrintableEstimate = React.forwardRef(({
           </span>
           Price Calculation
         </h2>
-        
+
         <div className="bg-gray-50 rounded-lg p-4">
           <div className="space-y-2 text-sm">
             {/* Service Subtotal */}
@@ -212,7 +212,7 @@ const PrintableEstimate = React.forwardRef(({
                 }, 0).toLocaleString()}
               </span>
             </div>
-            
+
             {/* Timeline Adjustment */}
             <div className="flex justify-between">
               <span className="text-gray-700">
@@ -222,7 +222,7 @@ const PrintableEstimate = React.forwardRef(({
                 ×{timelineMultipliers[timeline]?.multiplier}
               </span>
             </div>
-            
+
             {/* Support Adjustment */}
             <div className="flex justify-between">
               <span className="text-gray-700">
@@ -232,9 +232,9 @@ const PrintableEstimate = React.forwardRef(({
                 +${supportLevels[supportLevel]?.price}/month
               </span>
             </div>
-            
+
             <hr className="border-gray-300 my-3" />
-            
+
             {/* Total */}
             <div className="flex justify-between text-lg font-bold">
               <span className="text-gray-900">Total Project Cost:</span>
@@ -252,7 +252,7 @@ const PrintableEstimate = React.forwardRef(({
           </span>
           Terms & Conditions
         </h2>
-        
+
         <div className="bg-gray-50 rounded-lg p-4">
           <div className="grid grid-cols-2 gap-6 text-xs">
             <div>
@@ -263,7 +263,7 @@ const PrintableEstimate = React.forwardRef(({
                 <li>• Scope changes may affect final cost</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Payment Terms</h4>
               <ul className="text-gray-700 space-y-1">
@@ -272,7 +272,7 @@ const PrintableEstimate = React.forwardRef(({
                 <li>• Final 20% upon project completion</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">What's Included</h4>
               <ul className="text-gray-700 space-y-1">
@@ -281,7 +281,7 @@ const PrintableEstimate = React.forwardRef(({
                 <li>• Documentation & training</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Support & Warranty</h4>
               <ul className="text-gray-700 space-y-1">
@@ -300,13 +300,13 @@ const PrintableEstimate = React.forwardRef(({
           <div>
             <h4 className="font-semibold text-gray-900 mb-2 text-sm">Contact Information</h4>
             <div className="text-xs text-gray-600 space-y-1">
-              <div>📧 connect.proximacloud@gmail.com</div>
+              <div>📧 info@proximacloud.in</div>
               <div>📞 +91-77987-29845</div>
               <div>🏢 Ramtek, Nagpur, India</div>
               <div>🌐 proximacloud.com</div>
             </div>
           </div>
-          
+
           <div className="text-right">
             <div className="bg-teal-50 border border-teal-200 rounded-lg p-3">
               <div className="font-semibold text-teal-600 mb-1 text-sm">Ready to Get Started?</div>

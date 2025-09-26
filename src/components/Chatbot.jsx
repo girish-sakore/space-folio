@@ -34,7 +34,7 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(false);               // Bot typing indicator
   const [unreadCount, setUnreadCount] = useState(0);             // Unread message counter
   const [hasShownProactiveMessage, setHasShownProactiveMessage] = useState(false); // Proactive engagement tracker
-  
+
   // Refs for DOM manipulation
   const messagesEndRef = useRef(null);                           // Auto-scroll target
   const inputRef = useRef(null);                                 // Input focus management
@@ -61,11 +61,11 @@ const Chatbot = () => {
       inputRef.current?.focus();
     }
   }, [isOpen]);
-  
+
   // Proactive engagement - show helpful message after 45 seconds of inactivity
   useEffect(() => {
     let proactiveTimer;
-    
+
     if (!hasShownProactiveMessage && messages.length === 1) {
       proactiveTimer = setTimeout(() => {
         const proactiveMessage = {
@@ -75,16 +75,16 @@ const Chatbot = () => {
           suggestions: ['📞 Quick 15-Min Call', '📧 Email My Idea', '🚀 Browse Services', '💬 Yes, Let\'s Chat'],
           timestamp: new Date()
         };
-        
+
         setMessages(prev => [...prev, proactiveMessage]);
         setHasShownProactiveMessage(true);
-        
+
         if (!isOpen) {
           setUnreadCount(prev => prev + 1);
         }
       }, 45000); // 45 seconds
     }
-    
+
     return () => {
       if (proactiveTimer) clearTimeout(proactiveTimer);
     };
@@ -100,7 +100,7 @@ const Chatbot = () => {
    */
   const getBotResponse = (userMessage) => {
     const message = userMessage.toLowerCase();
-    
+
     // Lead capture - first priority
     if (message.includes('interested') || message.includes('quote') || message.includes('price') || message.includes('cost')) {
       return {
@@ -109,7 +109,7 @@ const Chatbot = () => {
         isLeadCapture: true
       };
     }
-    
+
     // Service inquiries - focus on benefits and CTA
     if (message.includes('service') || message.includes('what do you do') || message.includes('help')) {
       return {
@@ -117,7 +117,7 @@ const Chatbot = () => {
         suggestions: ['💰 Get Pricing', '📞 Book Free Call', '📋 See Our Work', '💬 Tell Me About Your Project']
       };
     }
-    
+
     // Specific service interest - immediate lead capture focus
     if (message.includes('web') || message.includes('website') || message.includes('development')) {
       return {
@@ -125,29 +125,29 @@ const Chatbot = () => {
         suggestions: ['📞 Book Free Consultation', '✉️ Email Your Requirements', '📊 Quick Price Estimate', '👀 See Examples']
       };
     }
-    
+
     if (message.includes('mobile') || message.includes('app') || message.includes('ios') || message.includes('android')) {
       return {
         text: '📱 Mobile apps can transform your business!\n\n✅ **Our expertise:**\n• Native iOS & Android\n• Cross-platform solutions\n• App Store optimization\n• Starting from $8,000\n\n🚀 **Ready to start?** Most successful apps begin with a strategy session.',
         suggestions: ['📞 Strategy Call', '✉️ Share Your App Idea', '💰 Get App Quote', '📱 See App Examples']
       };
     }
-    
+
     if (message.includes('cloud') || message.includes('aws') || message.includes('azure') || message.includes('migration')) {
       return {
         text: '☁️ Smart choice! Cloud migration can cut costs by 40%.\n\n✅ **Our track record:**\n• 30+ successful migrations\n• AWS & Azure certified\n• Zero downtime migrations\n• Starting from $5,000\n\n🎯 **Free cloud assessment available!** Let\'s analyze your current setup.',
         suggestions: ['📊 Free Cloud Assessment', '📞 Migration Strategy Call', '💰 Get Migration Quote', '📈 ROI Calculator']
       };
     }
-    
+
     // Contact intent - immediate connection
     if (message.includes('contact') || message.includes('call') || message.includes('email') || message.includes('reach')) {
       return {
-        text: '📞 **Ready to connect? Here are the fastest ways:**\n\n🚀 **Immediate:** Call +91-77987-29845\n📧 **24-hour response:** connect.proximacloud@gmail.com\n📅 **Book directly:** Schedule a free consultation\n\n⏰ **We\'re online:** Mon-Fri, 9 AM - 6 PM IST\n\n💡 **Pro tip:** Calls get faster responses!',
+        text: '📞 **Ready to connect? Here are the fastest ways:**\n\n🚀 **Immediate:** Call +91-77987-29845\n📧 **24-hour response:** info@proximacloud.in\n📅 **Book directly:** Schedule a free consultation\n\n⏰ **We\'re online:** Mon-Fri, 9 AM - 6 PM IST\n\n💡 **Pro tip:** Calls get faster responses!',
         suggestions: ['📞 Call Now', '📧 Send Email', '📅 Schedule Meeting', '💬 Continue Chat']
       };
     }
-    
+
     // About/company - build trust quickly
     if (message.includes('about') || message.includes('company') || message.includes('who')) {
       return {
@@ -155,7 +155,7 @@ const Chatbot = () => {
         suggestions: ['🤝 Let\'s Partner Up', '📞 Meet Our Team', '📊 See Our Results', '💬 Discuss Your Goals']
       };
     }
-    
+
     // Pricing focus - always lead to consultation
     if (message.includes('pricing') || message.includes('cost') || message.includes('budget')) {
       return {
@@ -163,7 +163,7 @@ const Chatbot = () => {
         suggestions: ['📞 15-Min Pricing Call', '📧 Email Requirements', '📊 Pricing Calculator', '💡 Budget-Friendly Options']
       };
     }
-    
+
     // Greeting - immediate engagement
     if (message.includes('hello') || message.includes('hi') || message.includes('hey')) {
       return {
@@ -171,7 +171,7 @@ const Chatbot = () => {
         suggestions: ['💻 Need a Website', '📱 Want an App', '☁️ Move to Cloud', '📊 Data Analytics']
       };
     }
-    
+
     // Support/questions - guide to consultation
     if (message.includes('help') || message.includes('support') || message.includes('question')) {
       return {
@@ -179,7 +179,7 @@ const Chatbot = () => {
         suggestions: ['📞 Quick Consultation', '💬 Ask Your Question', '📧 Email Details', '🚀 Explore Solutions']
       };
     }
-    
+
     // Thank you - reinforce next steps
     if (message.includes('thank') || message.includes('thanks')) {
       return {
@@ -187,7 +187,7 @@ const Chatbot = () => {
         suggestions: ['📞 Let\'s Start Today', '💬 I Have More Questions', '📧 Send Requirements', '📊 Get Quick Quote']
       };
     }
-    
+
     // Default - always guide toward contact
     return {
       text: '🤔 **I want to give you the best answer!**\n\nTell me more about what you\'re working on, or let\'s jump on a quick call where I can understand your needs better.\n\n💡 **Most clients find a 15-minute chat more valuable than hours of reading.**',
@@ -202,31 +202,31 @@ const Chatbot = () => {
       window.open('tel:+917798729845', '_self');
       return true;
     }
-    
+
     if (actionText.includes('✉️') || actionText.includes('Email')) {
       // Email action
-      window.open('mailto:connect.proximacloud@gmail.com?subject=Project Inquiry from Website', '_blank');
+      window.open('mailto:info@proximacloud.in?subject=Project Inquiry from Website', '_blank');
       return true;
     }
-    
+
     if (actionText.includes('Calculator') || actionText.includes('📊')) {
       // Pricing calculator
       window.open('/pricing-calculator', '_blank');
       return true;
     }
-    
+
     if (actionText.includes('Quote') && !actionText.includes('Email')) {
       // Direct to contact page for quote
       window.open('/contact', '_blank');
       return true;
     }
-    
+
     return false;
   };
-  
+
   const handleSendMessage = async (text = inputValue) => {
     if (!text.trim()) return;
-    
+
     // Check if this is a lead action first
     if (handleLeadAction(text)) {
       // Add a bot response confirming the action
@@ -264,7 +264,7 @@ const Chatbot = () => {
 
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
-      
+
       if (!isOpen) {
         setUnreadCount(prev => prev + 1);
       }
@@ -279,22 +279,22 @@ const Chatbot = () => {
   };
 
   const formatTime = (date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
       minute: '2-digit',
-      hour12: true 
+      hour12: true
     });
   };
 
   const chatbotVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8, 
-      y: 20 
+    hidden: {
+      opacity: 0,
+      scale: 0.8,
+      y: 20
     },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
       transition: {
         type: "spring",
@@ -302,9 +302,9 @@ const Chatbot = () => {
         damping: 20
       }
     },
-    exit: { 
-      opacity: 0, 
-      scale: 0.8, 
+    exit: {
+      opacity: 0,
+      scale: 0.8,
       y: 20,
       transition: { duration: 0.2 }
     }
@@ -312,8 +312,8 @@ const Chatbot = () => {
 
   const messageVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 0.3 }
     }
@@ -363,7 +363,7 @@ const Chatbot = () => {
               </motion.span>
             )}
           </AnimatePresence>
-          
+
           {/* Unread Badge */}
           {unreadCount > 0 && (
             <motion.div
@@ -375,17 +375,17 @@ const Chatbot = () => {
               {unreadCount}
             </motion.div>
           )}
-          
+
           {/* Pulse Effect */}
           <motion.div
             className="absolute inset-0 rounded-full bg-teal-400"
-            animate={{ 
+            animate={{
               scale: [1, 1.4],
               opacity: [0.7, 0]
             }}
-            transition={{ 
-              duration: 2, 
-              repeat: Infinity 
+            transition={{
+              duration: 2,
+              repeat: Infinity
             }}
           />
         </motion.button>
@@ -427,15 +427,13 @@ const Chatbot = () => {
                   animate="visible"
                   className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${
-                    message.type === 'user'
+                  <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-2xl ${message.type === 'user'
                       ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white'
                       : 'bg-slate-700 text-slate-100'
-                  }`}>
-                    <p className="text-sm whitespace-pre-line">{message.text}</p>
-                    <p className={`text-xs mt-1 ${
-                      message.type === 'user' ? 'text-teal-100' : 'text-slate-400'
                     }`}>
+                    <p className="text-sm whitespace-pre-line">{message.text}</p>
+                    <p className={`text-xs mt-1 ${message.type === 'user' ? 'text-teal-100' : 'text-slate-400'
+                      }`}>
                       {formatTime(message.timestamp)}
                     </p>
                   </div>
@@ -455,11 +453,11 @@ const Chatbot = () => {
                         <motion.div
                           key={i}
                           className="w-2 h-2 bg-teal-400 rounded-full"
-                          animate={{ 
+                          animate={{
                             scale: [1, 1.5, 1],
                             opacity: [0.5, 1, 0.5]
                           }}
-                          transition={{ 
+                          transition={{
                             duration: 1,
                             repeat: Infinity,
                             delay: i * 0.2

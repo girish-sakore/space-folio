@@ -28,7 +28,7 @@ export const knowledgeBase = {
       benefits: ['Reduced operational costs', '99.9% uptime SLA', 'Automatic scaling', 'Enhanced security'],
       process: ['Infrastructure Assessment', 'Migration Planning', 'Data Transfer', 'Testing & Validation', 'Go-Live Support']
     },
-    
+
     'web development': {
       description: 'Modern, responsive web applications using cutting-edge technologies',
       pricing: 'Starting from $3,000 for basic websites, $8,000+ for complex applications',
@@ -36,7 +36,7 @@ export const knowledgeBase = {
       technologies: ['React', 'Next.js', 'Node.js', 'TypeScript', 'Tailwind CSS', 'MongoDB', 'PostgreSQL'],
       features: ['Mobile-first design', 'SEO optimization', 'Performance optimization', 'CMS integration', 'E-commerce capability']
     },
-    
+
     'mobile apps': {
       description: 'Native iOS and Android applications plus cross-platform solutions',
       pricing: 'Starting from $8,000 for basic apps, $15,000+ for complex applications',
@@ -44,7 +44,7 @@ export const knowledgeBase = {
       platforms: ['iOS (Swift)', 'Android (Kotlin)', 'React Native', 'Flutter'],
       services: ['UI/UX Design', 'Development', 'App Store Submission', 'Maintenance & Updates']
     },
-    
+
     'data analytics': {
       description: 'Business intelligence solutions and data-driven insights',
       pricing: 'Starting from $6,000 - custom pricing for enterprise solutions',
@@ -52,14 +52,14 @@ export const knowledgeBase = {
       capabilities: ['Real-time dashboards', 'Predictive analytics', 'Data warehousing', 'Custom reports', 'ML integration'],
       tools: ['Power BI', 'Tableau', 'Apache Spark', 'Python', 'R', 'SQL']
     },
-    
+
     'devops': {
       description: 'DevOps automation and infrastructure management',
       pricing: 'Starting from $4,000 for basic setups',
       services: ['CI/CD Pipeline Setup', 'Infrastructure as Code', 'Container Orchestration', 'Monitoring & Logging'],
       tools: ['Docker', 'Kubernetes', 'Jenkins', 'GitLab CI', 'Terraform', 'Ansible']
     },
-    
+
     'security': {
       description: 'Comprehensive cybersecurity assessments and implementations',
       pricing: 'Starting from $7,000 for security audits',
@@ -86,7 +86,7 @@ export const knowledgeBase = {
 
   // Contact Information
   contact: {
-    email: 'connect.proximacloud@gmail.com',
+    email: 'info@proximacloud.in',
     phone: '+91-77987-29845',
     website: 'proximacloud.com',
     business_hours: 'Monday-Friday, 9:00 AM - 6:00 PM IST',
@@ -156,13 +156,13 @@ export const knowledgeBase = {
 // Utility functions for the chatbot
 export const findServiceInfo = (serviceName) => {
   const service = serviceName.toLowerCase();
-  
+
   for (const [key, value] of Object.entries(knowledgeBase.services)) {
     if (service.includes(key) || key.includes(service)) {
       return value;
     }
   }
-  
+
   return null;
 };
 
@@ -174,20 +174,20 @@ export const getRandomFAQ = () => {
 export const searchKnowledge = (query) => {
   const lowQuery = query.toLowerCase();
   const results = [];
-  
+
   // Search in services
   Object.entries(knowledgeBase.services).forEach(([key, service]) => {
     if (key.includes(lowQuery) || service.description.toLowerCase().includes(lowQuery)) {
       results.push({ type: 'service', key, data: service });
     }
   });
-  
+
   // Search in FAQ
   knowledgeBase.faq.forEach(faq => {
     if (faq.question.toLowerCase().includes(lowQuery) || faq.answer.toLowerCase().includes(lowQuery)) {
       results.push({ type: 'faq', data: faq });
     }
   });
-  
+
   return results;
 };

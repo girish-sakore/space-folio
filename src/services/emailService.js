@@ -56,7 +56,7 @@ class EmailService {
   // Original API method
   async sendViaAPI(formData) {
     const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in";
-    
+
     const response = await fetch(`${api_base_url}/fast/api/submit-contact/`, {
       method: "POST",
       headers: {
@@ -69,7 +69,7 @@ class EmailService {
       const result = await response.json();
       return { success: true, data: result };
     }
-    
+
     throw new Error(`API failed with status ${response.status}`);
   }
 
@@ -81,7 +81,7 @@ class EmailService {
       email: formData.email,
       subject: formData.subject || 'Contact Form Submission',
       message: formData.message,
-      to: 'crnonstopcorp@gmail.com'
+      to: 'info@proximacloud.in'
     };
 
     const response = await fetch('https://api.web3forms.com/submit', {
@@ -94,11 +94,11 @@ class EmailService {
     });
 
     const result = await response.json();
-    
+
     if (response.ok && result.success) {
       return { success: true, method: 'web3forms', data: result };
     }
-    
+
     throw new Error(`Web3Forms failed: ${result.message || 'Unknown error'}`);
   }
 
@@ -116,14 +116,14 @@ ${formData.message}
 ---
 Sent via Contact Form
     `);
-    
-    const mailtoLink = `mailto:crnonstopcorp@gmail.com?subject=${subject}&body=${body}`;
-    
+
+    const mailtoLink = `mailto:info@proximacloud.in?subject=${subject}&body=${body}`;
+
     // Open mailto link
     window.location.href = mailtoLink;
-    
-    return { 
-      success: true, 
+
+    return {
+      success: true,
       method: 'mailto',
       message: 'Email client opened. Please send the email from your email application.'
     };
@@ -155,7 +155,7 @@ Sent via Contact Form
     });
 
     document.body.appendChild(formElement);
-    
+
     try {
       const response = await fetch('/', {
         method: 'POST',

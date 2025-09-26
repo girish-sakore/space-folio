@@ -1,16 +1,16 @@
 import React from 'react';
 
-const EstimatePDF = ({ 
-  selectedServices, 
-  services, 
-  projectComplexity, 
-  timeline, 
-  supportLevel, 
-  totalPrice, 
-  complexityMultipliers, 
-  timelineMultipliers, 
+const EstimatePDF = ({
+  selectedServices,
+  services,
+  projectComplexity,
+  timeline,
+  supportLevel,
+  totalPrice,
+  complexityMultipliers,
+  timelineMultipliers,
   supportLevels,
-  getSelectedServicesFeatures 
+  getSelectedServicesFeatures
 }) => {
   const currentDate = new Date().toLocaleDateString('en-US', {
     year: 'numeric',
@@ -21,8 +21,8 @@ const EstimatePDF = ({
   const estimateId = `EST-${Date.now().toString().slice(-6)}`;
 
   return (
-    <div 
-      id="pdf-estimate" 
+    <div
+      id="pdf-estimate"
       className="bg-white text-gray-900 min-h-screen"
       style={{
         fontFamily: 'system-ui, -apple-system, sans-serif',
@@ -62,7 +62,7 @@ const EstimatePDF = ({
           </span>
           Project Overview
         </h2>
-        
+
         <div className="grid grid-cols-3 gap-6 mb-6">
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600 mb-1">Complexity Level</div>
@@ -73,7 +73,7 @@ const EstimatePDF = ({
               {complexityMultipliers[projectComplexity]?.description}
             </div>
           </div>
-          
+
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600 mb-1">Timeline</div>
             <div className="font-semibold text-gray-900">
@@ -83,7 +83,7 @@ const EstimatePDF = ({
               {timelineMultipliers[timeline]?.description}
             </div>
           </div>
-          
+
           <div className="bg-gray-50 rounded-lg p-4">
             <div className="text-sm text-gray-600 mb-1">Support Level</div>
             <div className="font-semibold text-gray-900">
@@ -104,7 +104,7 @@ const EstimatePDF = ({
           </span>
           Services Breakdown
         </h2>
-        
+
         <div className="border border-gray-200 rounded-lg overflow-hidden">
           <div className="bg-gray-50 px-6 py-3 border-b border-gray-200">
             <div className="grid grid-cols-4 gap-4 font-semibold text-gray-900">
@@ -114,11 +114,11 @@ const EstimatePDF = ({
               <div className="text-right">Total</div>
             </div>
           </div>
-          
+
           {selectedServices.map((serviceId, index) => {
             const service = services.find(s => s.id === serviceId);
             const adjustedPrice = service.basePrice * service.complexity[projectComplexity];
-            
+
             return (
               <div key={serviceId} className={`px-6 py-4 ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                 <div className="grid grid-cols-4 gap-4 items-center">
@@ -152,7 +152,7 @@ const EstimatePDF = ({
           </span>
           Features Included
         </h2>
-        
+
         <div className="grid grid-cols-2 gap-4">
           {getSelectedServicesFeatures().map((feature, index) => (
             <div key={index} className="flex items-center">
@@ -173,7 +173,7 @@ const EstimatePDF = ({
           </span>
           Price Calculation
         </h2>
-        
+
         <div className="bg-gray-50 rounded-lg p-6">
           <div className="space-y-3">
             {/* Service Subtotal */}
@@ -186,7 +186,7 @@ const EstimatePDF = ({
                 }, 0).toLocaleString()}
               </span>
             </div>
-            
+
             {/* Timeline Adjustment */}
             <div className="flex justify-between">
               <span className="text-gray-700">
@@ -196,7 +196,7 @@ const EstimatePDF = ({
                 ×{timelineMultipliers[timeline]?.multiplier}
               </span>
             </div>
-            
+
             {/* Support Adjustment */}
             <div className="flex justify-between">
               <span className="text-gray-700">
@@ -206,9 +206,9 @@ const EstimatePDF = ({
                 +${supportLevels[supportLevel]?.price}/month
               </span>
             </div>
-            
+
             <hr className="border-gray-300" />
-            
+
             {/* Total */}
             <div className="flex justify-between text-xl font-bold">
               <span className="text-gray-900">Total Project Cost:</span>
@@ -226,7 +226,7 @@ const EstimatePDF = ({
           </span>
           Terms & Conditions
         </h2>
-        
+
         <div className="bg-gray-50 rounded-lg p-6">
           <div className="grid grid-cols-2 gap-8 text-sm">
             <div>
@@ -237,7 +237,7 @@ const EstimatePDF = ({
                 <li>• Scope changes may affect final cost</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Payment Terms</h4>
               <ul className="text-gray-700 space-y-1">
@@ -246,7 +246,7 @@ const EstimatePDF = ({
                 <li>• Final 20% upon project completion</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">What's Included</h4>
               <ul className="text-gray-700 space-y-1">
@@ -255,7 +255,7 @@ const EstimatePDF = ({
                 <li>• Documentation & training</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="font-semibold text-gray-900 mb-2">Support & Warranty</h4>
               <ul className="text-gray-700 space-y-1">
@@ -274,13 +274,13 @@ const EstimatePDF = ({
           <div>
             <h4 className="font-semibold text-gray-900 mb-3">Contact Information</h4>
             <div className="text-sm text-gray-600 space-y-1">
-              <div>📧 connect.proximacloud@gmail.com</div>
+              <div>📧 info@proximacloud.in</div>
               <div>📞 +91-77987-29845</div>
               <div>🏢 Ramtek, Nagpur, India</div>
               <div>🌐 proximacloud.com</div>
             </div>
           </div>
-          
+
           <div className="text-right">
             <div className="bg-teal-50 border border-teal-200 rounded-lg p-4">
               <div className="font-semibold text-teal-600 mb-2">Ready to Get Started?</div>

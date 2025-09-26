@@ -23,29 +23,29 @@ export default function InteractiveContactForm() {
     // Step 1: Project Type
     projectType: '',
     projectDescription: '',
-    
+
     // Step 2: Budget & Timeline
     budget: '',
     timeline: '',
     priority: '',
-    
+
     // Step 3: Technical Requirements
     platforms: [],
     features: [],
     integrations: [],
-    
+
     // Step 4: Business Details
     businessType: '',
     teamSize: '',
     currentSolution: '',
-    
+
     // Step 5: Contact Information
     name: '',
     email: '',
     phone: '',
     company: '',
     message: '',
-    
+
     // Technical fields
     honeypot: '',
     captcha: '',
@@ -61,7 +61,7 @@ export default function InteractiveContactForm() {
   // Services mapping from pricing page
   const servicesMap = {
     'cloud-migration': 'Cloud Migration',
-    'web-development': 'Web Development', 
+    'web-development': 'Web Development',
     'mobile-app': 'Mobile App Development',
     'data-analytics': 'Data Analytics',
     'devops': 'DevOps & Automation',
@@ -72,16 +72,16 @@ export default function InteractiveContactForm() {
   useEffect(() => {
     if (location.state) {
       const { services, estimate } = location.state;
-      
+
       if (services && services.length > 0) {
         // Auto-switch to simple form for pricing page users
         setUseSimpleForm(true);
-        
+
         // Generate message from pricing selections
-        const selectedServiceNames = services.map(serviceId => 
+        const selectedServiceNames = services.map(serviceId =>
           servicesMap[serviceId] || serviceId
         );
-        
+
         const pricingMessage = `Hi, I'm interested in getting a detailed quote for the following services:
 
 💰 Estimated Budget: $${estimate ? estimate.toLocaleString() : 'Custom'}
@@ -98,7 +98,7 @@ Please provide:
 • Next steps to get started
 
 I'm ready to move forward with this project. Looking forward to hearing from you!`;
-        
+
         // Pre-fill form data
         setFormData(prev => ({
           ...prev,
@@ -161,7 +161,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
     },
     {
       id: 4,
-      title: "Business Details", 
+      title: "Business Details",
       description: "Tell us about your business and current situation",
       icon: <BusinessIcon />
     },
@@ -242,44 +242,53 @@ I'm ready to move forward with this project. Looking forward to hearing from you
   // Generate message from selections
   const generateMessageFromSelections = () => {
     let message = "Hi, I'm interested in your services. Here are the details:\n\n";
-    
+
     if (formData.projectType) {
       const selectedType = projectTypes.find(type => type.id === formData.projectType);
       message += `Project Type: ${selectedType?.name || formData.projectType}\n`;
     }
-    
+
     if (formData.projectDescription) {
       message += `Description: ${formData.projectDescription}\n`;
     }
-    
+
     if (formData.budget) {
       const selectedBudget = budgetRanges.find(range => range.id === formData.budget);
       message += `Budget: ${selectedBudget?.name || formData.budget}\n`;
     }
-    
+
     if (formData.timeline) {
       const selectedTimeline = timelineOptions.find(option => option.id === formData.timeline);
       message += `Timeline: ${selectedTimeline?.name || formData.timeline}\n`;
     }
-    
+
+    if (formData.priority) {
+      const selectedPriority = priorityLevels.find(option => option.id === formData.priority);
+      message += `Priority: ${selectedPriority?.name || formData.priority}\n`;
+    }
+
     if (formData.platforms.length > 0) {
       message += `Platforms: ${formData.platforms.join(', ')}\n`;
     }
-    
+
     if (formData.features.length > 0) {
       message += `Required Features: ${formData.features.join(', ')}\n`;
     }
-    
+
     if (formData.integrations.length > 0) {
       message += `Integrations Needed: ${formData.integrations.join(', ')}\n`;
     }
-    
+
     if (formData.businessType) {
       message += `Business Type: ${formData.businessType}\n`;
     }
-    
+
     if (formData.teamSize) {
       message += `Team Size: ${formData.teamSize}\n`;
+    }
+
+    if (formData.currentSolution) {
+      message += `Current Solution: ${formData.currentSolution}\n`;
     }
 
     if (formData.message) {
@@ -326,9 +335,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <input
-                className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${
-                  errors.name ? "border-red-500" : "border-slate-600"
-                } focus:outline-none focus:border-teal-500 transition-colors`}
+                className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${errors.name ? "border-red-500" : "border-slate-600"
+                  } focus:outline-none focus:border-teal-500 transition-colors`}
                 placeholder="Your Name *"
                 type="text"
                 value={formData.name}
@@ -341,9 +349,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
 
             <div>
               <input
-                className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${
-                  errors.email ? "border-red-500" : "border-slate-600"
-                } focus:outline-none focus:border-teal-500 transition-colors`}
+                className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${errors.email ? "border-red-500" : "border-slate-600"
+                  } focus:outline-none focus:border-teal-500 transition-colors`}
                 placeholder="Your Email *"
                 type="email"
                 value={formData.email}
@@ -387,9 +394,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
               Security Check: {captchaQuestion.question}
             </label>
             <input
-              className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${
-                errors.captcha ? "border-red-500" : "border-slate-600"
-              } focus:outline-none focus:border-teal-500 transition-colors`}
+              className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${errors.captcha ? "border-red-500" : "border-slate-600"
+                } focus:outline-none focus:border-teal-500 transition-colors`}
               placeholder="Enter your answer"
               type="number"
               value={formData.captcha}
@@ -414,14 +420,13 @@ I'm ready to move forward with this project. Looking forward to hearing from you
             >
               ← Back to Detailed Form
             </motion.button>
-            
+
             <motion.button
               type="button"
-              className={`flex-1 px-8 py-3 rounded-lg font-semibold transition-all ${
-                isSubmitting
+              className={`flex-1 px-8 py-3 rounded-lg font-semibold transition-all ${isSubmitting
                   ? "bg-slate-600 text-slate-400 cursor-not-allowed"
                   : "bg-teal-600 hover:bg-teal-700 text-white"
-              }`}
+                }`}
               onClick={handleSimpleSubmit}
               disabled={isSubmitting}
               whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
@@ -441,7 +446,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       [field]: value,
       generatedMessage: generateMessageFromSelections()
     }));
-    
+
     // Clear error when user makes selection
     if (errors[field]) {
       setErrors(prev => ({
@@ -457,7 +462,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       const newArray = currentArray.includes(value)
         ? currentArray.filter(item => item !== value)
         : [...currentArray, value];
-      
+
       return {
         ...prev,
         [field]: newArray
@@ -467,7 +472,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
 
   const validateStep = (stepIndex) => {
     const newErrors = {};
-    
+
     switch (stepIndex) {
       case 0:
         if (!formData.projectType) {
@@ -510,18 +515,18 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       default:
         break;
     }
-    
+
     return newErrors;
   };
 
   const nextStep = () => {
     const stepErrors = validateStep(currentStep);
-    
+
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       return;
     }
-    
+
     setErrors({});
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
@@ -536,14 +541,14 @@ I'm ready to move forward with this project. Looking forward to hearing from you
 
   const handleSubmit = async () => {
     const stepErrors = validateStep(currentStep);
-    
+
     if (Object.keys(stepErrors).length > 0) {
       setErrors(stepErrors);
       return;
     }
 
     setIsSubmitting(true);
-    
+
     // Prepare final form data for submission
     const finalFormData = {
       name: formData.name,
@@ -552,8 +557,6 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       message: generateMessageFromSelections(),
       honeypot: formData.honeypot,
       captcha: formData.captcha,
-      // Add development override
-      dev_email_override: "crnonstopcorp@gmail.com"
     };
 
     const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in";
@@ -564,7 +567,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
     try {
       // For development, check if we're in dev mode and API is not available
       const isDevelopment = import.meta.env.DEV;
-      
+
       const response = await fetch(`${api_base_url}/fast/api/submit-contact/`, {
         method: "POST",
         headers: {
@@ -585,12 +588,12 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       }
     } catch (error) {
       console.error('❌ Network error:', error);
-      
+
       // Try alternative email service
       try {
         console.log('🔄 Trying alternative email service...');
         const emailResult = await emailService.sendEmail(finalFormData);
-        
+
         if (emailResult.success) {
           console.log(`✓ Email sent successfully via ${emailResult.method}`);
           if (emailResult.method === 'mailto') {
@@ -602,8 +605,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
         }
       } catch (emailError) {
         console.error('❌ All email methods failed:', emailError);
-        setErrors({ 
-          submit: "Unable to send message. Please contact us directly at crnonstopcorp@gmail.com" 
+        setErrors({
+          submit: "Unable to send message. Please contact us directly at info@proximacloud.in"
         });
       }
     } finally {
@@ -627,7 +630,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
 
   const validateSimpleForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
@@ -646,20 +649,20 @@ I'm ready to move forward with this project. Looking forward to hearing from you
     } else if (parseInt(formData.captcha) !== captchaQuestion.answer) {
       newErrors.captcha = 'Incorrect answer';
     }
-    
+
     return newErrors;
   };
 
   const handleSimpleSubmit = async () => {
     const simpleErrors = validateSimpleForm();
-    
+
     if (Object.keys(simpleErrors).length > 0) {
       setErrors(simpleErrors);
       return;
     }
 
     setIsSubmitting(true);
-    
+
     // Prepare simple form data for submission
     const finalFormData = {
       name: formData.name,
@@ -668,8 +671,6 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       message: formData.message,
       honeypot: formData.honeypot,
       captcha: formData.captcha,
-      // Add development override
-      dev_email_override: "crnonstopcorp@gmail.com",
       form_type: "simple"
     };
 
@@ -699,12 +700,12 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       }
     } catch (error) {
       console.error('❌ Network error:', error);
-      
+
       // Try alternative email service
       try {
         console.log('🔄 Trying alternative email service...');
         const emailResult = await emailService.sendEmail(finalFormData);
-        
+
         if (emailResult.success) {
           console.log(`✓ Email sent successfully via ${emailResult.method}`);
           if (emailResult.method === 'mailto') {
@@ -716,8 +717,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
         }
       } catch (emailError) {
         console.error('❌ All email methods failed:', emailError);
-        setErrors({ 
-          submit: "Unable to send message. Please contact us directly at crnonstopcorp@gmail.com" 
+        setErrors({
+          submit: "Unable to send message. Please contact us directly at info@proximacloud.in"
         });
       }
     } finally {
@@ -735,11 +736,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                 <motion.button
                   key={type.id}
                   type="button"
-                  className={`p-6 rounded-xl border-2 text-left transition-all ${
-                    formData.projectType === type.id
+                  className={`p-6 rounded-xl border-2 text-left transition-all ${formData.projectType === type.id
                       ? 'border-teal-500 bg-teal-500/10'
                       : 'border-slate-600 hover:border-slate-500'
-                  }`}
+                    }`}
                   onClick={() => updateFormData('projectType', type.id)}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -755,7 +755,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
             {errors.projectType && (
               <p className="text-red-400 text-sm">{errors.projectType}</p>
             )}
-            
+
             <div>
               <label className="block text-white mb-2">Project Description (Optional)</label>
               <textarea
@@ -779,11 +779,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                   <motion.button
                     key={budget.id}
                     type="button"
-                    className={`p-4 rounded-lg border text-left transition-all ${
-                      formData.budget === budget.id
+                    className={`p-4 rounded-lg border text-left transition-all ${formData.budget === budget.id
                         ? 'border-teal-500 bg-teal-500/10'
                         : 'border-slate-600 hover:border-slate-500'
-                    }`}
+                      }`}
                     onClick={() => updateFormData('budget', budget.id)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -805,11 +804,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                   <motion.button
                     key={timeline.id}
                     type="button"
-                    className={`p-4 rounded-lg border text-left transition-all ${
-                      formData.timeline === timeline.id
+                    className={`p-4 rounded-lg border text-left transition-all ${formData.timeline === timeline.id
                         ? 'border-teal-500 bg-teal-500/10'
                         : 'border-slate-600 hover:border-slate-500'
-                    }`}
+                      }`}
                     onClick={() => updateFormData('timeline', timeline.id)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -831,11 +829,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                   <motion.button
                     key={priority.id}
                     type="button"
-                    className={`p-4 rounded-lg border text-left transition-all ${
-                      formData.priority === priority.id
+                    className={`p-4 rounded-lg border text-left transition-all ${formData.priority === priority.id
                         ? 'border-teal-500 bg-teal-500/10'
                         : 'border-slate-600 hover:border-slate-500'
-                    }`}
+                      }`}
                     onClick={() => updateFormData('priority', priority.id)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -859,11 +856,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                   <motion.button
                     key={platform.id}
                     type="button"
-                    className={`p-4 rounded-lg border text-left transition-all ${
-                      formData.platforms.includes(platform.id)
+                    className={`p-4 rounded-lg border text-left transition-all ${formData.platforms.includes(platform.id)
                         ? 'border-teal-500 bg-teal-500/10'
                         : 'border-slate-600 hover:border-slate-500'
-                    }`}
+                      }`}
                     onClick={() => toggleArrayField('platforms', platform.id)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -890,11 +886,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                   <motion.button
                     key={feature}
                     type="button"
-                    className={`p-3 rounded-lg border text-left transition-all ${
-                      formData.features.includes(feature)
+                    className={`p-3 rounded-lg border text-left transition-all ${formData.features.includes(feature)
                         ? 'border-teal-500 bg-teal-500/10'
                         : 'border-slate-600 hover:border-slate-500'
-                    }`}
+                      }`}
                     onClick={() => toggleArrayField('features', feature)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -917,11 +912,10 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                   <motion.button
                     key={integration}
                     type="button"
-                    className={`p-3 rounded-lg border text-left transition-all ${
-                      formData.integrations.includes(integration)
+                    className={`p-3 rounded-lg border text-left transition-all ${formData.integrations.includes(integration)
                         ? 'border-teal-500 bg-teal-500/10'
                         : 'border-slate-600 hover:border-slate-500'
-                    }`}
+                      }`}
                     onClick={() => toggleArrayField('integrations', integration)}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -1009,9 +1003,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <input
-                  className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${
-                    errors.name ? "border-red-500" : "border-slate-600"
-                  } focus:outline-none focus:border-teal-500 transition-colors`}
+                  className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${errors.name ? "border-red-500" : "border-slate-600"
+                    } focus:outline-none focus:border-teal-500 transition-colors`}
                   placeholder="Your Full Name *"
                   type="text"
                   value={formData.name}
@@ -1024,9 +1017,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
 
               <div>
                 <input
-                  className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${
-                    errors.email ? "border-red-500" : "border-slate-600"
-                  } focus:outline-none focus:border-teal-500 transition-colors`}
+                  className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${errors.email ? "border-red-500" : "border-slate-600"
+                    } focus:outline-none focus:border-teal-500 transition-colors`}
                   placeholder="Your Email Address *"
                   type="email"
                   value={formData.email}
@@ -1076,9 +1068,8 @@ I'm ready to move forward with this project. Looking forward to hearing from you
                 Security Check: {captchaQuestion.question}
               </label>
               <input
-                className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${
-                  errors.captcha ? "border-red-500" : "border-slate-600"
-                } focus:outline-none focus:border-teal-500 transition-colors`}
+                className={`w-full px-4 py-3 bg-slate-900 text-white rounded-lg border ${errors.captcha ? "border-red-500" : "border-slate-600"
+                  } focus:outline-none focus:border-teal-500 transition-colors`}
                 placeholder="Enter your answer"
                 type="number"
                 value={formData.captcha}
@@ -1119,203 +1110,199 @@ I'm ready to move forward with this project. Looking forward to hearing from you
           <SuccessAnimation onComplete={handleSuccessComplete} />
         )}
       </AnimatePresence>
-      
-    <section className="py-20" id="contact">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          {location.state?.services ? (
-            <>
-              <h2 className="text-4xl font-bold text-white mb-4">
-                Get Your <span className="gradient-text">Detailed Quote</span>
-              </h2>
-              <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-4">
-                Great! You've selected services worth <span className="text-teal-400 font-semibold">${location.state.estimate?.toLocaleString()}</span>
-              </p>
-              <p className="text-slate-500 max-w-2xl mx-auto mb-8">
-                We've pre-filled the form with your selections. Just add your contact details and we'll send you a comprehensive proposal within 24 hours.
-              </p>
-            </>
-          ) : (
-            <>
-              <h2 className="text-4xl font-bold text-white mb-4">Let's Build Something Amazing</h2>
-              <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
-                Tell us about your project and we'll provide you with a customized proposal and timeline.
-              </p>
-            </>
-          )}
-          
-          {/* Form Choice - Only show when NOT coming from pricing */}
-          {!location.state?.services && (
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <div className="text-slate-400 text-sm">Choose your preferred way:</div>
-              <div className="flex gap-3">
-                <motion.button
-                  className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-medium transition-all"
-                  onClick={() => setUseSimpleForm(false)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  🧿 Detailed Wizard
-                </motion.button>
-                <motion.button
-                  className="px-6 py-2 border border-slate-500 text-slate-300 hover:border-slate-400 hover:text-white rounded-lg font-medium transition-all"
-                  onClick={() => setUseSimpleForm(true)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  ⚡ Quick Contact
-                </motion.button>
-              </div>
-            </div>
-          )}
-        </div>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Conditional Form Rendering */}
-          {useSimpleForm ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {renderSimpleForm()}
-            </motion.div>
-          ) : (
-            <>
-          {/* Progress Indicator */}
-          <div className="mb-12">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="text-white font-semibold">
-                Step {currentStep + 1} of {steps.length}: {steps[currentStep].title}
-              </h3>
-              <div className="flex items-center gap-4">
-                <button
-                  type="button"
-                  className="text-slate-400 hover:text-slate-300 text-xs underline transition-colors"
-                  onClick={() => setUseSimpleForm(true)}
-                >
-                  Skip to Quick Form
-                </button>
-                <div className="text-slate-400 text-sm">
-                  {Math.round(((currentStep + 1) / steps.length) * 100)}% Complete
+      <section className="py-20" id="contact">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            {location.state?.services ? (
+              <>
+                <h2 className="text-4xl font-bold text-white mb-4">
+                  Get Your <span className="gradient-text">Detailed Quote</span>
+                </h2>
+                <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-4">
+                  Great! You've selected services worth <span className="text-teal-400 font-semibold">${location.state.estimate?.toLocaleString()}</span>
+                </p>
+                <p className="text-slate-500 max-w-2xl mx-auto mb-8">
+                  We've pre-filled the form with your selections. Just add your contact details and we'll send you a comprehensive proposal within 24 hours.
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-4xl font-bold text-white mb-4">Let's Build Something Amazing</h2>
+                <p className="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
+                  Tell us about your project and we'll provide you with a customized proposal and timeline.
+                </p>
+              </>
+            )}
+
+            {/* Form Choice - Only show when NOT coming from pricing */}
+            {!location.state?.services && (
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="text-slate-400 text-sm">Choose your preferred way:</div>
+                <div className="flex gap-3">
+                  <motion.button
+                    className="px-6 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-medium transition-all"
+                    onClick={() => setUseSimpleForm(false)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    🧿 Detailed Wizard
+                  </motion.button>
+                  <motion.button
+                    className="px-6 py-2 border border-slate-500 text-slate-300 hover:border-slate-400 hover:text-white rounded-lg font-medium transition-all"
+                    onClick={() => setUseSimpleForm(true)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    ⚡ Quick Contact
+                  </motion.button>
                 </div>
               </div>
-            </div>
-            
-            {/* Progress Bar */}
-            <div className="w-full bg-slate-700 rounded-full h-2 mb-8">
-              <motion.div
-                className="h-full rounded-full bg-gradient-to-r from-blue-500 via-teal-500 to-green-500"
-                initial={{ width: "0%" }}
-                animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-                transition={{ duration: 0.5 }}
-              />
-            </div>
+            )}
+          </div>
 
-            {/* Step Indicators */}
-            <div className="hidden md:flex justify-between">
-              {steps.map((step, index) => (
-                <div
-                  key={step.id}
-                  className={`flex flex-col items-center ${
-                    index <= currentStep ? 'text-teal-400' : 'text-slate-600'
-                  }`}
-                >
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${
-                      index <= currentStep ? 'bg-teal-500' : 'bg-slate-600'
-                    }`}
-                  >
-                    {index < currentStep ? (
-                      <CheckCircleIcon fontSize="small" />
+          <div className="max-w-4xl mx-auto">
+            {/* Conditional Form Rendering */}
+            {useSimpleForm ? (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {renderSimpleForm()}
+              </motion.div>
+            ) : (
+              <>
+                {/* Progress Indicator */}
+                <div className="mb-12">
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="text-white font-semibold">
+                      Step {currentStep + 1} of {steps.length}: {steps[currentStep].title}
+                    </h3>
+                    <div className="flex items-center gap-4">
+                      <button
+                        type="button"
+                        className="text-slate-400 hover:text-slate-300 text-xs underline transition-colors"
+                        onClick={() => setUseSimpleForm(true)}
+                      >
+                        Skip to Quick Form
+                      </button>
+                      <div className="text-slate-400 text-sm">
+                        {Math.round(((currentStep + 1) / steps.length) * 100)}% Complete
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="w-full bg-slate-700 rounded-full h-2 mb-8">
+                    <motion.div
+                      className="h-full rounded-full bg-gradient-to-r from-blue-500 via-teal-500 to-green-500"
+                      initial={{ width: "0%" }}
+                      animate={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                      transition={{ duration: 0.5 }}
+                    />
+                  </div>
+
+                  {/* Step Indicators */}
+                  <div className="hidden md:flex justify-between">
+                    {steps.map((step, index) => (
+                      <div
+                        key={step.id}
+                        className={`flex flex-col items-center ${index <= currentStep ? 'text-teal-400' : 'text-slate-600'
+                          }`}
+                      >
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center mb-2 ${index <= currentStep ? 'bg-teal-500' : 'bg-slate-600'
+                            }`}
+                        >
+                          {index < currentStep ? (
+                            <CheckCircleIcon fontSize="small" />
+                          ) : (
+                            <span className="text-sm font-semibold">{index + 1}</span>
+                          )}
+                        </div>
+                        <div className="text-xs text-center max-w-20">
+                          {step.title}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Form Content */}
+                <div className="bg-slate-800 p-8 rounded-lg shadow-lg border border-slate-700">
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold text-white mb-2">{steps[currentStep].title}</h3>
+                    <p className="text-slate-400">{steps[currentStep].description}</p>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={currentStep}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {renderStepContent()}
+                    </motion.div>
+                  </AnimatePresence>
+
+                  {/* Navigation Buttons */}
+                  <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-600">
+                    <motion.button
+                      type="button"
+                      className={`flex items-center gap-2 px-6 py-3 rounded-lg border transition-all ${currentStep === 0
+                          ? 'border-slate-700 text-slate-500 cursor-not-allowed'
+                          : 'border-slate-500 text-slate-300 hover:border-slate-400 hover:text-white'
+                        }`}
+                      onClick={prevStep}
+                      disabled={currentStep === 0}
+                      whileHover={{ scale: currentStep === 0 ? 1 : 1.05 }}
+                      whileTap={{ scale: currentStep === 0 ? 1 : 0.95 }}
+                    >
+                      <ArrowBackIcon />
+                      Previous
+                    </motion.button>
+
+                    <div className="text-slate-400 text-sm">
+                      {currentStep + 1} / {steps.length}
+                    </div>
+
+                    {currentStep === steps.length - 1 ? (
+                      <motion.button
+                        type="button"
+                        className={`flex items-center gap-2 px-8 py-3 rounded-lg font-semibold transition-all ${isSubmitting
+                            ? "bg-slate-600 text-slate-400 cursor-not-allowed"
+                            : "bg-teal-600 hover:bg-teal-700 text-white"
+                          }`}
+                        onClick={handleSubmit}
+                        disabled={isSubmitting}
+                        whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+                        whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+                      >
+                        {isSubmitting ? "Sending..." : "Send Project Details"}
+                        <ArrowForwardIcon />
+                      </motion.button>
                     ) : (
-                      <span className="text-sm font-semibold">{index + 1}</span>
+                      <motion.button
+                        type="button"
+                        className="flex items-center gap-2 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-all"
+                        onClick={nextStep}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                      >
+                        Next
+                        <ArrowForwardIcon />
+                      </motion.button>
                     )}
                   </div>
-                  <div className="text-xs text-center max-w-20">
-                    {step.title}
-                  </div>
                 </div>
-              ))}
-            </div>
+              </>
+            )}
           </div>
-
-          {/* Form Content */}
-          <div className="bg-slate-800 p-8 rounded-lg shadow-lg border border-slate-700">
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-white mb-2">{steps[currentStep].title}</h3>
-              <p className="text-slate-400">{steps[currentStep].description}</p>
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentStep}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                {renderStepContent()}
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Navigation Buttons */}
-            <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-600">
-              <motion.button
-                type="button"
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg border transition-all ${
-                  currentStep === 0
-                    ? 'border-slate-700 text-slate-500 cursor-not-allowed'
-                    : 'border-slate-500 text-slate-300 hover:border-slate-400 hover:text-white'
-                }`}
-                onClick={prevStep}
-                disabled={currentStep === 0}
-                whileHover={{ scale: currentStep === 0 ? 1 : 1.05 }}
-                whileTap={{ scale: currentStep === 0 ? 1 : 0.95 }}
-              >
-                <ArrowBackIcon />
-                Previous
-              </motion.button>
-
-              <div className="text-slate-400 text-sm">
-                {currentStep + 1} / {steps.length}
-              </div>
-
-              {currentStep === steps.length - 1 ? (
-                <motion.button
-                  type="button"
-                  className={`flex items-center gap-2 px-8 py-3 rounded-lg font-semibold transition-all ${
-                    isSubmitting
-                      ? "bg-slate-600 text-slate-400 cursor-not-allowed"
-                      : "bg-teal-600 hover:bg-teal-700 text-white"
-                  }`}
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
-                  whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-                >
-                  {isSubmitting ? "Sending..." : "Send Project Details"}
-                  <ArrowForwardIcon />
-                </motion.button>
-              ) : (
-                <motion.button
-                  type="button"
-                  className="flex items-center gap-2 px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-lg font-semibold transition-all"
-                  onClick={nextStep}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Next
-                  <ArrowForwardIcon />
-                </motion.button>
-              )}
-            </div>
-          </div>
-            </>
-          )}
         </div>
-      </div>
-    </section>
+      </section>
     </>
   );
 }

@@ -62,10 +62,10 @@ const Contact = () => {
                 <div className="font-semibold text-white mb-2">Email</div>
                 <div className="text-slate-300">
                   <a
-                    href="mailto:connect.proximacloud@gmail.com"
+                    href="mailto:info@proximacloud.in"
                     className="hover:text-teal-400 transition-colors"
                   >
-                    connect.proximacloud@gmail.com
+                    info@proximacloud.in
                   </a>
                 </div>
               </div>
