@@ -90,7 +90,7 @@ const BlogPost = ({ onTagClick }) => {
 
       {/* Blog Content */}
       <div
-        className="prose prose-invert max-w-3xl mb-12"
+        className="prose prose-invert max-w-6xl mb-12"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 
