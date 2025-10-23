@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import longLogo from '../assets/Proxima_Cloud_6-CSK-uDlf.png';
 import SEO from '../components/SEO';
 import { getAboutPageSchema } from '../utils/structuredData';
 import { getLocalBusinessSchema, getProfessionalServiceSchema } from '../utils/localBusinessSchema';
-import teamMembers from '../data/teamMembers';
+import { fetchFromCloud } from '../utils/cloudClient';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import GroupIcon from '@mui/icons-material/Group';
 import PublicIcon from '@mui/icons-material/Public';
@@ -20,6 +20,23 @@ import EmailIcon from '@mui/icons-material/Email';
 import StarIcon from '@mui/icons-material/Star';
 
 const About = () => {
+  const [teamMembers, setTeamMembers] = useState([]);
+
+  useEffect(() => {
+    async function loadTeam() {
+      try {
+        const data = await fetchFromCloud('teamMembers.json');
+        console.log("team members data:", data);
+        setTeamMembers(data);
+        console.log("team members state:", teamMembers);
+      } catch (error) {
+        console.error('Failed to load team members:', error);
+      }
+    }
+
+    loadTeam();
+  }, [teamMembers]);
+
   const values = [
     {
       icon: <LightbulbIcon className="text-4xl text-teal-400" />,
@@ -188,100 +205,104 @@ const About = () => {
             </p>
           </div>
           <div className="grid lg:grid-cols-2 gap-8">
-            {teamMembers.map((member) => (
-              <div key={member.id} className="card p-8 relative overflow-hidden">
-                <div className="relative z-10">
-                  {/* Avatar */}
-                  <div className="relative mb-6 flex justify-center">
-                    <img
-                      src={member.avatar}
-                      alt={member.name}
-                      className="w-24 h-24 rounded-full object-cover border-2 border-teal-400"
-                    />
-                  </div>
-
-                  {/* Rating Stars */}
-                  <div className="flex justify-center gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <StarIcon
-                        key={i}
-                        className={`text-yellow-500 ${i < Math.floor(member.rating) ? '' : 'opacity-30'}`}
-                        fontSize="small"
+            { Array.isArray(teamMembers) && teamMembers.length > 0 ? (
+              teamMembers.map((member) => (
+                <div key={member.id} className="card p-8 relative overflow-hidden">
+                  <div className="relative z-10">
+                    {/* Avatar */}
+                    <div className="relative mb-6 flex justify-center">
+                      <img
+                        src={member.avatar}
+                        alt={member.name}
+                        className="w-24 h-24 rounded-full object-cover border-2 border-teal-400"
                       />
-                    ))}
-                    <span className="text-slate-400 text-sm ml-1">{member.rating}</span>
-                  </div>
-
-                  {/* Basic Info */}
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                    <p className="text-teal-400 mb-3">{member.role}</p>
-                    <p className="text-slate-400 text-sm">{member.bio}</p>
-                  </div>
-
-                  {/* Quick Stats */}
-                  <div className="grid grid-cols-2 gap-4 mb-6 text-center">
-                    <div>
-                      <div className="text-white font-bold text-lg">{member.experience}</div>
-                      <div className="text-slate-400 text-xs">Experience</div>
                     </div>
-                    <div>
-                      <div className="text-white font-bold text-lg">{member.projects}+</div>
-                      <div className="text-slate-400 text-xs">Projects</div>
+  
+                    {/* Rating Stars */}
+                    <div className="flex justify-center gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <StarIcon
+                          key={i}
+                          className={`text-yellow-500 ${i < Math.floor(member.rating) ? '' : 'opacity-30'}`}
+                          fontSize="small"
+                        />
+                      ))}
+                      <span className="text-slate-400 text-sm ml-1">{member.rating}</span>
                     </div>
-                  </div>
-
-                  {/* Specialties */}
-                  <div className="mb-6 flex flex-wrap gap-1 justify-center">
-                    {member.specialties.map((specialty, idx) => (
-                      <span key={idx} className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">
-                        {specialty}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Social Links */}
-                  <div className="flex justify-center gap-3">
-                    {member.social.linkedin && (
+  
+                    {/* Basic Info */}
+                    <div className="text-center mb-6">
+                      <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
+                      <p className="text-teal-400 mb-3">{member.role}</p>
+                      <p className="text-slate-400 text-sm">{member.bio}</p>
+                    </div>
+  
+                    {/* Quick Stats */}
+                    <div className="grid grid-cols-2 gap-4 mb-6 text-center">
+                      <div>
+                        <div className="text-white font-bold text-lg">{member.experience}</div>
+                        <div className="text-slate-400 text-xs">Experience</div>
+                      </div>
+                      <div>
+                        <div className="text-white font-bold text-lg">{member.projects}+</div>
+                        <div className="text-slate-400 text-xs">Projects</div>
+                      </div>
+                    </div>
+  
+                    {/* Specialties */}
+                    <div className="mb-6 flex flex-wrap gap-1 justify-center">
+                      {member.specialties.map((specialty, idx) => (
+                        <span key={idx} className="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">
+                          {specialty}
+                        </span>
+                      ))}
+                    </div>
+  
+                    {/* Social Links */}
+                    <div className="flex justify-center gap-3">
+                      {member.social.linkedin && (
+                        <a
+                          href={member.social.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-slate-400 hover:text-blue-400 transition-colors"
+                        >
+                          <LinkedInIcon fontSize="small" />
+                        </a>
+                      )}
+                      {member.social.twitter && (
+                        <a
+                          href={member.social.twitter}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-slate-400 hover:text-blue-300 transition-colors"
+                        >
+                          <TwitterIcon fontSize="small" />
+                        </a>
+                      )}
+                      {member.social.github && (
+                        <a
+                          href={member.social.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-slate-400 hover:text-white transition-colors"
+                        >
+                          <GitHubIcon fontSize="small" />
+                        </a>
+                      )}
                       <a
-                        href={member.social.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-400 transition-colors"
+                        href={`mailto:${member.social.email}`}
+                        className="text-slate-400 hover:text-teal-400 transition-colors"
                       >
-                        <LinkedInIcon fontSize="small" />
+                        <EmailIcon fontSize="small" />
                       </a>
-                    )}
-                    {member.social.twitter && (
-                      <a
-                        href={member.social.twitter}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-blue-300 transition-colors"
-                      >
-                        <TwitterIcon fontSize="small" />
-                      </a>
-                    )}
-                    {member.social.github && (
-                      <a
-                        href={member.social.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-slate-400 hover:text-white transition-colors"
-                      >
-                        <GitHubIcon fontSize="small" />
-                      </a>
-                    )}
-                    <a
-                      href={`mailto:${member.social.email}`}
-                      className="text-slate-400 hover:text-teal-400 transition-colors"
-                    >
-                      <EmailIcon fontSize="small" />
-                    </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-slate-400 text-center col-span-2">Loading team members...</p>
+            )}
           </div>
         </div>
 

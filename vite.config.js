@@ -81,5 +81,14 @@ export default defineConfig({
   // Enable compression
   server: {
     compression: true,
+    // only for devlopement testing with Nextcloud
+    proxy: {
+      '/nextcloud': {
+        target: 'https://cloud.proximacloud.in',
+        changeOrigin: true,
+        secure: false,
+        rewrite: path => path.replace(/^\/nextcloud/, ''),
+      },
+    },
   },
 })
