@@ -559,7 +559,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       captcha: formData.captcha,
     };
 
-    const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in";
+    const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in/fast/api";
 
     console.log('📝 Submitting form data:', finalFormData);
     console.log('🌐 API URL:', api_base_url);
@@ -568,7 +568,7 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       // For development, check if we're in dev mode and API is not available
       const isDevelopment = import.meta.env.DEV;
 
-      const response = await fetch(`${api_base_url}/fast/api/submit-contact/`, {
+      const response = await fetch(`${api_base_url}/submit-contact/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -674,13 +674,13 @@ I'm ready to move forward with this project. Looking forward to hearing from you
       form_type: "simple"
     };
 
-    const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in";
+    const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in/fast/api";
 
     console.log('📝 Submitting simple form data:', finalFormData);
     console.log('🌐 API URL:', api_base_url);
 
     try {
-      const response = await fetch(`${api_base_url}/fast/api/submit-contact/`, {
+      const response = await fetch(`${api_base_url}/submit-contact/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

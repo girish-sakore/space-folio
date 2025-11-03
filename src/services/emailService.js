@@ -55,9 +55,9 @@ class EmailService {
 
   // Original API method
   async sendViaAPI(formData) {
-    const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in";
+    const api_base_url = import.meta.env.VITE_API_URL || "https://proximacloud.in/fast/api";
 
-    const response = await fetch(`${api_base_url}/fast/api/submit-contact/`, {
+    const response = await fetch(`${api_base_url}/submit-contact/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
