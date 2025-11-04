@@ -20,7 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
-    const isQrRef = urlParams.get("ref") === "qr";
+    const isQrRef = urlParams.get("ref") === "qr1";
     const hasSeenPopup = localStorage.getItem("qrPopupShown");
 
     if (isQrRef && !hasSeenPopup) {
