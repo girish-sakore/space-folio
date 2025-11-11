@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import { motion } from 'framer-motion';
 import Hero from "../components/Hero";
 import ProximaShareHero from "../components/ProximaShareHero";
@@ -12,8 +12,35 @@ import TestimonialsCarousel from "../components/TestimonialsCarousel";
 import { getWebSiteSchema, getOrganizationSchema } from "../utils/structuredData";
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import { fadeInVariants, slideUpVariants } from '../utils/animationVariants';
+import QrLandingPopup from "../components/QrLandingPopup";
+import trackQrVisit from "../services/trackQrVisit";
 
 const Home = () => {
+  const [isQrPopupOpen, setIsQrPopupOpen] = useState(false);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const isQrRef = urlParams.get("ref") === "qr1";
+    const hasSeenPopup = localStorage.getItem("qrPopupShown");
+
+    if (isQrRef && !hasSeenPopup) {
+      const data = {
+        source: "qr",
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        pagePath: window.location.pathname,
+      };
+
+      trackQrVisit(data);
+      setIsQrPopupOpen(true);
+    }
+  }, []);
+
+  const handleClosePopup = () => {
+    setIsQrPopupOpen(false);
+    localStorage.setItem("qrPopupShown", "true");
+  };
+
   const { ref: proximaShareRef, controls: proximaShareControls } = useScrollAnimation({ delay: 100 });
   const { ref: servicesRef, controls: servicesControls } = useScrollAnimation({ delay: 200 });
   const { ref: projectsRef, controls: projectsControls } = useScrollAnimation({ delay: 300 });
@@ -36,6 +63,7 @@ const Home = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
+      <QrLandingPopup isOpen={isQrPopupOpen} onClose={handleClosePopup} />
       <SEO 
         title=""
         description="Professional cloud migration, web development, mobile apps, and digital transformation services. Expert technology solutions for modern businesses."

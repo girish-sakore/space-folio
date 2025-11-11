@@ -7,7 +7,7 @@ export const useScrollAnimation = (options = {}) => {
   const {
     threshold = 0.1,
     triggerOnce = true,
-    margin = '-100px',
+    margin = '-50px',
     delay = 0
   } = options;
   
