@@ -34,5 +34,26 @@ pipeline {
         always {
             sh 'docker image prune -f'
         }
+
+        success {
+            // Only send if it was failing before (prevents spamming on every push)
+            fixed {
+                mail to: 'girish.sakore3@gmail.com',
+                     subject: "SUCCESS: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
+                     body: "Great news! The pipeline is back to normal. Check it out at: ${env.BUILD_URL}"
+            }
+        }
+
+        failure {
+            mail to: 'girish.sakore3@gmail.com',
+                 subject: "FAILED: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
+                 body: "Attention! The deployment failed. \n\nCheck the console output here: ${env.BUILD_URL}console"
+        }
+        
+        unstable {
+            mail to: 'girish.sakore3@gmail.com',
+                 subject: "UNSTABLE: Job '${env.JOB_NAME}' [${env.BUILD_NUMBER}]",
+                 body: "The build finished but some tests failed. Review logs: ${env.BUILD_URL}"
+        }
     }
 }
