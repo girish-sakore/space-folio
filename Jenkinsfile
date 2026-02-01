@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         APP_PATH = "/home/girish/spacefolio/space-folio"
-        SCANNER_HOME=tool 'sonar-scanner'
     }
 
     stages {
@@ -19,11 +18,9 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 script {
+                    def scannerHome = tool 'SonarScanner'
                     withSonarQubeEnv('sonar-server') {
-                        sh 'sonar-scanner \
-                            -Dsonar.projectKey=Spacefolio \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=https://share.proximacloud.in'
+                        sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
