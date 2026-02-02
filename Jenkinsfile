@@ -9,7 +9,7 @@ pipeline {
     stages {
 
         stage('Update Code') {
-            agent { label 'windows-pc' }
+            agent { label 'proxima' }
 
             steps {
                 dir("${env.APP_PATH}") {
@@ -20,7 +20,7 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            agent { label 'windows-pc' }
+            agent { label 'proxima' }
 
             steps {
                 script {
