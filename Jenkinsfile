@@ -2,7 +2,7 @@ pipeline {
     agent none
 
     environment {
-        IMAGE_NAME = "ghcr.io/girishsakore/spacefolio:${BUILD_NUMBER}"
+        IMAGE_NAME = "girishsakore3/spacefolio:${BUILD_NUMBER}"
     }
 
     stages {
@@ -29,26 +29,21 @@ pipeline {
                 checkout scm
 
                 withCredentials([usernamePassword(
-                    credentialsId: 'github-token',
-                    usernameVariable: 'GH_USER',
-                    passwordVariable: 'GH_TOKEN'
+                    credentialsId: 'dockerhub-creds',
+                    usernameVariable: 'DH_USER',
+                    passwordVariable: 'DH_PASS'
                 )]) {
 
-                    script {
-                        if (isUnix()) {
-                            sh '''
-                            echo $GH_TOKEN | docker login ghcr.io -u $GH_USER --password-stdin
-                            docker build -t $IMAGE_NAME .
-                            docker push $IMAGE_NAME
-                            '''
-                        } else {
-                            bat '''
-                            echo %GH_TOKEN% | docker login ghcr.io -u %GH_USER% --password-stdin
-                            docker build -t %IMAGE_NAME% .
-                            docker push %IMAGE_NAME%
-                            '''
-                        }
-                    }
+                    sh '''
+                    echo "Logging into Docker Hub..."
+                    echo $DH_PASS | docker login -u $DH_USER --password-stdin
+
+                    echo "Building image..."
+                    docker build -t $IMAGE_NAME .
+
+                    echo "Pushing image..."
+                    docker push $IMAGE_NAME
+                    '''
                 }
             }
         }
