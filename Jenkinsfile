@@ -25,14 +25,14 @@ pipeline {
         stage('Build & Push Image') {
             agent { label 'wsl-saber' }
 
+            checkout scm
             steps {
-                checkout scm
 
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-creds',
-                    usernameVariable: 'DH_USER',
-                    passwordVariable: 'DH_PASS'
-                )]) {
+                // withCredentials([usernamePassword(
+                //     credentialsId: 'dockerhub-creds',
+                //     usernameVariable: 'DH_USER',
+                //     passwordVariable: 'DH_PASS'
+                // )]) {
 
                     sh '''
                     echo "Logging into Docker Hub..."
@@ -44,7 +44,7 @@ pipeline {
                     echo "Pushing image..."
                     docker push $IMAGE_NAME
                     '''
-                }
+                // }
             }
         }
 
