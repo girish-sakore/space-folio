@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent node-saber
 
     environment {
         APP_PATH = "/home/girish/spacefolio/space-folio"
