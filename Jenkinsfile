@@ -1,12 +1,16 @@
 pipeline {
-    agent node-saber
+    agent none
 
     environment {
         APP_PATH = "/home/girish/spacefolio/space-folio"
+        IMAGE_NAME = "ghcr.io/girishsakore/spacefolio:latest"
     }
 
     stages {
+
         stage('Update Code') {
+            agent { label 'windows-pc' }
+
             steps {
                 dir("${env.APP_PATH}") {
                     echo 'Fetching latest code...'
@@ -16,6 +20,8 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
+            agent { label 'windows-pc' }
+
             steps {
                 script {
                     def scannerHome = tool 'SonarScanner'
@@ -26,21 +32,46 @@ pipeline {
             }
         }
 
-        stage('Build & Deploy') {
+        stage('Build & Push Image') {
+            agent { label 'windows-pc' }
+
             steps {
                 dir("${env.APP_PATH}") {
-                    echo 'Rebuilding and Restarting Containers...'
-                    sh 'docker compose up -d --build --remove-orphans'
+                    withCredentials([usernamePassword(
+                        credentialsId: 'github-token',
+                        usernameVariable: 'GH_USER',
+                        passwordVariable: 'GH_TOKEN'
+                    )]) {
+
+                        sh '''
+                        echo $GH_TOKEN | docker login ghcr.io -u $GH_USER --password-stdin
+                        docker build -t $IMAGE_NAME .
+                        docker push $IMAGE_NAME
+                        '''
+                    }
                 }
             }
         }
 
+        stage('Deploy on Server') {
+            agent { label 'proxima' }
+
+            steps {
+                sh '''
+                docker pull $IMAGE_NAME
+                docker compose up -d --remove-orphans
+                '''
+            }
+        }
+
         stage('Verify') {
+            agent { label 'proxima' }
             steps {
                 sh 'docker ps'
             }
         }
     }
+
     post {
         always {
             sh 'docker image prune -f'
