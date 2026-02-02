@@ -7,20 +7,20 @@ pipeline {
 
     stages {
 
-        stage('SonarQube Analysis') {
-            agent { label 'proxima' }
+        // stage('SonarQube Analysis') {
+        //     agent { label 'proxima' }
 
-            steps {
-                checkout scm
+        //     steps {
+        //         checkout scm
 
-                script {
-                    def scannerHome = tool 'SonarScanner'
-                    withSonarQubeEnv('sonar-server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
-            }
-        }
+        //         script {
+        //             def scannerHome = tool 'SonarScanner'
+        //             withSonarQubeEnv('sonar-server') {
+        //                 sh "${scannerHome}/bin/sonar-scanner"
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('Build & Push Image') {
             agent { label 'docker' }
@@ -74,6 +74,7 @@ pipeline {
 
     post {
         always {
+            agent { label 'proxima' }
             script {
                 if (isUnix()) {
                     sh 'docker image prune -f'
