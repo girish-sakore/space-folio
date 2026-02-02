@@ -28,12 +28,11 @@ pipeline {
             steps {
                 checkout scm
 
-                // withCredentials([usernamePassword(
-                //     credentialsId: 'dockerhub-creds',
-                //     usernameVariable: 'DH_USER',
-                //     passwordVariable: 'DH_PASS'
-                // )])
-                script {
+                withCredentials([usernamePassword(
+                    credentialsId: 'docker-token',
+                    usernameVariable: 'DH_USER',
+                    passwordVariable: 'DH_PASS'
+                )]) {
 
                     sh '''
                     echo "Logging into Docker Hub..."
