@@ -33,7 +33,7 @@ pipeline {
         }
 
         stage('Build & Push Image') {
-            agent { label 'windows-pc' }
+            agent { label 'docker' }
 
             steps {
                 dir("${env.APP_PATH}") {
@@ -42,12 +42,21 @@ pipeline {
                         usernameVariable: 'GH_USER',
                         passwordVariable: 'GH_TOKEN'
                     )]) {
-
-                        sh '''
-                        echo $GH_TOKEN | docker login ghcr.io -u $GH_USER --password-stdin
-                        docker build -t $IMAGE_NAME .
-                        docker push $IMAGE_NAME
-                        '''
+                        script {
+                            if (isUnix()) {
+                                sh '''
+                                echo $GH_TOKEN | docker login ghcr.io -u $GH_USER --password-stdin
+                                docker build -t $IMAGE_NAME .
+                                docker push $IMAGE_NAME
+                                '''
+                            } else {
+                                bat '''
+                                echo %GH_TOKEN% | docker login ghcr.io -u %GH_USER% --password-stdin
+                                docker build -t %IMAGE_NAME% .
+                                docker push %IMAGE_NAME%
+                                '''
+                            }
+                        }
                     }
                 }
             }
