@@ -23,7 +23,7 @@ pipeline {
         // }
 
         stage('Build & Push Image') {
-            agent { label 'docker' }
+            agent { label 'wsl-saber' }
 
             steps {
                 checkout scm
