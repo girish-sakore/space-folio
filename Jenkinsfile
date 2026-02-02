@@ -67,16 +67,16 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            agent { label 'proxima' }
-            script {
-                if (isUnix()) {
-                    sh 'docker image prune -f'
-                } else {
-                    bat 'docker image prune -f'
-                }
-            }
-        }
-    }
+    // post {
+    //     always {
+    //         agent { label 'proxima' }
+    //         script {
+    //             if (isUnix()) {
+    //                 sh 'docker image prune -f'
+    //             } else {
+    //                 bat 'docker image prune -f'
+    //             }
+    //         }
+    //     }
+    // }
 }
