@@ -7,23 +7,23 @@ pipeline {
 
     stages {
 
-        // stage('SonarQube Analysis') {
-        //     agent { label 'proxima' }
+        stage('SonarQube Analysis') {
+            agent { label 'proxima' }
 
-        //     steps {
-        //         checkout scm
+            steps {
+                checkout scm
 
-        //         script {
-        //             def scannerHome = tool 'SonarScanner'
-        //             withSonarQubeEnv('sonar-server') {
-        //                 sh "${scannerHome}/bin/sonar-scanner"
-        //             }
-        //         }
-        //     }
-        // }
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    withSonarQubeEnv('sonar-server') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
 
         stage('Build & Push Image') {
-            agent { label 'wsl-saber' }
+            // agent { label 'wsl-saber' }
 
             steps {
                 checkout scm
@@ -49,7 +49,7 @@ pipeline {
         }
 
         stage('Deploy on Server') {
-            agent { label 'proxima' }
+            // agent { label 'proxima' }
 
             steps {
                 sh '''
@@ -67,16 +67,16 @@ pipeline {
         }
     }
 
-    // post {
-    //     always {
-    //         agent { label 'proxima' }
-    //         script {
-    //             if (isUnix()) {
-    //                 sh 'docker image prune -f'
-    //             } else {
-    //                 bat 'docker image prune -f'
-    //             }
-    //         }
-    //     }
-    // }
+    post {
+        always {
+            // agent { label 'proxima' }
+            script {
+                if (isUnix()) {
+                    sh 'docker image prune -f'
+                } else {
+                    bat 'docker image prune -f'
+                }
+            }
+        }
+    }
 }
