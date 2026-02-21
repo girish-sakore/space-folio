@@ -1,8 +1,8 @@
 services:
   vite:
     build: .
-    image: vite-app:latest
-    container_name: vite-app
+    image: spacefolio:latest
+    container_name: spacefolio-vite-nginx-app
     ports:
       - "3001:80"
     restart: always
