@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
 
     environment {
         IMAGE_NAME = "girishsakore3/spacefolio:${BUILD_NUMBER}"
@@ -8,17 +8,17 @@ pipeline {
     stages {
 
         stage('SonarQube Analysis') {
-            agent { label 'proxima' }
+            // agent { label 'proxima' }
 
             steps {
-                checkout scm
+                // checkout scm
 
-                script {
-                    def scannerHome = tool 'SonarScanner'
-                    withSonarQubeEnv('sonar-server') {
-                        sh "${scannerHome}/bin/sonar-scanner"
-                    }
-                }
+                // script {
+                //     def scannerHome = tool 'SonarScanner'
+                //     withSonarQubeEnv('sonar-server') {
+                //         sh "${scannerHome}/bin/sonar-scanner"
+                //     }
+                // }
             }
         }
 
@@ -60,7 +60,7 @@ pipeline {
         }
 
         stage('Verify') {
-            agent { label 'proxima' }
+            // agent { label 'proxima' }
             steps {
                 sh 'docker ps'
             }
