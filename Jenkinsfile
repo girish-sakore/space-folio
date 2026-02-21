@@ -39,6 +39,7 @@ pipeline {
                     echo "Logging into Docker Hub..."
                     echo $DH_PASS | docker login -u $DH_USER --password-stdin
 
+                    pwd
                     echo "Building image..."
                     docker build -t $IMAGE_NAME .
 
