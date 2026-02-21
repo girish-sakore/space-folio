@@ -40,7 +40,8 @@ pipeline {
                     echo $DH_PASS | docker login -u $DH_USER --password-stdin
 
                     pwd
-                    echo "Building image..."
+                    ls -la
+                    echo "==========Building image..."
                     docker build -t $IMAGE_NAME .
 
                     echo "Pushing image..."
