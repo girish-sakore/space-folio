@@ -19,6 +19,7 @@ pipeline {
                 //         sh "${scannerHome}/bin/sonar-scanner"
                 //     }
                 // }
+                script { echo "SonarQube analysis would run here."}
             }
         }
 
