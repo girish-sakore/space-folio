@@ -6,7 +6,7 @@ on:
       - gitops-upgrade
 
 jobs:
-  build-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,3 +25,16 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
           docker push ${{ secrets.DOCKER_USER }}/spacefolio:latest
+  
+  deploy:
+    needs: build-and-push
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl set image deployment/spacefolio spacefolio=${{ secrets.DOCKER_USER }}/spacefolio:latest
+          kubectl rollout status deployment/spacefolio
