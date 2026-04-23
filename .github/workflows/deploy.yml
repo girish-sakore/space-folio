@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - gitops-upgrade
+      - main
 
 jobs:
   build-and-push:
@@ -39,5 +40,6 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
+          kubectl annotate deployment proximacloud kubernetes.io/change-cause="Deploy image ${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }} (commit ${{ github.sha }})" --overwrite
           kubectl set image deployment/proximacloud proximacloud-container=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
           kubectl rollout status deployment/proximacloud
