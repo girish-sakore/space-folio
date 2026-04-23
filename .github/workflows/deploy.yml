@@ -39,5 +39,5 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/spacefolio proximacloud-container=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
-          kubectl rollout status deployment/spacefolio
+          kubectl set image deployment/proximacloud proximacloud-container=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
+          kubectl rollout status deployment/proximacloud
