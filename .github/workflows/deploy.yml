@@ -34,7 +34,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set KUBECONFIG
+        run: echo "KUBECONFIG=C:\Users\giris\.kube\proxima-config" >> $env:GITHUB_ENV
+
       - name: Deploy to Kubernetes
         run: |
-          kubectl set image deployment/spacefolio spacefolio=${{ secrets.DOCKER_USER }}/spacefolio:latest
+          kubectl set image deployment/spacefolio proximacloud-container=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
           kubectl rollout status deployment/spacefolio
