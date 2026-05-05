@@ -39,16 +39,16 @@ jobs:
         run: echo "KUBECONFIG=C:\Users\giris\.kube\proxima-config" >> $env:GITHUB_ENV
 
       - name: Deploy to Kubernetes
+        shell: bash
         run: |
-          kubectl annotate deployment proximacloud kubernetes.io/change-cause="Deploy image ${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }} (commit ${{ github.sha }})" --overwrite
-          
           CURRENT_IMAGE=$(kubectl get deployment proximacloud -o=jsonpath='{.spec.template.spec.containers[0].image}')
           NEW_IMAGE=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
-
+          
           echo "Current: $CURRENT_IMAGE"
           echo "New: $NEW_IMAGE"
-
+          
           if [ "$CURRENT_IMAGE" != "$NEW_IMAGE" ]; then
+            kubectl annotate deployment proximacloud kubernetes.io/change-cause="Deploy image ${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }} (commit ${{ github.sha }})" --overwrite
             kubectl set image deployment/proximacloud proximacloud-container=$NEW_IMAGE
             kubectl rollout status deployment/proximacloud
           else
