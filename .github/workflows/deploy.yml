@@ -41,5 +41,16 @@ jobs:
       - name: Deploy to Kubernetes
         run: |
           kubectl annotate deployment proximacloud kubernetes.io/change-cause="Deploy image ${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }} (commit ${{ github.sha }})" --overwrite
-          kubectl set image deployment/proximacloud proximacloud-container=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
-          kubectl rollout status deployment/proximacloud
+          
+          CURRENT_IMAGE=$(kubectl get deployment proximacloud -o=jsonpath='{.spec.template.spec.containers[0].image}')
+          NEW_IMAGE=${{ secrets.DOCKER_USER }}/spacefolio:${{ github.run_number }}
+
+          echo "Current: $CURRENT_IMAGE"
+          echo "New: $NEW_IMAGE"
+
+          if [ "$CURRENT_IMAGE" != "$NEW_IMAGE" ]; then
+            kubectl set image deployment/proximacloud proximacloud-container=$NEW_IMAGE
+            kubectl rollout status deployment/proximacloud
+          else
+            echo "Image unchanged, skipping deployment"
+          fi
