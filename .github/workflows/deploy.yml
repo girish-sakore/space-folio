@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Deploy on Proxima Cloud
 
 on:
   push:
@@ -32,8 +32,8 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      # - name: Checkout code
+      #   uses: actions/checkout@v3
 
       - name: Set KUBECONFIG
         run: echo "KUBECONFIG=C:\Users\giris\.kube\proxima-config" >> $env:GITHUB_ENV
