@@ -29,6 +29,8 @@ const Home = () => {
         timestamp: new Date().toISOString(),
         userAgent: navigator.userAgent,
         pagePath: window.location.pathname,
+        referrer: document.referrer || "Direct / Bookmark", 
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
       };
 
       trackQrVisit(data);
