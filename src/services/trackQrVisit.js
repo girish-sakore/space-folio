@@ -14,6 +14,11 @@ const trackQrVisit = async (data) => {
   }
 
   try {
+    if (!supabase) {
+      console.warn("Supabase is not configured. Skipping QR visit recording.");
+      return { success: false, message: "Supabase not configured" };
+    }
+
     // 2. Insert the enriched payload straight into Supabase
     const { error } = await supabase
       .from('qr_visits')

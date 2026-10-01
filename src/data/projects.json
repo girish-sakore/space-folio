@@ -49,7 +49,9 @@
       "Redux Toolkit",
       "Redux Persist",
       "React Hook Form",
-      "SWC"
+      "SWC",
+      "PHP",
+      "WordPress"
     ],
     "industries": [
       "Fintech",
@@ -58,6 +60,7 @@
       "E-commerce",
       "Social Media",
       "Entertainment",
+      "Publishing",
       "Real Estate",
       "Travel",
       "Food & Beverage",
@@ -647,6 +650,160 @@
       "complexity": "Complex",
       "teamSize": 1,
       "duration": "Ongoing"
+    },
+    {
+      "id": 14,
+      "title": "Loop Learn",
+      "slug": "the-loop-learn",
+      "description": "A gamified, bite-sized daily micro-learning web platform that replaces doomscrolling with 5-minute interactive trivia, timeline ordering, and visual recall games.",
+      "image": "/images/000032.png",
+      "link": "https://www.thelooplearn.com/",
+      "client": "Loop",
+      "startDate": "2024-01-01",
+      "endDate": "2024-10-01",
+      "status": "Completed",
+      "features": [
+        "Daily curated themes (from History to Science)",
+        "Interactive timeline sorting games",
+        "Visual recall and clue matching challenges",
+        "Tactile Neo-brutalist responsive UI",
+        "Real-time score & progress tracking",
+        "Friend Loops & social sharing mechanics",
+        "Expert-curated content without AI hallucination"
+      ],
+      "challenges": "Designing an engaging tactile game interface with snappy micro-interactions that feels playful yet educational, while keeping load times instant.",
+      "solutions": "Built with Next.js and Tailwind CSS with custom tactile button physics, dynamic category theming, and modular micro-learning game engines.",
+      "results": "Delivered an addictive, high-engagement educational experience that encourages daily repeat visits and replaces passive screen time with memorable facts.",
+      "technologies": [
+        "Next.js",
+        "React",
+        "Tailwind CSS",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "REST API"
+      ],
+      "industries": [
+        "Education",
+        "Entertainment",
+        "Gaming"
+      ],
+      "projectTypes": [
+        "Web Application",
+        "Learning Management System",
+        "Social Platform"
+      ],
+      "categories": [
+        "Full Stack",
+        "Frontend",
+        "UI/UX",
+        "Performance Optimization"
+      ],
+      "complexity": "Medium",
+      "teamSize": 3,
+      "duration": "6 months"
+    },
+    {
+      "id": 15,
+      "title": "Workstation WordPress Theme",
+      "slug": "workstation-wordpress-theme",
+      "description": "An open-source blog and magazine theme officially published on WordPress.org, featuring native Gutenberg Block Editor patterns, accessibility compliance, and editorial layouts.",
+      "image": "/images/234844.png",
+      "link": "https://wordpress.org/themes/workstation/",
+      "client": "WordPress.org / Open Source",
+      "startDate": "2024-03-01",
+      "endDate": "2024-07-29",
+      "status": "Completed",
+      "features": [
+        "Full Gutenberg Block Editor support",
+        "Pre-built Hero & 3-Column Block Patterns",
+        "Official WordPress Theme Review Team compliance",
+        "Accessibility-Ready & Keyboard navigation support",
+        "Translation-Ready with full internationalization (i18n)",
+        "Responsive, high-performance magazine layouts",
+        "Custom colors, custom logos & threaded comments"
+      ],
+      "challenges": "Meeting strict WordPress Theme Review Team standards for security, data escaping, nonces, and zero external framework bloat while providing modern magazine aesthetic.",
+      "solutions": "Architected clean PHP template hierarchy with native Block Patterns (`workstation/hero-section`, `workstation/three-columns`) and optimized CSS custom properties.",
+      "results": "Successfully approved and published on the official WordPress.org Theme Directory with 40+ active installations and ongoing community adoption.",
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "JavaScript",
+        "CSS3",
+        "HTML5"
+      ],
+      "industries": [
+        "Publishing",
+        "Education",
+        "Entertainment"
+      ],
+      "projectTypes": [
+        "Content Management System",
+        "UI/UX Design",
+        "Web Application"
+      ],
+      "categories": [
+        "Frontend",
+        "Full Stack",
+        "UI/UX",
+        "Performance Optimization"
+      ],
+      "complexity": "Medium",
+      "teamSize": 1,
+      "duration": "4 months"
+    },
+    {
+      "id": 16,
+      "title": "Atlasly Content Manager",
+      "slug": "atlasly-content-manager",
+      "description": "An open-source headless CMS engine plugin for WordPress that delivers schema-driven custom content types, native REST API, GraphQL endpoints, and webhook automations.",
+      "image": "/images/000032.png",
+      "link": "https://wordpress.org/plugins/atlasly-content-manager/",
+      "client": "WordPress.org / Open Source",
+      "startDate": "2024-05-01",
+      "endDate": "2024-09-01",
+      "status": "Completed",
+      "features": [
+        "Content Type Schema Builder with 20+ custom field types",
+        "High-performance REST API endpoints for all models & entries",
+        "Native GraphQL endpoint for decoupled querying",
+        "Automated Webhook triggers for CI/CD & microservices",
+        "Headless form submission capture and structured storage",
+        "Multi-format Data Import/Export (CSV, JSON, XML)",
+        "WordPress Multisite support & Media Library integration"
+      ],
+      "challenges": "Engineering a high-throughput, decoupled headless architecture inside WordPress core while maintaining sub-50ms API response times and robust database relationships.",
+      "solutions": "Built custom schema persistence tables, indexed API resolvers for GraphQL and REST, and added asynchronous event-driven webhook dispatchers.",
+      "results": "Published on official WordPress.org Plugin Directory with 470+ downloads, empowering developers to use WordPress as a modern headless backend.",
+      "technologies": [
+        "WordPress",
+        "PHP",
+        "GraphQL",
+        "REST API",
+        "JavaScript",
+        "MySQL"
+      ],
+      "industries": [
+        "Education",
+        "Publishing",
+        "Fintech",
+        "E-commerce"
+      ],
+      "projectTypes": [
+        "Content Management System",
+        "API Development",
+        "Web Application"
+      ],
+      "categories": [
+        "Backend",
+        "Full Stack",
+        "API Integration",
+        "Database"
+      ],
+      "complexity": "Complex",
+      "teamSize": 1,
+      "duration": "5 months"
     }
   ]
 }

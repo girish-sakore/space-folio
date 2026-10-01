@@ -6,6 +6,9 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import LaunchIcon from '@mui/icons-material/Launch';
 import BuildIcon from '@mui/icons-material/Build';
 import NewReleasesIcon from '@mui/icons-material/NewReleases';
+import AllInclusiveIcon from '@mui/icons-material/AllInclusive';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import StorageIcon from '@mui/icons-material/Storage';
 import { motion } from 'framer-motion';
 
 const Tools = () => {
@@ -17,14 +20,66 @@ const Tools = () => {
 
   const tools = [
     {
+      id: 'loop',
+      name: 'Loop',
+      tagline: 'Replace Doomscrolling with Learning',
+      description: 'A gamified, bite-sized daily learning platform that turns idle scrolling into 5-minute interactive knowledge sessions.',
+      icon: (
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-500 via-pink-500 to-amber-400 flex items-center justify-center shadow-lg shadow-purple-500/30">
+          <AllInclusiveIcon className="h-10 w-10 text-white" />
+        </div>
+      ),
+      features: ['Daily fresh themes', 'Interactive mini-games', 'Timeline sorting', 'Expert-crafted'],
+      status: 'Available',
+      isNew: true,
+      url: 'https://www.thelooplearn.com/',
+      category: 'EdTech & Gaming'
+    },
+    {
+      id: 'atlasly',
+      name: 'Atlasly CMS',
+      tagline: 'Headless Content Engine for WordPress',
+      description: 'Schema-driven custom content types, REST API, GraphQL endpoints, and webhook automations for modern headless web apps.',
+      icon: (
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 via-teal-600 to-cyan-700 flex items-center justify-center shadow-lg shadow-teal-500/30">
+          <StorageIcon className="h-10 w-10 text-white" />
+        </div>
+      ),
+      features: ['20+ Field Schema Builder', 'REST & GraphQL APIs', 'Webhook Triggers', 'Headless Form Capture'],
+      status: 'Available',
+      isNew: true,
+      url: 'https://wordpress.org/plugins/atlasly-content-manager/',
+      category: 'Headless CMS & APIs'
+    },
+    {
+      id: 'workstation',
+      name: 'Workstation Theme',
+      tagline: 'Modern WordPress Magazine Theme',
+      description: 'An open-source, lightweight WordPress theme with full Block Editor support, accessibility compliance, and editorial patterns.',
+      icon: (
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-700 flex items-center justify-center shadow-lg shadow-blue-500/30">
+          <AutoStoriesIcon className="h-10 w-10 text-white" />
+        </div>
+      ),
+      features: ['Block Editor (Gutenberg)', 'Accessibility Ready', 'Editorial Patterns', 'Translation Ready'],
+      status: 'Available',
+      isNew: false,
+      url: 'https://wordpress.org/themes/workstation/',
+      category: 'Open Source & CMS'
+    },
+    {
       id: 'proximashare',
       name: 'ProximaShare',
       tagline: 'Simple & Secure File Sharing',
       description: 'Upload and share files easily with secure, auto-expiring links. No registration required.',
-      icon: <CloudUploadIcon className="h-12 w-12 text-teal-400" />,
+      icon: (
+        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-teal-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-teal-500/30">
+          <CloudUploadIcon className="h-10 w-10 text-white" />
+        </div>
+      ),
       features: ['2MB file limit', '3-day expiry', 'No registration', 'Secure links'],
       status: 'Available',
-      isNew: true,
+      isNew: false,
       url: 'https://share.proximacloud.in/',
       internalLink: '/proximashare',
       category: 'File Management'
