@@ -17,10 +17,12 @@ export const generateSlug = (title) => {
  */
 export const loadProjects = () => {
   try {
-    const projects = (projectsData.projects || []).map(p => ({
-      ...p,
-      slug: p.slug || generateSlug(p.title)
-    }));
+    const projects = (projectsData.projects || [])
+      .sort((a, b) => b.id - a.id)
+      .map(p => ({
+        ...p,
+        slug: p.slug || generateSlug(p.title)
+      }));
     return {
       success: true,
       data: {
@@ -52,7 +54,7 @@ export const getFeaturedProjects = (count = 3) => {
     const sortedProjects = data.projects
       .filter(project => project.status === 'Completed')
       .sort((a, b) => new Date(b.endDate || b.startDate || 0) - new Date(a.endDate || a.startDate || 0));
-    
+
     return { success: true, data: sortedProjects.slice(0, count), error: null };
   } catch (error) {
     console.error('Error getting featured projects:', error);
@@ -68,14 +70,14 @@ const filterByTag = (projects, tags, tagKey) => {
     if (!Array.isArray(tags) || tags.length === 0) {
       return { success: true, data: projects, error: null };
     }
-    
-    const filtered = projects.filter(project => 
+
+    const filtered = projects.filter(project =>
       project[tagKey] && tags.some(tag => project[tagKey].includes(tag))
     );
     return { success: true, data: filtered, error: null };
   } catch (error) {
-     console.error(`Error filtering by ${tagKey}:`, error);
-     return { success: false, data: projects, error: error.message };
+    console.error(`Error filtering by ${tagKey}:`, error);
+    return { success: false, data: projects, error: error.message };
   }
 };
 
@@ -91,13 +93,13 @@ export const filterProjects = (projects, filters = {}) => {
       if (!result.success) return result;
       currentProjects = result.data;
     }
-    
+
     if (filters.industries?.length) {
       result = filterByTag(currentProjects, filters.industries, 'industries');
       if (!result.success) return result;
       currentProjects = result.data;
     }
-    
+
     if (filters.projectTypes?.length) {
       result = filterByTag(currentProjects, filters.projectTypes, 'projectTypes');
       if (!result.success) return result;
@@ -109,11 +111,11 @@ export const filterProjects = (projects, filters = {}) => {
       if (!result.success) return result;
       currentProjects = result.data;
     }
-    
+
     if (filters.complexity?.length) {
       currentProjects = currentProjects.filter(p => filters.complexity.includes(p.complexity));
     }
-    
+
     if (filters.status) {
       currentProjects = currentProjects.filter(p => p.status === filters.status);
     }
@@ -135,7 +137,7 @@ const getAllUniqueTags = (projects, tagKey) => {
       }
     });
     return { success: true, data: Array.from(tags).sort(), error: null };
-  } catch(error) {
+  } catch (error) {
     console.error(`Error getting unique tags for ${tagKey}:`, error);
     return { success: false, data: [], error: error.message };
   }
@@ -244,7 +246,7 @@ export const validateProject = (project) => {
   if (!project || typeof project !== 'object') {
     return { success: false, data: null, error: 'Project must be an object' };
   }
-  
+
   // Required fields
   const requiredFields = ['id', 'title', 'description', 'status'];
   requiredFields.forEach(field => {
@@ -262,7 +264,7 @@ export const validateProject = (project) => {
   if (project.id && (typeof project.id !== 'number' || project.id <= 0)) {
     errors.push('ID must be a positive number');
   }
-  
+
   // Validate arrays
   const arrayFields = ['technologies', 'industries', 'projectTypes', 'categories', 'features'];
   arrayFields.forEach(field => {
@@ -270,18 +272,18 @@ export const validateProject = (project) => {
       errors.push(`${field} must be an array`);
     }
   });
-  
+
   // Validate complexity
   if (project.complexity && !['Simple', 'Medium', 'Complex'].includes(project.complexity)) {
     errors.push('Complexity must be Simple, Medium, or Complex');
   }
-  
+
   // Validate status
   const validStatuses = ['Completed', 'In Progress', 'On Hold', 'Cancelled', 'Maintenance'];
   if (project.status && !validStatuses.includes(project.status)) {
     errors.push(`Status must be one of: ${validStatuses.join(', ')}`);
   }
-  
+
   // Validate dates
   if (project.startDate && isNaN(Date.parse(project.startDate))) {
     errors.push('Start date must be a valid date');
@@ -289,7 +291,7 @@ export const validateProject = (project) => {
   if (project.endDate && isNaN(Date.parse(project.endDate))) {
     errors.push('End date must be a valid date');
   }
-  
+
   // Validate team size
   if (project.teamSize && (typeof project.teamSize !== 'number' || project.teamSize <= 0)) {
     errors.push('Team size must be a positive number');
@@ -302,7 +304,7 @@ export const validateProject = (project) => {
       errors.push('Image must be a valid URL');
     }
   }
-  
+
   return {
     success: errors.length === 0,
     data: project,
@@ -330,21 +332,21 @@ export default {
   getProjectBySlug,
   getFeaturedProjects,
   filterProjects,
-  
+
   // Tag Management
   getAllTechnologies,
   getAllIndustries,
   getAllProjectTypes,
   getAllCategories,
   getTagCounts,
-  
+
   // Search and Sort
   searchProjects,
   sortProjects,
-  
+
   // Validation
   validateProject,
-  
+
   // Helper
   getTagCategories
 };
