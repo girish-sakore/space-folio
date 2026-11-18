@@ -2,8 +2,6 @@
 // This file now imports project data from projects.json and uses utility functions
 // from projectUtils.js while maintaining backward compatibility with existing components
 
-import myne_logo from '../assets/234844.png';
-import hapchi_logo from '../assets/000032.png';
 import { loadProjects } from '../utils/projectUtils.js';
 
 // Load project data from JSON
@@ -21,20 +19,13 @@ if (success) {
 // Map JSON data to maintain backward compatibility with existing component structure
 // This ensures FeaturedProjects.jsx, Portfolio.jsx, and ProjectDetail.jsx continue to work
 const projects = allProjects.map(project => {
-  // Handle image imports for local assets
-  let projectImage = project.image;
-  if (project.id === 1) {
-    projectImage = myne_logo;
-  } else if (project.id === 2) {
-    projectImage = hapchi_logo;
-  }
 
   return {
     // Core fields that existing components expect
     id: project.id,
     title: project.title,
     description: project.description,
-    image: projectImage,
+    image: project.image,
     link: project.link,
     features: project.features || [],
     

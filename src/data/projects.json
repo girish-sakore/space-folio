@@ -241,97 +241,6 @@
       "duration": "15 months"
     },
     {
-      "id": 3,
-      "title": "Social Media App",
-      "slug": "social-media-app",
-      "description": "A social platform for connecting creative professionals",
-      "image": "https://images.unsplash.com/photo-1675703818188-cee153b831f3",
-      "link": "#",
-      "client": "Internal Project",
-      "startDate": "2024-01-01",
-      "endDate": "2024-06-30",
-      "status": "In Progress",
-      "features": [
-        "User Profiles",
-        "Content Sharing",
-        "Real-time Messaging",
-        "Professional Networking",
-        "Portfolio Showcase"
-      ],
-      "challenges": "Building scalable real-time features and ensuring user engagement.",
-      "solutions": "Implementing WebSocket connections and gamification elements.",
-      "results": "Currently in development with promising early user testing results.",
-      "technologies": [
-        "React Native",
-        "Node.js",
-        "MongoDB",
-        "Socket.io",
-        "Firebase"
-      ],
-      "industries": [
-        "Social Media",
-        "Entertainment"
-      ],
-      "projectTypes": [
-        "Mobile App",
-        "Social Platform"
-      ],
-      "categories": [
-        "Mobile Development",
-        "Backend",
-        "API Integration"
-      ],
-      "complexity": "Medium",
-      "teamSize": 4,
-      "duration": "6 months"
-    },
-    {
-      "id": 4,
-      "title": "Portfolio Generator",
-      "slug": "portfolio-generator",
-      "description": "Tool for creating beautiful portfolio websites",
-      "image": "https://images.unsplash.com/photo-1739514984003-330f7c1d2007",
-      "link": "#",
-      "client": "Open Source",
-      "startDate": "2024-02-01",
-      "endDate": "2024-04-30",
-      "status": "Completed",
-      "features": [
-        "Template Selection",
-        "Drag & Drop Builder",
-        "Custom Themes",
-        "Export Options",
-        "SEO Optimization"
-      ],
-      "challenges": "Creating an intuitive drag-and-drop interface with flexible customization options.",
-      "solutions": "Developed a component-based architecture with real-time preview functionality.",
-      "results": "Successfully launched with over 1000 users in the first month.",
-      "technologies": [
-        "React",
-        "Node.js",
-        "MongoDB",
-        "HTML5",
-        "CSS3",
-        "Tailwind CSS"
-      ],
-      "industries": [
-        "Portfolio Management",
-        "Marketing"
-      ],
-      "projectTypes": [
-        "Web Application",
-        "Portfolio Website"
-      ],
-      "categories": [
-        "Frontend",
-        "UI/UX",
-        "Full Stack"
-      ],
-      "complexity": "Medium",
-      "teamSize": 3,
-      "duration": "3 months"
-    },
-    {
       "id": 5,
       "title": "Cyberi3Secure",
       "slug": "cyberi3secure",
@@ -383,152 +292,152 @@
       "duration": "2.5 months"
     },
     {
-  "id": 6,
-  "title": "St. Vincent Pallotti College Website",
-  "slug": "st-vincent-college-website",
-  "description": "Official website of St. Vincent Pallotti College of Engineering & Technology, Nagpur, showcasing courses, admissions, events, and campus facilities.",
-  "image": "/images/Palloti.png",
-  "link": "https://dev.stvincentngp.edu.in/",
-  "client": "St. Vincent Pallotti College of Engineering & Technology",
-  "startDate": "2025-03-18",
-  "endDate": "",
-  "status": "In Progress",
-  "features": [
-    "Course Information",
-    "Admission Details",
-    "Event Updates",
-    "Contact Forms",
-    "Responsive Design",
-    "Informational Pages",
-    "Blog/News Section"
-  ],
-  "challenges": "Presenting detailed academic information in a user-friendly layout while ensuring performance and responsive design.",
-  "solutions": "Developed a PHP-based custom website with a clean structure, interactive navigation, optimized performance, and mobile responsiveness.",
-  "results": "Currently under development, aiming for a professional, informative, and responsive website.",
-  "technologies": [
-    "PHP",
-    "MySQL",
-    "HTML5",
-    "CSS3",
-    "JavaScript",
-    "jQuery",
-    "Bootstrap"
-  ],
-  "industries": [
-    "Education",
-    "Institution"
-  ],
-  "projectTypes": [
-    "Website Development",
-    "Institutional Website"
-  ],
-  "categories": [
-    "Web Development",
-    "UI/UX Design",
-    "Security",
-    "PHP"
-  ],
-  "complexity": "Medium",
-  "teamSize": 2,
-  "duration": "Ongoing"
+      "id": 6,
+      "title": "St. Vincent Pallotti College Website",
+      "slug": "st-vincent-college-website",
+      "description": "Official website of St. Vincent Pallotti College of Engineering & Technology, Nagpur, showcasing courses, admissions, events, and campus facilities.",
+      "image": "/images/Palloti.png",
+      "link": "https://dev.stvincentngp.edu.in/",
+      "client": "St. Vincent Pallotti College of Engineering & Technology",
+      "startDate": "2025-03-18",
+      "endDate": "",
+      "status": "In Progress",
+      "features": [
+        "Course Information",
+        "Admission Details",
+        "Event Updates",
+        "Contact Forms",
+        "Responsive Design",
+        "Informational Pages",
+        "Blog/News Section"
+      ],
+      "challenges": "Presenting detailed academic information in a user-friendly layout while ensuring performance and responsive design.",
+      "solutions": "Developed a PHP-based custom website with a clean structure, interactive navigation, optimized performance, and mobile responsiveness.",
+      "results": "Currently under development, aiming for a professional, informative, and responsive website.",
+      "technologies": [
+        "PHP",
+        "MySQL",
+        "HTML5",
+        "CSS3",
+        "JavaScript",
+        "jQuery",
+        "Bootstrap"
+      ],
+      "industries": [
+        "Education",
+        "Institution"
+      ],
+      "projectTypes": [
+        "Website Development",
+        "Institutional Website"
+      ],
+      "categories": [
+        "Web Development",
+        "UI/UX Design",
+        "Security",
+        "PHP"
+      ],
+      "complexity": "Medium",
+      "teamSize": 2,
+      "duration": "Ongoing"
     },
     {
-  "id": 7,
-  "title": "Inheritance Infra Website",
-  "slug": "inheritance-infra-website",
-  "description": "Official website of Inheritance Infrastructure Pvt. Ltd., showcasing their projects, services, and commitment to innovative and sustainable construction solutions.",
-  "image": "/images/Inheritance_Infra.png",
-  "link": "https://inheritance-infrastructure.vercel.app/",
-  "client": "Inheritance Infrastructure Pvt. Ltd.",
-  "startDate": "2025-05-01",
-  "endDate": "",
-  "status": "In Progress",
-  "features": [
-    "Project Portfolio",
-    "Service Offerings",
-    "Contact Forms",
-    "Responsive Design",
-    "Interactive Sections",
-    "Blog/News Section"
-  ],
-  "challenges": "Presenting detailed infrastructure services and projects in an interactive, user-friendly, and responsive manner while maintaining performance.",
-  "solutions": "Developed a React-based website with a component-driven architecture, optimized performance, responsive design, and easy content management for future scalability.",
-  "results": "Currently under development, aiming for a professional, responsive, and informative website that highlights the company's expertise and projects.",
-  "technologies": [
-    "React.js",
-    "JavaScript",
-    "HTML5",
-    "CSS3",
-    "Bootstrap",
-    "Vercel (Deployment)"
-  ],
-  "industries": [
-    "Construction",
-    "Infrastructure"
-  ],
-  "projectTypes": [
-    "Website Development",
-    "Corporate Website"
-  ],
-  "categories": [
-    "Web Development",
-    "UI/UX Design",
-    "Performance Optimization",
-    "React"
-  ],
-  "complexity": "Medium",
-  "teamSize": 2,
-  "duration": "Ongoing"
+      "id": 7,
+      "title": "Inheritance Infra Website",
+      "slug": "inheritance-infra-website",
+      "description": "Official website of Inheritance Infrastructure Pvt. Ltd., showcasing their projects, services, and commitment to innovative and sustainable construction solutions.",
+      "image": "/images/Inheritance_Infra.png",
+      "link": "https://inheritance-infrastructure.vercel.app/",
+      "client": "Inheritance Infrastructure Pvt. Ltd.",
+      "startDate": "2025-05-01",
+      "endDate": "",
+      "status": "In Progress",
+      "features": [
+        "Project Portfolio",
+        "Service Offerings",
+        "Contact Forms",
+        "Responsive Design",
+        "Interactive Sections",
+        "Blog/News Section"
+      ],
+      "challenges": "Presenting detailed infrastructure services and projects in an interactive, user-friendly, and responsive manner while maintaining performance.",
+      "solutions": "Developed a React-based website with a component-driven architecture, optimized performance, responsive design, and easy content management for future scalability.",
+      "results": "Currently under development, aiming for a professional, responsive, and informative website that highlights the company's expertise and projects.",
+      "technologies": [
+        "React.js",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Bootstrap",
+        "Vercel (Deployment)"
+      ],
+      "industries": [
+        "Construction",
+        "Infrastructure"
+      ],
+      "projectTypes": [
+        "Website Development",
+        "Corporate Website"
+      ],
+      "categories": [
+        "Web Development",
+        "UI/UX Design",
+        "Performance Optimization",
+        "React"
+      ],
+      "complexity": "Medium",
+      "teamSize": 2,
+      "duration": "Ongoing"
     },
     {
-  "id": 8,
-  "title": "CRN Portfolio Website",
-  "slug": "crn-portfolio-website",
-  "description": "Personal portfolio website of CRN, showcasing projects, skills, and professional achievements, built using Next.js for fast performance and SEO optimization.",
-  "image": "/images/crn-portfolio.png",
-  "link": "https://crn-portfolio.vercel.app/",
-  "client": "CRN",
-  "startDate": "2025-04-01",
-  "endDate": "",
-  "status": "In Progress",
-  "features": [
-    "Project Showcase",
-    "Skills Section",
-    "About Me Section",
-    "Contact Form",
-    "Responsive Design",
-    "Interactive UI",
-    "SEO Optimized Pages"
-  ],
-  "challenges": "Presenting a professional portfolio in a visually appealing and interactive way while ensuring fast load times and SEO optimization.",
-  "solutions": "Developed a Next.js-based website using component-driven architecture, optimized images, server-side rendering, and responsive design for all devices.",
-  "results": "Currently under development, aiming for a visually engaging and SEO-friendly portfolio website that highlights skills and projects effectively.",
-  "technologies": [
-    "Next.js",
-    "React.js",
-    "JavaScript",
-    "HTML5",
-    "CSS3",
-    "Tailwind CSS",
-    "Vercel (Deployment)"
-  ],
-  "industries": [
-    "Portfolio",
-    "Personal Branding"
-  ],
-  "projectTypes": [
-    "Portfolio Website",
-    "Web Application"
-  ],
-  "categories": [
-    "Web Development",
-    "UI/UX Design",
-    "Performance Optimization",
-    "React"
-  ],
-  "complexity": "Medium",
-  "teamSize": 1,
-  "duration": "Ongoing"
+      "id": 8,
+      "title": "CRN Portfolio Website",
+      "slug": "crn-portfolio-website",
+      "description": "Personal portfolio website of CRN, showcasing projects, skills, and professional achievements, built using Next.js for fast performance and SEO optimization.",
+      "image": "/images/crn-portfolio.png",
+      "link": "https://crn-portfolio.vercel.app/",
+      "client": "CRN",
+      "startDate": "2025-04-01",
+      "endDate": "",
+      "status": "In Progress",
+      "features": [
+        "Project Showcase",
+        "Skills Section",
+        "About Me Section",
+        "Contact Form",
+        "Responsive Design",
+        "Interactive UI",
+        "SEO Optimized Pages"
+      ],
+      "challenges": "Presenting a professional portfolio in a visually appealing and interactive way while ensuring fast load times and SEO optimization.",
+      "solutions": "Developed a Next.js-based website using component-driven architecture, optimized images, server-side rendering, and responsive design for all devices.",
+      "results": "Currently under development, aiming for a visually engaging and SEO-friendly portfolio website that highlights skills and projects effectively.",
+      "technologies": [
+        "Next.js",
+        "React.js",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "Vercel (Deployment)"
+      ],
+      "industries": [
+        "Portfolio",
+        "Personal Branding"
+      ],
+      "projectTypes": [
+        "Portfolio Website",
+        "Web Application"
+      ],
+      "categories": [
+        "Web Development",
+        "UI/UX Design",
+        "Performance Optimization",
+        "React"
+      ],
+      "complexity": "Medium",
+      "teamSize": 1,
+      "duration": "Ongoing"
     },
     {
       "id": 9,
@@ -589,9 +498,9 @@
     },
     {
       "id": 10,
-      "title": "Recovery Agency Management System",
+      "title": "EZ-Allocator",
       "slug": "recovery-agency-management-system",
-      "description": "Comprehensive debt recovery management system built with React, TypeScript, and Material-UI. Features advanced data grids, real-time analytics, and role-based authentication for financial institutions.",
+      "description": "Recovery Agency Management System is a Comprehensive debt recovery management system built with React, TypeScript, and Material-UI. Features advanced data grids, real-time analytics, and role-based authentication for financial institutions.",
       "image": "/images/ez-allocation.png",
       "link": "#",
       "client": "Financial Services Institution",
@@ -653,7 +562,7 @@
     },
     {
       "id": 14,
-      "title": "Loop Learn",
+      "title": "The Loop Learn",
       "slug": "the-loop-learn",
       "description": "A gamified, bite-sized daily micro-learning web platform that replaces doomscrolling with 5-minute interactive trivia, timeline ordering, and visual recall games.",
       "image": "/images/loop-learn.png",
@@ -705,7 +614,7 @@
     },
     {
       "id": 15,
-      "title": "Workstation WordPress Theme",
+      "title": "Workstation",
       "slug": "workstation-wordpress-theme",
       "description": "An open-source blog and magazine theme officially published on WordPress.org, featuring native Gutenberg Block Editor patterns, accessibility compliance, and editorial layouts.",
       "image": "/images/workstation-theme.jpg",
